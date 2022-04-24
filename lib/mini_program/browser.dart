@@ -2,7 +2,6 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
-import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/pages/search.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/cupertino.dart';
