@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "591276375770",
+    "project_id": "baishi-io",
+    "storage_bucket": "baishi-io.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591276375770:android:1b9ced813d80444d53efe3",
+        "android_client_info": {
+          "package_name": "io.baishi.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591276375770-sc8te234q7ioc1fjevk0fcdtbd34h6c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy9FKobiZF6I8vMCnBslAIB2b3Na5izlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591276375770-sc8te234q7ioc1fjevk0fcdtbd34h6c1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

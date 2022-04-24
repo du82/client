@@ -1,0 +1,99 @@
+{
+
+  "welcome to" : "Welcome to",
+  "login to continue": "Login to Continue",
+  "welcome-intro": "Explore the latest news and events happening in the world in minutes. Subscribe and get notified of all of our articles & share them with your friends..",
+  "skip": "Skip",
+
+  "don't have an account?" : "Don't have an account?",
+  "create" : "Create",
+  "create account" : "Create Account",
+  "login" : "Login",
+  "login to access all features" : "Login to access all features",
+  "follow the simple steps": "Follow the simple steps",
+  "already have an account?": "Already have an account?",
+
+  "search contents" : "搜索应用程序和互联网",
+  "popular contents" : "Popular Content",
+  "recent contents" : "Latest Content",
+  "view all" : "view all",
+  "post" : "上传",
+  "follow" : "关注",
+
+  "search" : "Search",
+  "search for content" : "搜索内容",
+  "recent searches" : "搜索历史记录",
+  "search-description" :  "You haven't searched for any items yet.\n Try now - we will help you!",
+  "try again" : "Try again!",
+  "categories" : "Categories",
+
+  "clear all" : "Clear all",
+  "bookmark is empty" : "Your Bookmark is empty !!",
+  "save your favourite contents here" : "Save your favourite news here",
+  "added to your bookamrk" : "Added to your bookmark",
+
+  "no categories found": "No categories found",
+  "no contents found" : "No content found",
+  "no internet" : "No internet connection!",
+  "check your internet connection!" : "Check your internet connection!",
+  "contents you might love" : "Articles you might love",
+
+  "comments" : "Comments",
+  "view comments" : "View Comments",
+  "write a comment" : "写评论",
+  "no comments found" : "没有评论",
+  "be the first to comment" : "写下第一条评论",
+  "login to write comments" : "认证写评论",
+  "comment success title" : "Comment submitted successfully",
+  "comment success description" : "Your comment has been submitted for the review. You will see your comment in this list after the review.\nThanks",
+  "you can't delete others comment" : "You can't delete others comment",
+  "you can't edit others comment" : "You can't edit others comment",
+  "update comment" : "Update Comment",
+
+  "delete" : "Delete",
+  "update" : "Update",
+
+  "notifications" : "Notifications",
+  "notification details" : "Notification Details",
+  "no notification title": "No notifications found!",
+  "no notification description" : "You haven't received any notifications yet. Make sure you have turned on the notifications from the settings.",
+
+  "settings": "Settings",
+  "general settings" : "General Settings",
+  "mini programs": "小程序",
+  "social settings" : "Social Settings",
+  "about app" : "About App",
+  "dark mode" : "Dark Mode",
+  "get notifications" : "Get Notifications",
+  "contact us" : "Contact Us",
+  "rate this app" : "Rate this app",
+  "open source licences" : "Open Source Licenses",
+  "privacy policy" : "Privacy Policy",
+  "about us" : "About Us",
+  "logout" : "Logout",
+  "our website" : "Our Website",
+  "facebook page" : "Facebook Page",
+  "youtube channel" : "Youtube Channel",
+
+  "logout title" : "Logout from the app?",
+  "logout description" : "Do you really want to logout from the app? You will lose all of your saved data. Continue?",
+
+  "language" : "Language",
+  "select language" : "Select Language",
+
+  "explore" : "推荐",
+  "videos" : "视频",
+  "video contents": "Video Articles",
+  "twitter": "Twitter",
+  "bookmark": "Bookmark",
+  "bookmarks": "Bookmarks",
+  "popular": "热门",
+  "ad": "广告",
+
+  "clear all notification-dialog": "Do you want to clear all the notification data?",
+  "clear all bookmark-dialog": "Do you want to clear all the saved articles?",
+
+  "buy now" : "Purchase this app",
+  "buy now subtitle" : "Buy the full source code here"
+
+}

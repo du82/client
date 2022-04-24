@@ -1,0 +1,97 @@
+{
+
+    "welcome to" : "Welcome to",
+    "login to continue": "Login to Continue",
+    "welcome-intro": "Explore the latest news and events happening in the world in minutes. Subscribe and get notified of all of our articles & share them with your friends..",
+    "skip": "Skip",
+
+    "don't have an account?" : "Don't have an account?",
+    "create" : "Create",
+    "create account" : "Create Account",
+    "login" : "Login",
+    "login to access all features" : "Login to access all features",
+    "follow the simple steps": "Follow the simple steps",
+    "already have an account?": "Already have an account?",
+
+    "search contents" : "Search or type a web address",
+    "search browser" : "Search or URL",
+    "popular contents" : "Popular Content",
+    "recent contents" : "Latest Content",
+    "view all" : "view all",
+    "post" : "Post",
+    "follow" : "Follow",
+
+    "search" : "Search",
+    "search for content" : "Search for content",
+    "recent searches" : "Search History",
+    "search-description" :  "You haven't searched for any items yet.\n Try now - we will help you!",
+    "try again" : "Try again!",
+    "categories" : "Categories",
+
+    "clear all" : "Clear all",
+    "bookmark is empty" : "Your Bookmark is empty !!",
+    "save your favourite contents here" : "Save your favourite news here",
+    "added to your bookamrk" : "Liked",
+
+    "no categories found": "No categories found",
+    "no contents found" : "No content found",
+    "no internet" : "No internet connection!",
+    "check your internet connection!" : "Check your internet connection!",
+    "contents you might love" : "Articles you might love",
+
+    "comments" : "Comments",
+    "view comments" : "View Comments",
+    "write a comment" : "Write a comment",
+    "no comments found" : "No comments found",
+    "be the first to comment" : "Be the first to comment",
+    "login to write comments" : "Login to write comments",
+    "comment success title" : "Comment submitted successfully",
+    "comment success description" : "Your comment has been submitted for the review. You will see your comment in this list after the review.\nThanks",
+    "you can't delete others comment" : "You can't delete others comment",
+    "you can't edit others comment" : "You can't edit others comment",
+    "update comment" : "Update Comment",
+
+    "delete" : "Delete",
+    "update" : "Update",
+
+    "notifications" : "Notifications",
+    "notification details" : "Notification Details",
+    "no notification title": "No notifications found!",
+    "no notification description" : "You haven't received any notifications yet. Make sure you have turned on the notifications from the settings.",
+
+    "settings": "Settings",
+    "general settings" : "General Settings",
+    "mini programs": "Mini Programs",
+    "social settings" : "Social Settings",
+    "about app" : "About App",
+    "dark mode" : "Dark Mode",
+    "get notifications" : "Get Notifications",
+    "contact us" : "Contact Us",
+    "rate this app" : "Rate this app",
+    "open source licences" : "Open Source Licenses",
+    "privacy policy" : "Privacy Policy",
+    "about us" : "About Us",
+    "logout" : "Logout",
+    "our website" : "Our Website",
+    "facebook page" : "Facebook Page",
+    "youtube channel" : "Youtube Channel",
+
+    "logout title" : "Logout from the app?",
+    "logout description" : "Do you really want to logout from the app? You will lose all of your saved data. Continue?",
+
+    "language" : "Language",
+    "select language" : "Select Language",
+
+    "explore" : "Explore",
+    "videos" : "Videos",
+    "video contents": "Video Content",
+    "twitter": "Twitter",
+    "bookmark": "Bookmark",
+    "bookmarks": "Bookmarks",
+    "popular": "Popular",
+    "ad": "Ad",
+
+    "clear all notification-dialog": "Do you want to clear all the notification data?",
+    "clear all bookmark-dialog": "Do you want to clear all the saved content?"
+
+}
