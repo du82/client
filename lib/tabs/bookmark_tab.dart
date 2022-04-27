@@ -126,11 +126,11 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
                 valueListenable: bookmarkList.listenable(),
                 builder: (BuildContext context, dynamic value, Widget? child) {
                   if(bookmarkList.isEmpty) return EmptyPageWithImage(
-                    image: Config.bookmarkImage,
-                    title: 'bookmark is empty'.tr(),
-                    description: 'save your favourite contents here'.tr(),
+                    image: Config.commentImage,
+                    title: 'no comments found'.tr(),
+                    description: 'be the first to comment'.tr(),
                   );
-                  
+
                   return ListView.separated(
                     padding: EdgeInsets.all(15),
                     itemCount: bookmarkList.length,

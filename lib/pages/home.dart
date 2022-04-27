@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
   final List<IconData> iconList = [
     LucideIcons.home,
     LucideIcons.play,
-    Feather.search,
-    //Feather.heart,
+    //Feather.search,
+    Feather.heart,
     LucideIcons.user
   ];
 
@@ -115,8 +115,8 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   HomeTab(),
                   VideoTab(),
-                  SearchTab(scaffoldKey: scaffoldKey,),
-                  //BookmarkTab(),
+                  //SearchTab(scaffoldKey: scaffoldKey,),
+                  BookmarkTab(),
                   SettingPage()
                 ],
               ),

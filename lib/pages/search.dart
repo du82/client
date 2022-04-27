@@ -161,6 +161,9 @@ class _SearchPageState extends State<SearchPage> {
                 } else if (query.startsWith("!w ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://wikipedia.org/wiki/" + query.replaceRange(0, 2, "")));
+                } else if (query.startsWith("!mp ")) {
+                  AppService().openLinkWithRenderMiniProgram(
+                      context, (query.replaceRange(0, 3, "")));
                 } else {
                   if (query.contains(".com") ||
                       query.contains(".net") ||
