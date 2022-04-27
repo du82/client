@@ -90,7 +90,7 @@ class AppService {
       Navigator.of(context).push(SwipeablePageRoute(
           builder: (BuildContext context) => RenderMiniProgram(url: url, title: "Render",)));
     }catch(e){
-      openToast1(context, 'Cant launch the url');
+      openToast1(context, 'Cant launch the mini program');
       debugPrint(e.toString());
     }
   }
