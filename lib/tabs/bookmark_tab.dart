@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wordpress_app/cards/bookmark_card.dart';
 import 'package:wordpress_app/config/config.dart';
@@ -23,16 +24,16 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
       elevation: 2,
       enableDrag: true,
       isDismissible: true,
-      isScrollControlled: false,
+      isScrollControlled: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(20),
-        topRight: Radius.circular(20)
+        topLeft: Radius.circular(18),
+        topRight: Radius.circular(18)
       )),
       context: context, builder: (context){
       return Container(
         alignment: Alignment.center,
         padding: EdgeInsets.all(20),
-        height: 210,
+        height: MediaQuery.of(context).size.height - 70,
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,52 +47,59 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
               wordSpacing: 1
             ),).tr(),
             SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextButton(
-                  child: Text('Yes', style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600
-                  ),),
-                  style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.resolveWith((states) => Size(100, 50)),
-                    backgroundColor: MaterialStateProperty.resolveWith((states) => Theme.of(context).primaryColor),
-                    shape: MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ))
-
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListTile(
+                      contentPadding: EdgeInsets.all(0),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        radius: 18,
+                        child: Icon(
+                          Feather.globe,
+                          size: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                      title: Text(
+                        'clear',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,),
+                      ).tr(),
+                      trailing: Icon(Feather.chevron_right),
+                      onTap: (){
+                        BookmarkService().clearBookmarkList();
+                        Navigator.pop(context);
+                      },
                   ),
-                  onPressed: (){
-                    BookmarkService().clearBookmarkList();
-                    Navigator.pop(context);
-                  },
-                ),
-
-                SizedBox(width: 20,),
-
-                TextButton(
-                  child: Text('Cancel', style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600
-                ),),
-                  style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.resolveWith((states) => Size(100, 50)),
-                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[400]),
-                    shape: MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                ))
-
-              ),
-              onPressed: ()=> Navigator.pop(context),
-            )
-              ],
+                  _Divider(),
+                  ListTile(
+                    contentPadding: EdgeInsets.all(0),
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.blueAccent,
+                      radius: 18,
+                      child: Icon(
+                        Feather.globe,
+                        size: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                    title: Text(
+                      'cancel',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,),
+                    ).tr(),
+                    trailing: Icon(Feather.chevron_right),
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
             ),
-
-            
           ],
         ),
       );
@@ -168,4 +176,19 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
   bool get wantKeepAlive => true;
 }
 
+class _Divider extends StatelessWidget {
+  const _Divider({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      height: 0.0,
+      thickness: 0.2,
+      indent: 50,
+      color: Colors.grey[400],
+    );
+  }
+}
 

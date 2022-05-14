@@ -195,168 +195,170 @@ class _VideoDetailsState extends State<VideoDetails> {
                   },
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Text(
-                              AppService.getNormalText(article.title!),
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  //letterSpacing: -0.6,
-                                  wordSpacing: 1),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Divider(
-                              color: Theme.of(context).dividerColor,
-                              thickness: 1.5,
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                /*CircleAvatar(
-                                  radius: 20,
-                                  backgroundImage: CachedNetworkImageProvider(
-                                      article.avatar!),
-                                ),*/
-                                Container(
-                                  width: 45,
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover, image: CachedNetworkImageProvider(
-                                        article.avatar!)),
-                                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        //mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '${article.author}',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w800),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        //mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            article.timeAgo!,
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          Text(
-                                            '•',
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          Text(
-                                            article.category!,
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Spacer(),
-                                InkWell(
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 8, right: 12),
-                                    height: 35,
-                                    //width: 100,
+              Container(
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              Text(
+                                AppService.getNormalText(article.title!),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    //letterSpacing: -0.6,
+                                    wordSpacing: 1),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Divider(
+                                color: Theme.of(context).dividerColor,
+                                thickness: 1.5,
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  /*CircleAvatar(
+                                    radius: 20,
+                                    backgroundImage: CachedNetworkImageProvider(
+                                        article.avatar!),
+                                  ),*/
+                                  Container(
+                                    width: 45,
+                                    height: 45,
                                     decoration: BoxDecoration(
-                                      //color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                                        color: Config().appThemeColor,
-                                        borderRadius: BorderRadius.circular(100)
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover, image: CachedNetworkImageProvider(
+                                          article.avatar!)),
+                                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
                                     ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Icon(
-                                          Feather.plus_circle,
-                                          color: Theme.of(context).colorScheme.background,
-                                          size: 20,
+                                        Row(
+                                          //mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${article.author}',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w800),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          'follow',
-                                          maxLines: 1,
-                                          style: TextStyle(
-                                              overflow: TextOverflow.ellipsis,
-                                              letterSpacing: -0.7,
-                                              wordSpacing: 1,
-                                              fontSize: 16,
-                                              color: Theme.of(context).colorScheme.background,
-                                              fontWeight: FontWeight.w500),
-                                        ).tr(),
+                                        Row(
+                                          //mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              article.timeAgo!,
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              '•',
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              article.category!,
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
+                                  Spacer(),
+                                  InkWell(
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 8, right: 12),
+                                      height: 35,
+                                      //width: 100,
+                                      decoration: BoxDecoration(
+                                        //color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                                          color: Config().appThemeColor,
+                                          borderRadius: BorderRadius.circular(100)
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Feather.plus_circle,
+                                            color: Theme.of(context).colorScheme.background,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            'follow',
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                letterSpacing: -0.7,
+                                                wordSpacing: 1,
+                                                fontSize: 16,
+                                                color: Theme.of(context).colorScheme.background,
+                                                fontWeight: FontWeight.w500),
+                                          ).tr(),
+                                        ],
+                                      ),
+                                    ),
 
-                                  //onTap: ()=> nextScreen(context, SearchPage()),
-                                  onTap: () => nextScreen(
-                                      context, CommentsPage(postId: article.id, categoryId: article.catId!,)),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Theme.of(context).dividerColor,
-                              thickness: 1.5,
-                              height: 20,
-                            ),
-                          ],
+                                    //onTap: ()=> nextScreen(context, SearchPage()),
+                                    onTap: () => nextScreen(
+                                        context, CommentsPage(postId: article.id, categoryId: article.catId!,)),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                color: Theme.of(context).dividerColor,
+                                thickness: 1.5,
+                                height: 20,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        child: AdConfig.isAdsEnabled == true ? BannerAdWidget() : Container(),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        child: Divider(
-                          color: Theme.of(context).dividerColor,
-                          thickness: 1.5,
-                          height: 20,
+                        Container(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: AdConfig.isAdsEnabled == true ? BannerAdWidget() : Container(),
                         ),
-                      ),
-                      RelatedArticles(
-                        postId: article.id,
-                        catId: article.catId,
-                        scaffoldKey: scaffoldKey,
-                      ),
-                    ],
+                        Container(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: Divider(
+                            color: Theme.of(context).dividerColor,
+                            thickness: 1.5,
+                            height: 20,
+                          ),
+                        ),
+                        RelatedArticles(
+                          postId: article.id,
+                          catId: article.catId,
+                          scaffoldKey: scaffoldKey,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

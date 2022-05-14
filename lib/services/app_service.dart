@@ -117,8 +117,6 @@ class AppService {
     }
   }
 
-
-
   Future launchAppReview(context) async {
     final SettingsBloc sb = Provider.of<SettingsBloc>(context, listen: false);
     LaunchReview.launch(

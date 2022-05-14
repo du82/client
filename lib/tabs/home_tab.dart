@@ -162,9 +162,8 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                               ),
                               builder: (BuildContext context) {
                                 return Container(
-                                  height: 200,
+                                  height: MediaQuery.of(context).size.height - 70,
                                   //color: Colors.amber,
-
                                   child: Center(
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,

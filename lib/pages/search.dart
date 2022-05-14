@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/src/provider.dart';
+import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:wordpress_app/blocs/category_bloc.dart';
 import 'package:wordpress_app/cards/card5.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/config/server_config.dart';
+import 'package:wordpress_app/mini_program/devkit.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/category.dart';
 import 'package:wordpress_app/models/constants.dart';
@@ -155,12 +157,22 @@ class _SearchPageState extends State<SearchPage> {
                 } else if (query.contains("http://")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, query);
+                } else if (query.contains("//devkit")) {
+                  Navigator.of(context).push(SwipeablePageRoute(
+                      builder: (BuildContext context) => DevKitMiniProgram()),
+                  );
                 } else if (query.startsWith("!d ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://duckduckgo.com/?q=" + query.replaceRange(0, 2, "")));
                 } else if (query.startsWith("!w ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://wikipedia.org/wiki/" + query.replaceRange(0, 2, "")));
+                } else if (query.startsWith("!y ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.youtube.com/results?search_query=" + query.replaceRange(0, 2, "")));
+                } else if (query.startsWith("!o ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://odysee.com/\$/search?q=" + query.replaceRange(0, 2, "")));
                 } else if (query.startsWith("!mp ")) {
                   AppService().openLinkWithRenderMiniProgram(
                       context, (query.replaceRange(0, 3, "")));
