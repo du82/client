@@ -167,17 +167,17 @@ class _SearchPageState extends State<SearchPage> {
                       builder: (BuildContext context) => DevKitMiniProgram()),
                 );
                   // B - Baidu
-                } else if (query.startsWith("!b ")) {
+                } else if (query.startsWith("!bd ")) {
                   AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://www.baidu.com/s?wd=" + query.replaceRange(0, 2, "")));
+                      context, ("https://www.baidu.com/s?wd=" + query.replaceRange(0, 3, "")));
                   // D - DuckDuckGo
                 } else if (query.startsWith("!d ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://duckduckgo.com/?q=" + query.replaceRange(0, 2, "")));
                   // G - GitHub
-                } else if (query.startsWith("!g ")) {
+                } else if (query.startsWith("!gh ")) {
                   AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://github.com/search?q=" + query.replaceRange(0, 2, "")));
+                      context, ("https://github.com/search?q=" + query.replaceRange(0, 3, "")));
                   // T - Toutiao
                 } else if (query.startsWith("!t ")) {
                   AppService().openLinkWithBrowserMiniProgram(
@@ -186,10 +186,17 @@ class _SearchPageState extends State<SearchPage> {
                 } else if (query.startsWith("!o ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://odysee.com/\$/search?q=" + query.replaceRange(0, 2, "")));
+                  // SO - Stack Overflow
+                } else if (query.startsWith("!so ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://stackoverflow.com/search?q=" + query.replaceRange(0, 3, "")));
                   // W - Wikipedia
                 } else if (query.startsWith("!w ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://wikipedia.org/wiki/" + query.replaceRange(0, 2, "")));
+                } else if (query.startsWith("!wa ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.wolframalpha.com/input?i=" + query.replaceRange(0, 3, "")));
                   // X - Xigua Video
                 } else if (query.startsWith("!x ")) {
                   AppService().openLinkWithBrowserMiniProgram(
@@ -438,7 +445,7 @@ class _SearchPageState extends State<SearchPage> {
                     height: 35,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://odysee.com/public/favicon-spaceman.png")),
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/odysee.png")),
                       borderRadius: BorderRadius.all(Radius.circular(80.0)),
                     ),
                   ),
@@ -514,14 +521,14 @@ class _SearchPageState extends State<SearchPage> {
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         height: 25,
-                        width: 40,
+                        width: 50,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(8)
                         ),
                         child: Center(
                           child: Text(
-                            '!g',
+                            '!gh',
                             maxLines: 1,
                             style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
@@ -535,7 +542,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                   onTap: (){
-                    searchFieldCtrl.text = "!g ";
+                    searchFieldCtrl.text = "!gh ";
                     searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
                   },
                 ),
@@ -624,12 +631,136 @@ class _SearchPageState extends State<SearchPage> {
                     height: 35,
                     decoration: BoxDecoration(
                       image: DecorationImage(
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://www.wolframalpha.com/favicon.ico")),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                  ),
+                  title: Text(
+                    'wolfram alpha',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                  trailing: InkWell(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      height: 25,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: Center(
+                        child: Text(
+                          '!wa',
+                          maxLines: 1,
+                          style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: -0.7,
+                              wordSpacing: 1,
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.w500),
+                        ).tr(),
+                      ),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!wa ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/baidu.png")),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                  ),
+                  title: Text(
+                    'baidu',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                  trailing: InkWell(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      height: 25,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: Center(
+                        child: Text(
+                          '!bd',
+                          maxLines: 1,
+                          style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: -0.7,
+                              wordSpacing: 1,
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.w500),
+                        ).tr(),
+                      ),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!bd ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
                           fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/youtube.png")),
                       borderRadius: BorderRadius.all(Radius.circular(80.0)),
                     ),
                   ),
                   title: Text(
-                    'YouTube',
+                    'youtube',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,),

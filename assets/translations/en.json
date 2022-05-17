@@ -27,9 +27,11 @@
     "baidu" : "Baidu",
     "duck duck go" : "DuckDuckGo",
     "github" : "GitHub",
+    "youtube" : "YouTube",
     "toutiao" : "Toutiao",
     "odysee" : "Odysee",
     "wikipedia" : "Wikipedia",
+    "wolfram alpha" : "Wolfram Alpha",
 
     "search" : "Search",
     "search for content" : "Search for content",
