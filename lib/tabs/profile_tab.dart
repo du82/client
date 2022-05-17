@@ -113,12 +113,6 @@ class _SettingPageState extends State<SettingPage>
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,),
                             ).tr(),
-                            /*trailing: Switch(
-                            activeColor: Theme.of(context).primaryColor,
-                            value: context.watch<NotificationBloc>().subscribed!,
-                            onChanged: (bool value) => context
-                                .read<NotificationBloc>()
-                                .configureFcmSubscription(value)),*/
                           ),
                           _Divider(),
                           ListTile(

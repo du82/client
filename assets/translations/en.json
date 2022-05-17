@@ -21,6 +21,16 @@
     "post" : "Post",
     "follow" : "Follow",
 
+    "not what you were looking for" : "Not what you were looking for?",
+    "try alt search" : "Try another search engine",
+
+    "baidu" : "Baidu",
+    "duck duck go" : "DuckDuckGo",
+    "github" : "GitHub",
+    "toutiao" : "Toutiao",
+    "odysee" : "Odysee",
+    "wikipedia" : "Wikipedia",
+
     "search" : "Search",
     "search for content" : "Search for content",
     "recent searches" : "Search History",

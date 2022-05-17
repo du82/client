@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/src/provider.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
@@ -22,6 +24,7 @@ import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/snacbar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:wordpress_app/widgets/language.dart';
 
 import 'category_based_articles.dart';
 import 'login.dart';
@@ -41,6 +44,8 @@ class _SearchPageState extends State<SearchPage> {
   Future? data;
 
   get itemBuilder => null;
+
+  get query => null;
 
   @override
   Widget build(BuildContext context) {
@@ -160,19 +165,40 @@ class _SearchPageState extends State<SearchPage> {
                 } else if (query.contains("//devkit")) {
                   Navigator.of(context).push(SwipeablePageRoute(
                       builder: (BuildContext context) => DevKitMiniProgram()),
-                  );
+                );
+                  // B - Baidu
+                } else if (query.startsWith("!b ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.baidu.com/s?wd=" + query.replaceRange(0, 2, "")));
+                  // D - DuckDuckGo
                 } else if (query.startsWith("!d ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://duckduckgo.com/?q=" + query.replaceRange(0, 2, "")));
-                } else if (query.startsWith("!w ")) {
+                  // G - GitHub
+                } else if (query.startsWith("!g ")) {
                   AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://wikipedia.org/wiki/" + query.replaceRange(0, 2, "")));
-                } else if (query.startsWith("!y ")) {
+                      context, ("https://github.com/search?q=" + query.replaceRange(0, 2, "")));
+                  // T - Toutiao
+                } else if (query.startsWith("!t ")) {
                   AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://www.youtube.com/results?search_query=" + query.replaceRange(0, 2, "")));
+                      context, ("https://so.toutiao.com/search?keyword=" + query.replaceRange(0, 2, "")));
+                  // O - Odysee
                 } else if (query.startsWith("!o ")) {
                   AppService().openLinkWithBrowserMiniProgram(
                       context, ("https://odysee.com/\$/search?q=" + query.replaceRange(0, 2, "")));
+                  // W - Wikipedia
+                } else if (query.startsWith("!w ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://wikipedia.org/wiki/" + query.replaceRange(0, 2, "")));
+                  // X - Xigua Video
+                } else if (query.startsWith("!x ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.ixigua.com/search/" + query.replaceRange(0, 2, "")));
+                  // Y - YouTube
+                } else if (query.startsWith("!yt ")) {
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.youtube.com/results?search_query=" + query.replaceRange(0, 3, "")));
+
                 } else if (query.startsWith("!mp ")) {
                   AppService().openLinkWithRenderMiniProgram(
                       context, (query.replaceRange(0, 3, "")));
@@ -220,11 +246,7 @@ class _SearchPageState extends State<SearchPage> {
                     return EmptyPageWithIcon(
                         icon: Icons.error, title: 'Error!');
                   } else if (snapshot.data.isEmpty) {
-                    return EmptyPageWithImage(
-                      image: Config.noContentImage,
-                      title: 'no contents found'.tr(),
-                      description: 'try again'.tr(),
-                    );
+                    return _searchProviderUI();
                   }
 
                   return ListView.separated(
@@ -258,8 +280,6 @@ class _SearchPageState extends State<SearchPage> {
         ? _EmptySearchAnimation()
         : Container(
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
-              /*margin: EdgeInsets.only(
-                          left: 10, right: 10, top: 10),*/
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onSecondary,
                 borderRadius: BorderRadius.circular(8),
@@ -269,7 +289,7 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Text(
                   'recent searches'.tr(),
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
                   height: 15,
@@ -316,6 +336,401 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           );
+  }
+
+  Widget _searchProviderUI() {
+    final recentSearchs = Hive.box(Constants.resentSearchTag);
+    final d = context.watch<CategoryBloc>().categoryData;
+    return recentSearchs.isEmpty
+        ? _EmptySearchAnimation()
+        : Container(
+      padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onSecondary,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'try alt search'.tr(),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://duckduckgo.com/favicon.ico")),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                  ),
+                  title: Text(
+                    'duck duck go',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                    trailing: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 25,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(
+                          child: Text(
+                            '!d',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1,
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w500),
+                          ).tr(),
+                        ),
+                      ),
+                    ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!d ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://odysee.com/public/favicon-spaceman.png")),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                  ),
+                  title: Text(
+                    'odysee',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                    trailing: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 25,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(
+                          child: Text(
+                            '!o',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1,
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w500),
+                          ).tr(),
+                        ),
+                      ),
+                    ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!o ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://github.com/favicon.ico")),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                  ),
+                  title: Text(
+                    'github',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                    trailing: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 25,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(
+                          child: Text(
+                            '!g',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1,
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w500),
+                          ).tr(),
+                        ),
+                      ),
+                    ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!g ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                    contentPadding: EdgeInsets.all(0),
+                    leading: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover, image: CachedNetworkImageProvider("https://en.wikipedia.org/favicon.ico")),
+                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      ),
+                    ),
+                    title: Text(
+                      'wikipedia',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,),
+                    ).tr(),
+                    trailing: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 25,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(
+                          child: Text(
+                            '!w',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1,
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w500),
+                          ).tr(),
+                        ),
+                      ),
+                    ),
+                    onTap: (){
+                      searchFieldCtrl.text = "!w ";
+                      searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/youtube.png")),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                  ),
+                  title: Text(
+                    'YouTube',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                  trailing: InkWell(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      height: 25,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: Center(
+                        child: Text(
+                          '!yt',
+                          maxLines: 1,
+                          style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: -0.7,
+                              wordSpacing: 1,
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.w500),
+                        ).tr(),
+                      ),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!yt ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                    contentPadding: EdgeInsets.all(0),
+                    leading: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover, image: CachedNetworkImageProvider("https://baishi.io/favicon.ico")),
+                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      ),
+                    ),
+                    title: Text(
+                      'Baishi Mini Programs',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,),
+                    ).tr(),
+                    trailing: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 25,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(
+                          child: Text(
+                            '!mp',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1,
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w500),
+                          ).tr(),
+                        ),
+                      ),
+                    ),
+                  onTap: (){
+                    searchFieldCtrl.text = "!mp ";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -428,6 +843,22 @@ class _CategoryItem extends StatelessWidget {
               heroTag: _heroTag,
             ));
       },
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      height: 0.0,
+      thickness: 0.2,
+      indent: 50,
+      color: Colors.grey[400],
     );
   }
 }
