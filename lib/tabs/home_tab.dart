@@ -9,12 +9,8 @@ import 'package:wordpress_app/blocs/featured_bloc.dart';
 import 'package:wordpress_app/blocs/latest_articles_bloc.dart';
 import 'package:wordpress_app/blocs/popular_articles_bloc.dart';
 import 'package:wordpress_app/blocs/tab_index_bloc.dart';
-import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/config/server_config.dart';
-import 'package:wordpress_app/config/server_config.dart';
-import 'package:wordpress_app/mini_program/browser.dart';
 import 'package:wordpress_app/pages/search.dart';
-import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/tab_medium.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -91,8 +87,8 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                 backgroundColor: Theme.of(context).primaryColor,
                 systemOverlayStyle: SystemUiOverlayStyle.light,
                 flexibleSpace: Image(
-                  //image: NetworkImage('${Server.url}/app-content/backgrounds/main.jpg'),
-                  image: CachedNetworkImageProvider('${WpConfig.websiteUrl}/app-content/backgrounds/main.jpg'),
+                  //image: CachedNetworkImageProvider('${WpConfig.websiteUrl}/app-content/backgrounds/main.jpg'),
+                  image: CachedNetworkImageProvider('https://source.unsplash.com/random/?earth,city,night,nature'),
                   fit: BoxFit.fitWidth,
                 ),
                 title: Container(
