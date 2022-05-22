@@ -78,6 +78,7 @@ class AppService {
   Future openLinkWithBrowserMiniProgram(BuildContext context, String url) async {
     try{
       Navigator.of(context).push(SwipeablePageRoute(
+          canOnlySwipeFromEdge: true,
           builder: (BuildContext context) => BrowserMiniProgram(url: url, title: "Browser",)));
     }catch(e){
       openToast1(context, 'Cant launch the url');
@@ -88,6 +89,7 @@ class AppService {
   Future openLinkWithRenderMiniProgram(BuildContext context, String url) async {
     try{
       Navigator.of(context).push(SwipeablePageRoute(
+          canOnlySwipeFromEdge: true,
           builder: (BuildContext context) => RenderMiniProgram(url: url, title: "Render",)));
     }catch(e){
       openToast1(context, 'Cant launch the mini program');

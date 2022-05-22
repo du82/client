@@ -11,28 +11,31 @@ import 'package:wordpress_app/pages/post_notification_details.dart';
 
 void nextScreen (context, page){
   Navigator.push(context, SwipeablePageRoute(
+    canOnlySwipeFromEdge: true,
     builder: (context) => page));
 }
 
 
 void nextScreeniOS (context, page){
   Navigator.push(context, SwipeablePageRoute(
+    canOnlySwipeFromEdge: true,
     builder: (context) => page));
 }
 
 
 void nextScreenCloseOthers (context, page){
-  Navigator.pushAndRemoveUntil(context, SwipeablePageRoute(builder: (context) => page), (route) => false);
+  Navigator.pushAndRemoveUntil(context, SwipeablePageRoute(canOnlySwipeFromEdge: true, builder: (context) => page), (route) => false);
 }
 
 void nextScreenReplace (context, page){
-  Navigator.pushReplacement(context, SwipeablePageRoute(builder: (context) => page));
+  Navigator.pushReplacement(context, SwipeablePageRoute(canOnlySwipeFromEdge: true, builder: (context) => page));
 }
 
 
 void nextScreenPopup (context, page){
   Navigator.push(context, SwipeablePageRoute(
     fullscreenDialog: true,
+    canOnlySwipeFromEdge: true,
     builder: (context) => page),
   );
 }
@@ -41,10 +44,12 @@ void nextScreenPopup (context, page){
 void navigateToDetailsScreen (context, Article article, String? heroTag){
   if(article.tags == null || !article.tags!.contains(WpConfig.videoTagId)){
     Navigator.push(context, SwipeablePageRoute(
+      canOnlySwipeFromEdge: true,
       builder: (context) => ArticleDetails(articleData: article, tag: heroTag,)),
     );
   }else{
      Navigator.push(context, SwipeablePageRoute(
+      canOnlySwipeFromEdge: true,
       builder: (context) => VideoDetails(article: article)),
 
     );
@@ -54,10 +59,12 @@ void navigateToDetailsScreen (context, Article article, String? heroTag){
 void navigateToDetailsScreenByReplace (context, Article article, String? heroTag){
   if(article.tags == null || !article.tags!.contains(WpConfig.videoTagId)){
     Navigator.pushReplacement(context, SwipeablePageRoute(
+      canOnlySwipeFromEdge: true,
       builder: (context) => ArticleDetails(articleData: article, tag: heroTag,)),
     );
   }else{
      Navigator.pushReplacement(context, SwipeablePageRoute(
+      canOnlySwipeFromEdge: true,
       builder: (context) => VideoDetails(article: article)),
     );
   }

@@ -8,15 +8,8 @@ import 'package:wordpress_app/blocs/theme_bloc.dart';
 import 'package:wordpress_app/blocs/user_bloc.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/config/server_config.dart';
-import 'package:wordpress_app/mini_program/promotion_render.dart';
-import 'package:wordpress_app/mini_program/render.dart';
-import 'package:wordpress_app/mini_program/selector/posts.dart';
-import 'package:wordpress_app/mini_program/test_browser.dart';
 import 'package:wordpress_app/pages/login.dart';
-import 'package:wordpress_app/pages/notifications.dart';
-import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:wordpress_app/widgets/server.dart';
 import '../widgets/language.dart';
 
 class SettingPage extends StatefulWidget {
@@ -159,6 +152,7 @@ class _SettingPageState extends State<SettingPage>
                               ).tr(),
                               trailing: Icon(Feather.chevron_right),
                               onTap: () => Navigator.of(context).push(SwipeablePageRoute(
+                                  canOnlySwipeFromEdge: true,
                                   builder: (BuildContext context) => LanguagePopup()),
                               )
                           ),
@@ -220,6 +214,7 @@ class GuestUserUI extends StatelessWidget {
             ).tr(),
             trailing: Icon(Feather.chevron_right),
             onTap: () => Navigator.of(context).push(SwipeablePageRoute(
+                canOnlySwipeFromEdge: true,
                 builder: (BuildContext context) => LoginPage()),
             )
         ),

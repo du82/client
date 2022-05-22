@@ -128,6 +128,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                         ),
                       ),
                       onTap: () => Navigator.of(context).push(SwipeablePageRoute(
+                          canOnlySwipeFromEdge: true,
                           builder: (BuildContext context) => SearchPage()),
                       )
                   ),
