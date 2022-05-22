@@ -111,9 +111,9 @@ class AdsBloc extends ChangeNotifier {
         createRewardedVideoAd();
       },
       );
-      _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem item){});
+      /*_rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem item){});
       _rewardedAd = null;
-      notifyListeners();
+      notifyListeners();*/
     }
   }
 
