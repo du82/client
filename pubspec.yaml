@@ -55,6 +55,7 @@ dependencies:
       url: https://github.com/westdabestdb/md2_tab_indicator
   swipeable_page_route: ^0.2.4
   lucide_icons: ^0.16.29
+  wikidart: ^0.0.1
 
 
 dev_dependencies:
