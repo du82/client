@@ -248,7 +248,7 @@ class _SearchPageState extends State<SearchPage> {
                       data = TenwanService().fetchPostsBySearch(searchFieldCtrl.text);},
                   ),
                 ),
-
+                // testing commits
                 textInputAction: TextInputAction.search,
                 onFieldSubmitted: (query) {
                   if (query == '' || query.isEmpty) {
