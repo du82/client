@@ -1,2 +1,2 @@
-# client
- Client side for Baishi
+# Baishi Flutter Client
+ Client side for Baishi superapp, written in Flutter.
