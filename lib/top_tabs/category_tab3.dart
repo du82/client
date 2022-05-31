@@ -55,8 +55,10 @@ class _CategoryTab3State extends State<CategoryTab3> {
               padding: EdgeInsets.all(15),
               physics: NeverScrollableScrollPhysics(),
               itemCount: cb.articles.length != 0 ? cb.articles.length + 1 : 5,
-              separatorBuilder: (BuildContext context, int index) => SizedBox(
-                height: 15,
+              separatorBuilder: (ctx, idx) => Divider(
+                color: Theme.of(context).dividerColor,
+                thickness: 1.5,
+                height: 20,
               ),
               shrinkWrap: true,
               itemBuilder: (_, int index) {

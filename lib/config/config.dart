@@ -52,7 +52,6 @@ class Config {
 
   //animation files
   static const String doneAnimation = 'assets/animation_files/done.flr';
-  static const String searchImage = 'assets/images/search.svg';
 
 
 }

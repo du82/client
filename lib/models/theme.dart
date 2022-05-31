@@ -69,9 +69,7 @@ class ThemeModel {
 
   final darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    primarySwatch: Colors.green,
     primaryColor: Config().appThemeColor,
-    accentColor: Color(0xFF32373c),
     backgroundColor: Colors.grey[900],
     scaffoldBackgroundColor: Colors.grey[900],
     splashColor: Colors.transparent,
@@ -79,17 +77,6 @@ class ThemeModel {
     shadowColor: Colors.grey[900],
     brightness: Brightness.dark,
     fontFamily: 'Manrope',
-    colorScheme: ColorScheme.dark(
-        primary: Colors.grey[900]!, //text
-        secondary: Colors.grey[600]!, //text
-        onPrimary: Color(0xFF121212), //card color -1
-        onSecondary: Colors.grey[900]!, //card color -2
-        primaryVariant: Colors.grey[850]!, //card color -3
-        secondaryVariant: Colors.grey[900]!, //card color -4
-        surface: Color(0xff303030), //shadow color - 1
-        onBackground: Colors.grey[900]!  //loading card color
-
-    ),
     dividerColor: Colors.grey[800],
     iconTheme: IconThemeData(color: Colors.white),
     primaryIconTheme: IconThemeData(
@@ -122,6 +109,16 @@ class ThemeModel {
           color: Colors.white,
           fontWeight: FontWeight.w500
       ),
-    ),
+    ), colorScheme: ColorScheme.dark(
+        primary: Colors.grey[900]!, //text
+        secondary: Colors.grey[600]!, //text
+        onPrimary: Color(0xFF121212), //card color -1
+        onSecondary: Colors.grey[900]!, //card color -2
+        primaryVariant: Colors.grey[850]!, //card color -3
+        secondaryVariant: Colors.grey[900]!, //card color -4
+        surface: Color(0xff303030), //shadow color - 1
+        onBackground: Colors.grey[900]!  //loading card color
+
+    ).copyWith(primary: Colors.green, secondary: Color(0xFF32373c)),
   );
 }

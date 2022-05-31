@@ -134,43 +134,48 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 },
               ),
               SizedBox(width: 10),
-              Container(
-                margin: new EdgeInsets.symmetric(horizontal: 5),
-                child: BookmarkIcon(
-                  bookmarkedList: bookmarkedList,
-                  article: article,
-                  iconSize: 25,
-                  scaffoldKey: scaffoldKey,
-                  iconColor: Colors.redAccent,
-                  normalIconColor: Theme.of(context).colorScheme.primary,
-                ),
+              Row(
+                children: [
+                  Container(
+                    margin: new EdgeInsets.symmetric(horizontal: 5),
+                    child: BookmarkIcon(
+                      bookmarkedList: bookmarkedList,
+                      article: article,
+                      iconSize: 24,
+                      scaffoldKey: scaffoldKey,
+                      iconColor: Theme.of(context).primaryColor,
+                      normalIconColor: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 5,
+                          right: 0
+                      ),
+                      child: Icon(
+                        LucideIcons.search,
+                        size: 25,
+                      ),
+                    ),
+                    onPressed: () => nextScreen(context, SearchPage()),
+                  ),
+                  IconButton(
+                    icon: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 5,
+                          right: 8
+                      ),
+                      child: Icon(
+                        LucideIcons.cornerUpRight,
+                        size: 25,
+                      ),
+                    ),
+                    onPressed: ()=> _handleShare(),
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 5,
-                      right: 0
-                  ),
-                  child: Icon(
-                    LucideIcons.search,
-                    size: 24,
-                  ),
-                ),
-                onPressed: () => nextScreen(context, SearchPage()),
-              ),
-              IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 5,
-                      right: 8
-                  ),
-                  child: Icon(
-                    LucideIcons.cornerUpRight,
-                    size: 25,
-                  ),
-                ),
-                onPressed: ()=> _handleShare(),
-              ),
+
             ],
           ),
         ),
@@ -361,7 +366,11 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                       RenderContext context1,
                                       Map<String, String> attributes,
                                       _) {
-                                    AppService().openLinkWithBrowserMiniProgram(context, url!);
+                                    if (url!.endsWith("?mp=render")) {
+                                      AppService().openLinkWithRenderMiniProgram(context, url);
+                                    } else {
+                                      AppService().openLinkWithBrowserMiniProgram(context, url);
+                                    }
                                   },
                                   onImageTap: (String? url,
                                       RenderContext context1,

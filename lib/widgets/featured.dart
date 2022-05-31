@@ -22,8 +22,7 @@ class _FeaturedState extends State<Featured> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 250,
-          width: double.infinity,
+          width: double.infinity - 50,
           child: PageView.builder(
             controller: PageController(initialPage: 0),
             scrollDirection: Axis.horizontal,
@@ -32,9 +31,12 @@ class _FeaturedState extends State<Featured> {
             itemBuilder: (BuildContext context, int index){
               if (fb.articles.isEmpty) {
                 if(fb.hasData){
-                  return _LoadingWidget();
+                  return Container(
+                      height: 150,
+                      child: _LoadingWidget()
+                  );
                 }else{
-                  return _NoContentsWidget();
+                  return Container(height: 550,);
                 }
               }
               return FeatureCard(article: fb.articles[index], heroTag: 'featured${fb.articles[index].id}');

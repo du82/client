@@ -13,7 +13,7 @@
     "follow the simple steps": "Follow the simple steps",
     "already have an account?": "Already have an account?",
 
-    "search contents" : "Search or type a web address",
+    "search contents" : "Search or type a URL",
     "search browser" : "Search or URL",
     "popular contents" : "Popular Content",
     "recent contents" : "Latest Content",
@@ -100,6 +100,8 @@
     "twitter": "Twitter",
     "bookmark": "Bookmark",
     "bookmarks": "Bookmarks",
+    "nothing bookmarked" : "Nothing bookmarked",
+    "bookmark description" : "Bookmark articles to save them for offline reading.",
     "popular": "Popular",
     "ad": "Ad",
 

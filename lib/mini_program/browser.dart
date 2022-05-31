@@ -316,9 +316,15 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                         ){
                           return NavigationDecision.prevent;
                         } else {
-                          AppService().openLinkWithBrowserMiniProgram(
-                              context, (request.url));
-                          return NavigationDecision.prevent;
+                          if (request.url.endsWith("?mp=render")) {
+                            AppService().openLinkWithRenderMiniProgram(
+                                context, (request.url));
+                            return NavigationDecision.prevent;
+                          } else {
+                            AppService().openLinkWithBrowserMiniProgram(
+                                context, (request.url));
+                            return NavigationDecision.prevent;
+                          }
                         }
                       },
                       onWebViewCreated: (webViewController) {

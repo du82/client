@@ -33,7 +33,7 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
       return Container(
         alignment: Alignment.center,
         padding: EdgeInsets.all(20),
-        height: MediaQuery.of(context).size.height - 70,
+        height: 250,
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,8 +135,8 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
                 builder: (BuildContext context, dynamic value, Widget? child) {
                   if(bookmarkList.isEmpty) return EmptyPageWithImage(
                     image: Config.commentImage,
-                    title: 'no comments found'.tr(),
-                    description: 'be the first to comment'.tr(),
+                    title: 'nothing bookmarked'.tr(),
+                    description: 'bookmark description'.tr(),
                   );
 
                   return ListView.separated(

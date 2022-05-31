@@ -23,8 +23,8 @@ class Tab0 extends StatefulWidget {
 class _Tab0State extends State<Tab0> {
 
   Future _onRefresh() async {
-    //context.read<FeaturedBloc>().saveDotIndex(0);
-    //context.read<FeaturedBloc>().fetchData();
+    context.read<FeaturedBloc>().saveDotIndex(0);
+    context.read<FeaturedBloc>().fetchData();
     context.read<PopularArticlesBloc>().fetchData();
     context.read<LatestArticlesBloc>().onReload();
   }
@@ -60,6 +60,7 @@ class _Tab0State extends State<Tab0> {
                     ),
                   ),
                 ),*/
+            //Featured(),
             PopularArticles(scaffoldKey: widget.scaffoldKey),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),

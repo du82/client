@@ -38,7 +38,7 @@ class Card5 extends StatelessWidget {
                     children: [
                       Text(
                         AppService.getNormalText(article.title!),
-                        maxLines: 2,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w500),

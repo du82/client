@@ -109,14 +109,6 @@ class FeatureCard extends StatelessWidget {
                                     .background),
                             child: Row(
                               children: [
-                                Icon(
-                                  CupertinoIcons.time_solid,
-                                  color: Colors.grey[400],
-                                  size: 16,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
                                 Text(
                                   article.date!,
                                   style: TextStyle(
@@ -129,7 +121,7 @@ class FeatureCard extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          /*SizedBox(
                             width: 5,
                           ),
                           Container(
@@ -166,7 +158,7 @@ class FeatureCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ],

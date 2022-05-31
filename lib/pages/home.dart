@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     LucideIcons.home,
     LucideIcons.play,
     //Feather.search,
-    Feather.heart,
+    LucideIcons.bookmark,
     LucideIcons.user
   ];
 

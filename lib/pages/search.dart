@@ -24,7 +24,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'category_based_articles.dart';
-import 'login.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key? key}) : super(key: key);
@@ -53,19 +52,6 @@ class _SearchPageState extends State<SearchPage> {
         elevation: 0,
         leadingWidth: 15,
         leading: Container(),
-        /*leading: IconButton(
-          icon: Padding(
-            padding: const EdgeInsets.only(
-                left: 5,
-                right: 5
-            ),
-            child: Icon(
-              LucideIcons.chevronLeft,
-              size: 32,
-            ),
-          ),
-          onPressed: ()=> Navigator.pop(context),
-        ),*/
       ),
       key: scaffoldKey,
       bottomNavigationBar: BottomAppBar(
@@ -131,7 +117,7 @@ class _SearchPageState extends State<SearchPage> {
                 textAlignVertical: TextAlignVertical.center,
                 autofocus: true,
                 maxLines: 1,
-                maxLength: 100,
+                maxLength: 250,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 controller: searchFieldCtrl,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
@@ -142,6 +128,22 @@ class _SearchPageState extends State<SearchPage> {
                   hintStyle: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
+                  ),
+                  suffix: InkWell(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 5),
+                      child: Icon(
+                        LucideIcons.xCircle,
+                        size: 18,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _searchStarted = false;
+                      });
+                      searchFieldCtrl.clear();
+                    },
                   ),
                   suffixIcon: InkWell(
                     child: Container(
@@ -361,23 +363,92 @@ class _SearchPageState extends State<SearchPage> {
                   } else if (snapshot.data.isEmpty) {
                     return _searchProviderUI();
                   }
-
-                  return ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data.length,
-                      separatorBuilder: (ctx, idx) => Divider(
+                  return Column(
+                    children: [
+                      /*if (searchFieldCtrl.text.contains(" "))
+                        Container()
+                      else
+                        Container(
+                          margin: EdgeInsets.only(bottom: 15),
+                          padding: EdgeInsets.only(
+                              left: 10, right: 10, top: 0, bottom: 0),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                contentPadding: EdgeInsets.all(0),
+                                leading: CircleAvatar(
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  radius: 18,
+                                  child: Icon(
+                                    Feather.terminal,
+                                    size: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                title: Text(
+                                  "Go to  " + searchFieldCtrl.text + ".com",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,),
+                                ).tr(),
+                                trailing: Icon(LucideIcons.chevronRight),
+                                onTap: (){
+                                  AppService().openLinkWithBrowserMiniProgram(
+                                      context, (searchFieldCtrl.text + ".com"));
+                                },
+                              ),
+                            ],
+                          ),
+                        ),*/
+                      ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: snapshot.data.length,
+                          separatorBuilder: (ctx, idx) => Divider(
+                            color: Theme.of(context).dividerColor,
+                            thickness: 1.5,
+                            height: 20,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            Article article = snapshot.data[index];
+                            return Card5(
+                                article: article,
+                                heroTag: 'search${article.id}',
+                                scaffoldKey: scaffoldKey);
+                          }),
+                      Divider(
                         color: Theme.of(context).dividerColor,
                         thickness: 1.5,
                         height: 20,
                       ),
-                      itemBuilder: (BuildContext context, int index) {
-                        Article article = snapshot.data[index];
-                        return Card5(
-                            article: article,
-                            heroTag: 'search${article.id}',
-                            scaffoldKey: scaffoldKey);
-                      });
+                      Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant,
+                            borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: (
+                              Text(
+                                'Search results provided by baishi.io',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    letterSpacing: -0.7,
+                                    wordSpacing: 1,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
+                              ).tr()
+                          ),
+                        ),
+                      )
+                    ],
+                  );
               }
             },
           ),
@@ -524,8 +595,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!d ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://duckduckgo.com/?q=" + searchFieldCtrl.text));
                   },
                 )
               ],
@@ -586,8 +657,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!o ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://odysee.com/\$/search?q=" + searchFieldCtrl.text));
                   },
                 )
               ],
@@ -648,8 +719,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!gh ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://github.com/search?q=" + searchFieldCtrl.text));
                   },
                 ),
               ],
@@ -710,8 +781,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!s ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://s.zhaocloud.net/search?q=" + searchFieldCtrl.text));
                   },
                 ),
               ],
@@ -772,8 +843,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!w ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://wikipedia.org/wiki/" + searchFieldCtrl.text));
                   },
                 ),
               ],
@@ -834,8 +905,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!wa ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.wolframalpha.com/input?i=" + searchFieldCtrl.text));
                   },
                 ),
               ],
@@ -896,8 +967,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!bd ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.baidu.com/s?wd=" + searchFieldCtrl.text));
                   },
                 )
               ],
@@ -958,70 +1029,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   onTap: (){
-                    searchFieldCtrl.text = "!yt ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                  },
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://baishi.io/favicon.ico")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                    ),
-                  ),
-                  title: Text(
-                    'Baishi Mini Programs',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!mp',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
-                    ),
-                  ),
-                  onTap: (){
-                    searchFieldCtrl.text = "!mp ";
-                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.youtube.com/results?search_query=" + searchFieldCtrl.text));
                   },
                 ),
               ],

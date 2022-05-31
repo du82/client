@@ -79,7 +79,7 @@ class AppService {
     try{
       Navigator.of(context).push(SwipeablePageRoute(
           canOnlySwipeFromEdge: true,
-          builder: (BuildContext context) => BrowserMiniProgram(url: url, title: "Browser",)));
+          builder: (BuildContext context) => BrowserMiniProgram(url: url, title: "browser",)));
     }catch(e){
       openToast1(context, 'Cant launch the url');
       debugPrint(e.toString());
@@ -90,7 +90,7 @@ class AppService {
     try{
       Navigator.of(context).push(SwipeablePageRoute(
           canOnlySwipeFromEdge: true,
-          builder: (BuildContext context) => RenderMiniProgram(url: url, title: "Render",)));
+          builder: (BuildContext context) => RenderMiniProgram(url: url, title: "render",)));
     }catch(e){
       openToast1(context, 'Cant launch the mini program');
       debugPrint(e.toString());
