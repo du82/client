@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import 'package:share/share.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/constants.dart';
 import 'package:wordpress_app/services/app_service.dart';
@@ -9,6 +12,8 @@ import 'package:wordpress_app/utils/cached_image.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/bookmark_icon.dart';
 import 'package:wordpress_app/widgets/video_icon.dart';
+
+import '../pages/comments_page.dart';
 
 
 //Big card with title & description
@@ -22,6 +27,11 @@ class Card4 extends StatelessWidget {
   final Article article;
   final String heroTag;
   final GlobalKey<ScaffoldState> scaffoldKey;
+
+  Future _handleShare() async {
+    var widget;
+    Share.share(widget.articleData!.link!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +48,7 @@ class Card4 extends StatelessWidget {
                     height: 180,
                     width: double.infinity,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                         child: Hero(
                             tag: heroTag,
                             child: CustomCacheImage(
@@ -109,12 +119,56 @@ class Card4 extends StatelessWidget {
                               fontWeight: FontWeight.w500),
                         ),
                         Spacer(),
-                        BookmarkIcon(
-                          bookmarkedList: bookmarkedList,
-                          article: article,
-                          iconSize: 18,
-                          scaffoldKey: scaffoldKey,
-                        )
+                        PopupMenuButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10))
+                            ),
+                            enableFeedback: true,
+                            elevation: 0,
+                            color: Colors.grey[800],
+                            child: Icon(
+                              LucideIcons.plusCircle,
+                              color: Theme.of(context).colorScheme.secondary,
+                              size: 18,
+                            ),
+                            itemBuilder: (BuildContext context) {
+                              return <PopupMenuItem>[
+                                PopupMenuItem(
+                                  value: 'scan',
+                                  child: Row(
+                                    children: <Widget>[
+                                      BookmarkIcon(
+                                        bookmarkedList: bookmarkedList,
+                                        article: article,
+                                        iconSize: 25,
+                                        normalIconColor: Colors.white,
+                                        scaffoldKey: scaffoldKey,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                            LucideIcons.messageSquare,
+                                            size: 25,
+                                            color: Colors.white,
+                                        ),
+                                        onPressed: () => nextScreen(context, CommentsPage(postId: article.id, categoryId: article.catId!,)),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                            LucideIcons.cornerUpRight,
+                                            size: 25,
+                                            color: Colors.white,
+                                        ),
+                                        onPressed: ()=> _handleShare(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ];
+                            },
+                        ),
                       ],
                     )
                   ],
