@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:wordpress_app/models/article.dart';
@@ -12,6 +13,8 @@ import 'package:wordpress_app/utils/cached_image.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/bookmark_icon.dart';
 import 'package:wordpress_app/widgets/video_icon.dart';
+
+import '../pages/comments_page.dart';
 
 
 //Big card with title & description
@@ -25,15 +28,6 @@ class Card2 extends StatelessWidget {
   final Article article;
   final String heroTag;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  
-  Future _handleBookmark(Box<dynamic> bookmarkedList) async {
-    BookmarkIcon(
-      bookmarkedList: bookmarkedList,
-      article: article,
-      iconSize: 18,
-      scaffoldKey: scaffoldKey,
-    );
-  }
 
   Future _handleShare(String s) async {
     var widget;
@@ -70,7 +64,7 @@ class Card2 extends StatelessWidget {
                       height: 180,
                       width: double.infinity,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           child: Hero(
                               tag: heroTag,
                               child: CustomCacheImage(
@@ -160,45 +154,54 @@ class Card2 extends StatelessWidget {
                           else
                             Container(),
                           Spacer(),
-                          IconButton(
-                            padding: EdgeInsets.only(right: 0, left: 8),
-                            constraints: BoxConstraints(),
-                            icon: Icon(
-                              Feather.x,
-                              size: 18,
-                              color: Theme.of(context).colorScheme.secondary,
+                          PopupMenuButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10))
                             ),
-                            onPressed: () {
-                              showModalBottomSheet<void>(
-                                backgroundColor: Colors.white,
-                                context: context,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(18),
-                                      topRight: Radius.circular(18)
+                            enableFeedback: true,
+                            elevation: 0,
+                            color: Colors.grey[800],
+                            child: Icon(
+                              LucideIcons.plusCircle,
+                              color: Theme.of(context).colorScheme.secondary,
+                              size: 18,
+                            ),
+                            itemBuilder: (BuildContext context) {
+                              return <PopupMenuItem>[
+                                PopupMenuItem(
+                                  value: 'scan',
+                                  child: Row(
+                                    children: <Widget>[
+                                      BookmarkIcon(
+                                        bookmarkedList: bookmarkedList,
+                                        article: article,
+                                        iconSize: 25,
+                                        normalIconColor: Colors.white,
+                                        scaffoldKey: scaffoldKey,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          LucideIcons.messageSquare,
+                                          size: 25,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () => nextScreen(context, CommentsPage(postId: article.id, categoryId: article.catId!,)),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          LucideIcons.cornerUpRight,
+                                          size: 25,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: ()=> _handleShare(article.link!),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    height: 300,
-                                    //color: Colors.amber,
-
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          const Text('Modal BottomSheet'),
-                                          ElevatedButton(
-                                            child: const Text('Close BottomSheet'),
-                                            onPressed: () => Navigator.pop(context),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
+                              ];
                             },
                           ),
                         ],

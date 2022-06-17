@@ -10,6 +10,7 @@ import 'package:wordpress_app/mini_program/promotion_render.dart';
 import 'package:wordpress_app/mini_program/render.dart';
 import 'package:wordpress_app/mini_program/selector/posts.dart';
 import 'package:wordpress_app/mini_program/test_browser.dart';
+import 'package:wordpress_app/pages/welcome.dart';
 import 'package:wordpress_app/tabs/profile_tab.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/vertical_line.dart';
@@ -347,6 +348,27 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                   ).tr(),
                   trailing: Icon(Feather.chevron_right),
                   onTap: () => nextScreen(context, PromotionMiniProgram(url: 'status.im', title: "Status")),
+                ),
+                SizedBox(height: 15),
+                ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.black,
+                    radius: 18,
+                    child: Icon(
+                      Feather.terminal,
+                      size: 18,
+                      color: Colors.greenAccent,
+                    ),
+                  ),
+                  title: Text(
+                    'Welcome Screen',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,),
+                  ).tr(),
+                  trailing: Icon(Feather.chevron_right),
+                  onTap: () => nextScreen(context, WelcomePage()),
                 ),
                 SizedBox(height: 15),
                 ListTile(

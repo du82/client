@@ -110,7 +110,7 @@ class Card3 extends StatelessWidget {
                           article: article,
                           iconSize: 25,
                           scaffoldKey: scaffoldKey,
-                          iconColor: Colors.redAccent,
+                          iconColor: Theme.of(context).primaryColor,
                           normalIconColor: Colors.black,
                         ),
                         Spacer(),

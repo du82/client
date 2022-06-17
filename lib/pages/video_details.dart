@@ -135,7 +135,7 @@ class _VideoDetailsState extends State<VideoDetails> {
                   article: article,
                   iconSize: 25,
                   scaffoldKey: scaffoldKey,
-                  iconColor: Colors.redAccent,
+                  iconColor: Theme.of(context).primaryColor,
                   normalIconColor: Colors.black,
                 ),
               ),
@@ -300,7 +300,7 @@ class _VideoDetailsState extends State<VideoDetails> {
                                       decoration: BoxDecoration(
                                         //color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
                                           color: Config().appThemeColor,
-                                          borderRadius: BorderRadius.circular(100)
+                                          borderRadius: BorderRadius.circular(10)
                                       ),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
