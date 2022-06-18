@@ -51,6 +51,262 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         titleSpacing: 0,
         title: _searchBar(),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(45),
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 5),
+            height: 40.0,
+            child: ListView(
+              // This next line does the trick.
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 15, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.com',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".com";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.net',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".net";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.org',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".org";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.me',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".me";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.io',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".io";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.co',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".co";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '.gov',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = searchFieldCtrl.text + ".gov";
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'http://',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = "http://" + searchFieldCtrl.text;
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 15, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'https://',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  onTap: (){
+                    searchFieldCtrl.text = "https://" + searchFieldCtrl.text;
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
         elevation: 0,
         leadingWidth: 15,
         leading: Container(),
@@ -80,7 +336,7 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 15),
                   child: Column(
                     children: [
                       _searchStarted == false
@@ -367,299 +623,6 @@ class _SearchPageState extends State<SearchPage> {
                   }
                   return Column(
                     children: [
-                      /*if (searchFieldCtrl.text.contains(" "))
-                        Container()
-                      else
-                        Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          padding: EdgeInsets.only(
-                              left: 10, right: 10, top: 0, bottom: 0),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.onSecondary,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListTile(
-                                contentPadding: EdgeInsets.all(0),
-                                leading: CircleAvatar(
-                                  backgroundColor: Theme.of(context).primaryColor,
-                                  radius: 18,
-                                  child: Icon(
-                                    Feather.terminal,
-                                    size: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                title: Text(
-                                  "Go to  " + searchFieldCtrl.text + ".com",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,),
-                                ).tr(),
-                                trailing: Icon(LucideIcons.chevronRight),
-                                onTap: (){
-                                  AppService().openLinkWithBrowserMiniProgram(
-                                      context, (searchFieldCtrl.text + ".com"));
-                                },
-                              ),
-                            ],
-                          ),
-                        ),*/
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 8),
-                        height: 40.0,
-                        child: ListView(
-                          // This next line does the trick.
-                          scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.com',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".com";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.net',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".net";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.org',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".org";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.me',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".me";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.io',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".io";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.co',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".co";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '.gov',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = searchFieldCtrl.text + ".gov";
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'http://',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = "http://" + searchFieldCtrl.text;
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primaryVariant,
-                                    borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'https://',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                ),
-                              ),
-                              onTap: (){
-                                searchFieldCtrl.text = "https://" + searchFieldCtrl.text;
-                                searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
                       ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
