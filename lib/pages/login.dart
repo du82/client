@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        hintText: 'Enter your username or email',
+                        hintText: 'Enter your username',
                         hintStyle: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 15),
@@ -178,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        hintText: 'Enter password',
+                        hintText: 'Enter your password',
                         hintStyle: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 15),
