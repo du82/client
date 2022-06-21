@@ -308,6 +308,37 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
+                        color: Colors.teal.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Translate',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            letterSpacing: -0.7,
+                            wordSpacing: 1,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ).tr(),
+                    ),
+                  ),
+                  /*onTap: (){
+                    searchFieldCtrl.text = "https://" + searchFieldCtrl.text;
+                    searchFieldCtrl.selection = TextSelection.fromPosition(TextPosition(offset: searchFieldCtrl.text.length));
+                  },*/
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.deepl.com/translator#en/de/" + searchFieldCtrl.text));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
                         color: Colors.purple.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8)
                     ),
@@ -1668,8 +1699,7 @@ class _EmptySearchAnimation extends StatelessWidget {
       children: [
         Center(
         ),
-
-        Text('search for contents', style: TextStyle(
+        Text('search for content', style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
             letterSpacing: -0.7,
@@ -1678,7 +1708,7 @@ class _EmptySearchAnimation extends StatelessWidget {
 
         SizedBox(height: 10,),
 
-        Text('search-description',
+        Text('search description',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 14,

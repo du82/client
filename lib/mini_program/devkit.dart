@@ -8,7 +8,6 @@ import 'package:wordpress_app/blocs/theme_bloc.dart';
 import 'package:wordpress_app/config/server_config.dart';
 import 'package:wordpress_app/mini_program/promotion_render.dart';
 import 'package:wordpress_app/mini_program/render.dart';
-import 'package:wordpress_app/mini_program/selector/posts.dart';
 import 'package:wordpress_app/mini_program/test_browser.dart';
 import 'package:wordpress_app/pages/welcome.dart';
 import 'package:wordpress_app/tabs/profile_tab.dart';
@@ -265,28 +264,6 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                       wordSpacing: 1),
                 ).tr(),
                 SizedBox(height: 15),
-                /*ListTile(
-                            contentPadding: EdgeInsets.all(0),
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.black,
-                              radius: 18,
-                              child: Icon(
-                                Feather.terminal,
-                                size: 18,
-                                color: Colors.greenAccent,
-                              ),
-                            ),
-                            title: Text(
-                              'Terminal',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).colorScheme.primary),
-                            ).tr(),
-                            trailing: Icon(Feather.chevron_right),
-                            onTap: () => nextScreenPopup(context, Notifications()),
-                          ),
-                          SizedBox(height: 15),*/
                 ListTile(
                   contentPadding: EdgeInsets.all(0),
                   leading: CircleAvatar(
@@ -389,7 +366,6 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                       fontWeight: FontWeight.w500,),
                   ).tr(),
                   trailing: Icon(Feather.chevron_right),
-                  onTap: () => nextScreen(context, PostsMiniProgram()),
                 ),
               ],
             ),

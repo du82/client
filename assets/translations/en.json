@@ -21,6 +21,12 @@
     "post" : "Post",
     "follow" : "Follow",
 
+    "browser" : "Browser",
+    "suggested actions" : "Suggested actions",
+    "developer options" : "Developer options",
+
+    "clear cache" : "Clear cache",
+
     "not what you were looking for" : "Not what you were looking for?",
     "try alt search" : "Try another search engine",
 
@@ -36,7 +42,7 @@
     "search" : "Search",
     "search for content" : "Search for content",
     "recent searches" : "Search History",
-    "search-description" :  "You haven't searched for any items yet.\n Try now - we will help you!",
+    "search description" :  "Try a search for something in the news\nor scroll the suggestions bar for more ideas!",
     "try again" : "Try again!",
     "categories" : "Categories",
 
