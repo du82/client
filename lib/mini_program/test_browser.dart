@@ -319,6 +319,7 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
+  //testing
   Future<void> _onListCache(
       WebViewController controller, BuildContext context) async {
     await controller.runJavascript('caches.keys()'
