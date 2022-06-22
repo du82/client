@@ -23,7 +23,17 @@
 
     "browser" : "Browser",
     "suggested actions" : "Suggested actions",
-    "developer options" : "Developer options",
+    "all actions" : "All actions",
+    "copied to clipboard" : "Copied to clipboard",
+    "burn" : "Burn",
+    "copy link" : "Copy link",
+    "forward" : "Forward",
+    "home" : "Home",
+    "reload" : "Reload",
+    "scan" : "Scan",
+    "share" : "Share",
+    "video" : "Video",
+    "outlink" : "Outlink",
 
     "clear cache" : "Clear cache",
 

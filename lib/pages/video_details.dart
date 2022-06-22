@@ -4,13 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
 import 'package:wordpress_app/blocs/ads_bloc.dart';
 import 'package:wordpress_app/config/ad_config.dart';
 import 'package:wordpress_app/config/config.dart';
-import 'package:wordpress_app/mini_program/browser.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/constants.dart';
 import 'package:wordpress_app/pages/search.dart';
@@ -18,7 +17,6 @@ import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/banner_ad.dart';
 import 'package:wordpress_app/widgets/bookmark_icon.dart';
-import 'package:wordpress_app/widgets/full_image.dart';
 import 'package:wordpress_app/widgets/local_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/widgets/related_articles.dart';
@@ -66,15 +64,20 @@ class _VideoDetailsState extends State<VideoDetails> {
           color: Theme.of(context).backgroundColor,
           child: Row(
             children: [
-              IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 5),
-                  child: Icon(
-                    Feather.chevron_left,
-                    size: 32,
-                  ),
+              InkWell(
+                child: IconButton(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 5,
+                        right: 0
+                    ),
+                    child: Icon(
+                      LucideIcons.chevronLeft,
+                      size: 32,
+                    ),
+                  ), onPressed: () {Navigator.pop(context);},
                 ),
-                onPressed: ()=> Navigator.pop(context),
+                onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
               ),
               SizedBox(width: 8),
               InkWell(
@@ -90,7 +93,7 @@ class _VideoDetailsState extends State<VideoDetails> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(
-                        Feather.edit_3,
+                        LucideIcons.edit3,
                         color: Theme.of(context).colorScheme.secondary,
                         size: 20,
                       ),
@@ -146,7 +149,7 @@ class _VideoDetailsState extends State<VideoDetails> {
                       right: 5
                   ),
                   child: Icon(
-                    Feather.search,
+                    LucideIcons.search,
                     size: 24,
                   ),
                 ),
@@ -159,7 +162,7 @@ class _VideoDetailsState extends State<VideoDetails> {
                       right: 5
                   ),
                   child: Icon(
-                    Feather.corner_up_right,
+                    LucideIcons.cornerUpRight,
                     size: 25,
                   ),
                 ),
@@ -223,11 +226,6 @@ class _VideoDetailsState extends State<VideoDetails> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  /*CircleAvatar(
-                                    radius: 20,
-                                    backgroundImage: CachedNetworkImageProvider(
-                                        article.avatar!),
-                                  ),*/
                                   Container(
                                     width: 45,
                                     height: 45,
@@ -306,7 +304,7 @@ class _VideoDetailsState extends State<VideoDetails> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Icon(
-                                            Feather.plus_circle,
+                                            LucideIcons.plusCircle,
                                             color: Theme.of(context).colorScheme.background,
                                             size: 20,
                                           ),

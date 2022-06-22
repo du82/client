@@ -73,18 +73,20 @@ class _ArticleDetailsState extends State<ArticleDetails> {
           color: Theme.of(context).backgroundColor,
           child: Row(
             children: [
-              IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 5,
-                      right: 5
-                  ),
-                  child: Icon(
-                    LucideIcons.chevronLeft,
-                    size: 32,
-                  ),
+              InkWell(
+                child: IconButton(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 5,
+                        right: 0
+                    ),
+                    child: Icon(
+                      LucideIcons.chevronLeft,
+                      size: 32,
+                    ),
+                  ), onPressed: () {Navigator.pop(context);},
                 ),
-                onPressed: ()=> Navigator.pop(context),
+                onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
               ),
               SizedBox(width: 8),
               InkWell(
@@ -353,8 +355,6 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                                 ],
                                               ),
                                             ),
-
-                                            //onTap: ()=> nextScreen(context, SearchPage()),
                                             onTap: () => nextScreen(
                                                 context, CommentsPage(postId: article.id, categoryId: article.catId!,)),
                                           ),

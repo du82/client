@@ -10,13 +10,10 @@ import 'package:wordpress_app/mini_program/promotion_render.dart';
 import 'package:wordpress_app/mini_program/render.dart';
 import 'package:wordpress_app/mini_program/test_browser.dart';
 import 'package:wordpress_app/pages/welcome.dart';
-import 'package:wordpress_app/tabs/profile_tab.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/vertical_line.dart';
 import 'package:wordpress_app/widgets/language.dart';
 import 'package:wordpress_app/widgets/server.dart';
-
-import '../config/config.dart';
 
 class DevKitMiniProgram extends StatefulWidget {
   const DevKitMiniProgram({Key? key}) : super(key: key);

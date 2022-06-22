@@ -27,6 +27,7 @@ class _LocalVideoPlayerState extends State<LocalVideoPlayer> {
           aspectRatio: 16/9,
           controlsConfiguration: BetterPlayerControlsConfiguration(
             enableSkips: true,
+            enablePip: true,
             enableOverflowMenu: true,
             enableMute: true,
             enableFullscreen: true,
