@@ -6,6 +6,7 @@ import 'package:provider/src/provider.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:wordpress_app/blocs/theme_bloc.dart';
 import 'package:wordpress_app/config/server_config.dart';
+import 'package:wordpress_app/experimental/two_level_test.dart';
 import 'package:wordpress_app/mini_program/promotion_render.dart';
 import 'package:wordpress_app/mini_program/render.dart';
 import 'package:wordpress_app/mini_program/test_browser.dart';
@@ -13,7 +14,6 @@ import 'package:wordpress_app/pages/welcome.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/vertical_line.dart';
 import 'package:wordpress_app/widgets/language.dart';
-import 'package:wordpress_app/widgets/server.dart';
 
 class DevKitMiniProgram extends StatefulWidget {
   const DevKitMiniProgram({Key? key}) : super(key: key);
@@ -215,27 +215,31 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                     )
                 ),
                 _Divider(),
-                ListTile(
-                    contentPadding: EdgeInsets.all(0),
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.blueAccent,
-                      radius: 18,
-                      child: Icon(
-                        Feather.server,
-                        size: 18,
-                        color: Colors.white,
-                      ),
+                Column(
+                  children: [
+                    ListTile(
+                        contentPadding: EdgeInsets.all(0),
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blueAccent,
+                          radius: 18,
+                          child: Icon(
+                            Feather.server,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                        title: Text(
+                          'Select Development Server',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,),
+                        ).tr(),
+                        trailing: Icon(Feather.chevron_right),
+                        onTap: () => Navigator.of(context).push(SwipeablePageRoute(
+                            builder: (BuildContext context) => TwoLevelExample()),
+                        )
                     ),
-                    title: Text(
-                      'Select Development Server',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,),
-                    ).tr(),
-                    trailing: Icon(Feather.chevron_right),
-                    onTap: () => Navigator.of(context).push(SwipeablePageRoute(
-                        builder: (BuildContext context) => ServerPopup()),
-                    )
+                  ],
                 ),
               ],
             ),
