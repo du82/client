@@ -32,18 +32,14 @@ class _Tab0State extends State<Tab0> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      backgroundColor: Theme.of(context).primaryColor,
-      color: Colors.white,
-      onRefresh: ()async => _onRefresh(),
-      child: SingleChildScrollView(
-        key: PageStorageKey('key0'),
-        padding: EdgeInsets.all(0),
-        physics: AlwaysScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            //Featured(),
-            /*Padding(
+    return SingleChildScrollView(
+      key: PageStorageKey('key0'),
+      padding: EdgeInsets.all(0),
+      physics: AlwaysScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          //Featured(),
+          /*Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   child: Container(
                     height: 50,
@@ -60,24 +56,19 @@ class _Tab0State extends State<Tab0> {
                     ),
                   ),
                 ),*/
-            //Featured(),
-            PopularArticles(scaffoldKey: widget.scaffoldKey),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                color: Theme.of(context).dividerColor,
-                thickness: 1.5,
-                height: 20,
-              ),
+          //Featured(),
+          PopularArticles(scaffoldKey: widget.scaffoldKey),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Divider(
+              color: Theme.of(context).dividerColor,
+              thickness: 1.5,
+              height: 20,
             ),
-            LattestArticles(scaffoldKey: widget.scaffoldKey),
-
-          ],
-        ),
+          ),
+          LattestArticles(scaffoldKey: widget.scaffoldKey),
+        ],
       ),
-
-
     );
-
   }
 }

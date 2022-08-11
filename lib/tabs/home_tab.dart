@@ -74,9 +74,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      key: scaffoldKey,
-      body: NestedScrollView(
+    return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               new SliverAppBar(
@@ -113,30 +111,29 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                               size: 23,
                             ),
                             SizedBox(width: 10),
-                            Flexible(
-                              child: Text(
-                                'search contents',
-                                maxLines: 1,
-                                style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    letterSpacing: -0.7,
-                                    wordSpacing: 1,
-                                    fontSize: 16,
-                                    color: Theme.of(context).colorScheme.secondary,
-                                    fontWeight: FontWeight.w500),
-                              ).tr(),
-                            ),
-                            Container(width: MediaQuery.of(context).size.width - 305,),
+                            Text(
+                              'search contents',
+                              maxLines: 1,
+                              style: TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  letterSpacing: -0.7,
+                                  wordSpacing: 1,
+                                  fontSize: 16,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.w500),
+                            ).tr(),
+                            //Container(width: MediaQuery.of(context).size.width - 305,),
+                            Spacer(),
                             InkWell(
                               child: Icon(
                                 LucideIcons.scanLine,
                                 color: Theme.of(context).colorScheme.secondary,
                                 size: 23,
                               ),
-                                onTap: () => Navigator.of(context).push(SwipeablePageRoute(
-                                    canOnlySwipeFromEdge: true,
-                                    builder: (BuildContext context) => BarcodeScannerWithController()),
-                                )
+                              onTap: () {
+                                Navigator.of(context).push(SwipeablePageRoute(canOnlySwipeFromEdge: true, builder: (BuildContext context) => BarcodeScannerWithController()));
+                                HapticFeedback.heavyImpact();
+                              }
                             ),
                             Container(width: 15,),
                             /*InkWell(
@@ -330,7 +327,6 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
               );
             },
           )
-      ),
     );
   }
 

@@ -1,25 +1,21 @@
-/*
- * Author: Jpeng
- * Email: peng8350@gmail.com
- * Time:  2019-06-26 16:28
- */
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide RefreshIndicator, RefreshIndicatorState;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:swipeable_page_route/swipeable_page_route.dart';
 
-/*
-   there two example implements two level,
-   the first is common,when twoRefreshing,header will follow the list to scrollDown,when closing,still follow
-   list move up,
-   the second example use Navigator and keep offset when twoLevel trigger,
-   header can use ClassicalHeader to implments twoLevel,it provide outerBuilder(1.4.7)
-   important point:
-   1. open enableTwiceRefresh bool ,default is false
-   2. _refreshController.twiceRefreshComplete() can closing the two level
-*/
+import '../pages/home.dart';
+import '../pages/search.dart';
+import '../services/app_service.dart';
+import '../services/barcode_scanner.dart';
+import '../tabs/profile_tab.dart';
+import '../tabs/video_tab.dart';
+import '../utils/next_screen.dart';
+
+
 class TwoLevelExample extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -30,7 +26,6 @@ class TwoLevelExample extends StatefulWidget {
 
 class _TwoLevelExampleState extends State<TwoLevelExample> {
   RefreshController _refreshController1 = RefreshController();
-  RefreshController _refreshController2 = RefreshController();
   int _tabIndex = 0;
 
   @override
@@ -48,9 +43,7 @@ class _TwoLevelExampleState extends State<TwoLevelExample> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return RefreshConfiguration(
-      footerTriggerDistance: 2,
       dragSpeedRatio: 1,
       headerBuilder: () => const MaterialClassicHeader(),
       footerBuilder: () => const ClassicFooter(),
@@ -59,21 +52,8 @@ class _TwoLevelExampleState extends State<TwoLevelExample> {
       enableLoadMoreVibrate: true,
       enableScrollWhenTwoLevel: true,
       maxOverScrollExtent: 120,
-      shouldFooterFollowWhenNotFull: (state) {
-        // If you want load more with noMoreData state ,may be you should return false
-        return false;
-      },
+      maxUnderScrollExtent: 120,
       child: Scaffold(
-        bottomNavigationBar: !_refreshController1.isTwoLevel
-            ? BottomNavigationBar(
-          currentIndex: _tabIndex,
-          onTap: (index) {
-            _tabIndex = index;
-            if (mounted) setState(() {});
-          },
-          items: [BottomNavigationBarItem(icon: Icon(Icons.add), label: "二级刷新例子1"), BottomNavigationBarItem(icon: Icon(Icons.border_clear), label: "二级刷新例子2")],
-        )
-            : null,
         body: Stack(
           children: <Widget>[
             Offstage(
@@ -93,98 +73,334 @@ class _TwoLevelExampleState extends State<TwoLevelExample> {
                       ),
                       twoLevelWidget: TwoLevelWidget(),
                     ),
-                    child: CustomScrollView(
-                      physics: ClampingScrollPhysics(),
-                      slivers: <Widget>[
-                        SliverToBoxAdapter(
-                          child: Container(
-                            child: Scaffold(
-                              appBar: AppBar(),
-                              body: Column(
-                                children: <Widget>[
-                                  RaisedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text("点击这里返回上一页!"),
-                                  ),
-                                  RaisedButton(
-                                    onPressed: () {
-                                      _refreshController1.requestTwoLevel();
-                                    },
-                                    child: Text("点击这里打开二楼!"),
-                                  )
-                                ],
-                              ),
-                            ),
-                            height: 500.0,
-                          ),
-                        )
-                      ],
-                    ),
+                    child: HomePage(),
                     controller: _refreshController1,
                     enableTwoLevel: true,
                     enablePullDown: true,
                     enablePullUp: true,
                     onLoading: () async {
-                      await Future.delayed(Duration(milliseconds: 2000));
+                      await Future.delayed(Duration(milliseconds: 100));
                       _refreshController1.loadComplete();
+                      showModalBottomSheet<void>(
+                        backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12)
+                          ),
+                        ),
+                        builder: (BuildContext context) {
+                          return Container(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            margin: EdgeInsets.only(top: 12),
+                            child: Center(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 15, right: 15, top: 10, bottom: 10),
+                                    margin: EdgeInsets.only(
+                                        left: 15, right: 15, top:5),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.onPrimary,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'suggested actions',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: -0.7,
+                                              wordSpacing: 1),
+                                        ).tr(),
+                                        Container(height: 10,),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.arrowRight,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Container()
+                                                ),
+                                                Text('forward').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.share,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Container()
+                                                ),
+                                                Text('share').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.scanLine,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () => Navigator.of(context).push(SwipeablePageRoute(
+                                                        canOnlySwipeFromEdge: true,
+                                                        builder: (BuildContext context) => BarcodeScannerWithController()),
+                                                    )
+                                                ),
+                                                Text('scan').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.flame,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context).popUntil((route) => route.isFirst);
+                                                    }
+                                                ),
+                                                Text('burn').tr(),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 15, right: 15, top: 10, bottom: 10),
+                                    margin: EdgeInsets.only(
+                                        left: 15, right: 15, top:15),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.onPrimary,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'all actions',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: -0.7,
+                                              wordSpacing: 1),
+                                        ).tr(),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.flame,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context).popUntil((route) => route.isFirst);
+                                                    }
+                                                ),
+                                                Text('burn').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.copy,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () {Clipboard.setData(ClipboardData(text: 'testing'));
+                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('copied to clipboard'),));}
+                                                ),
+                                                Text('copy link').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.arrowRight,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Container()
+                                                ),
+                                                Text('forward').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.home,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Navigator.of(context).popUntil((route) => route.isFirst),
+                                                ),
+                                                Text('home').tr(),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Container(height: 10,),
+                                        Row(
+                                          children: [
+
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.rotateCw,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Container()
+                                                ),
+                                                Text('reload').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.scanLine,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () => Navigator.of(context).push(SwipeablePageRoute(
+                                                        canOnlySwipeFromEdge: true,
+                                                        builder: (BuildContext context) => BarcodeScannerWithController()),
+                                                    )
+                                                ),
+                                                Text('scan').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.settings,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () {nextScreen(context, SettingPage());}
+                                                ),
+                                                Text('settings').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.share,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Container()
+                                                ),
+                                                Text('share').tr(),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Container(height: 10,),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.search,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () {nextScreen(context, SearchPage());}
+                                                ),
+                                                Text('search').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.bug,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> Container(),
+                                                ),
+                                                Text('Test Bugs').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    LucideIcons.externalLink,
+                                                    size: 25,
+                                                  ),
+                                                  onPressed: ()=> AppService().openLinkWithCustomTab(
+                                                      context, ('google.com')),
+                                                ),
+                                                Text('outlink').tr(),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    icon: Icon(
+                                                      LucideIcons.play,
+                                                      size: 25,
+                                                    ),
+                                                    onPressed: () {nextScreen(context, VideoTab());}
+                                                ),
+                                                Text('video').tr(),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
                     onRefresh: () async {
-                      await Future.delayed(Duration(milliseconds: 2000));
+                      await Future.delayed(Duration(milliseconds: 500));
                       _refreshController1.refreshCompleted();
                     },
                     onTwoLevel: (bool isOpen) {
                       print("twoLevel opening:" + isOpen.toString());
+                      FocusManager.instance.primaryFocus?.unfocus();
                     },
                   );
                 },
               ),
             ),
-            Offstage(
-              offstage: _tabIndex != 1,
-              child: SmartRefresher(
-                header: ClassicHeader(),
-                child: CustomScrollView(
-                  physics: ClampingScrollPhysics(),
-                  slivers: <Widget>[
-                    SliverToBoxAdapter(
-                      child: Container(
-                        child: RaisedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("点击这里返回上一页!"),
-                        ),
-                        color: Colors.red,
-                        height: 680.0,
-                      ),
-                    )
-                  ],
-                ),
-                controller: _refreshController2,
-                enableTwoLevel: true,
-                onRefresh: () async {
-                  await Future.delayed(Duration(milliseconds: 2000));
-                  _refreshController2.refreshCompleted();
-                },
-                onTwoLevel: (bool isOpen) {
-                  if (isOpen) {
-                    print("Asd");
-                    _refreshController2.position?.hold(() {});
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(
-                        builder: (c) => Scaffold(
-                          appBar: AppBar(),
-                          body: Text("二楼刷新"),
-                        )))
-                        .whenComplete(() {
-                      _refreshController2.twoLevelComplete(duration: Duration(microseconds: 1));
-                    });
-                  }
-                },
-              ),
-            )
+
           ],
         ),
       ),
@@ -206,52 +422,48 @@ class TwoLevelWidget extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          Center(
-            child: Wrap(
-              children: <Widget>[
-                RaisedButton(
-                  color: Colors.greenAccent,
-                  onPressed: () {},
-                  child: Text("登陆"),
-                ),
-              ],
-            ),
+          RaisedButton(
+            color: Colors.greenAccent,
+            onPressed: () {},
+            child: Text("登陆"),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Stack(
-                children: [
-                  Container(
-                    height: 50.0,
-                    padding: EdgeInsets.only(left: 10),
-                    child: GestureDetector(
+              Container(
+                height: 50.0,
+                padding: EdgeInsets.only(left: 10),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
+                ),
+                child: Stack(
+                  children: [
+                    GestureDetector(
                       child: Icon(
-                        LucideIcons.chevronLeft,
-                        color: Colors.white,
+                        LucideIcons.chevronsUp,
+                        color: Colors.black,
                         size: 30,
                       ),
                       onTap: () {
                         SmartRefresher.of(context)?.controller.twoLevelComplete();
                       },
                     ),
-                    alignment: Alignment.topLeft,
-                  ),
-                  Container(
-                    height: 50.0,
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text('Swipe up to go back', style: TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      letterSpacing: -0.7,
-                      wordSpacing: 1,
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),),
-                    alignment: Alignment.topCenter,
-                  ),
-                ],
-              )
-
+                    Container(
+                      height: 50.0,
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text('Swipe up to go back', style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          letterSpacing: -0.7,
+                          wordSpacing: 1,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),),
+                      alignment: Alignment.topCenter,
+                    ),
+                  ],
+                ),
+                alignment: Alignment.topLeft,
+              ),
             ],
           ),
         ],
