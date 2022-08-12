@@ -19,9 +19,9 @@ class Config {
 
 
   //app theme color
+  //final Color appThemeColor = Color(0xff2872fa);
   final Color appThemeColor = Color(0xff2872fa);
   final Color appSecondaryColor = Color(0xff32373c);
-
   // Icons
   static const String appIcon = 'assets/images/icon.png';
   static const String splash = 'assets/images/splash.png';

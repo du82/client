@@ -740,6 +740,24 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            IconButton(
+              icon: Padding(
+                padding: const EdgeInsets.only(
+                  left: 5,
+                ),
+                child: Icon(
+                  Feather.chevron_left,
+                  size: 32,
+                ),
+              ),
+              onPressed: ()=> Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wordpress_app/config/server_config.dart';
+import 'package:wordpress_app/widgets/banner.dart';
 import 'package:wordpress_app/widgets/featured.dart';
 import 'package:wordpress_app/widgets/popular_articles.dart';
 import '../blocs/featured_bloc.dart';
@@ -44,7 +45,7 @@ class _Tab0State extends State<Tab0> {
         child: Column(
           children: [
             //Featured(),
-            Container(
+            /*Container(
                   //height: 35,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(8),
@@ -66,8 +67,11 @@ class _Tab0State extends State<Tab0> {
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                ),
+                ),*/
             //Featured(),
+
+            HeaderBanner(title: 'The app is running in developer mode.', enabled: false,),
+
             PopularArticles(scaffoldKey: widget.scaffoldKey),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
