@@ -1042,7 +1042,7 @@ class _SearchPageState extends State<SearchPage> {
                       children: [
                         if (searchFieldCtrl.text.contains('scan') || searchFieldCtrl.text.contains('qr') || searchFieldCtrl.text.contains('code'))
                           SearchHintQRcode(),
-                        if (searchFieldCtrl.text.startsWith('translate') || searchFieldCtrl.text.startsWith('tr') || searchFieldCtrl.text.contains('code'))
+                        if (searchFieldCtrl.text.startsWith('translate') || searchFieldCtrl.text.startsWith('tr'))
                           SearchHintTranslate(request: searchFieldCtrl.text,),
                         if (searchFieldCtrl.text.contains('.com')
                             || searchFieldCtrl.text.contains('.net')
