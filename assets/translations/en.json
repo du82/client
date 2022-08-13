@@ -123,6 +123,18 @@
     "popular": "Popular",
     "ad": "Ad",
 
+    "scan code title" : "Scan a code",
+    "scan code description" : "You can scan a QR code, barcode, Aztec code, and many others right from the search box.",
+    "scan code button" : "Open scanner",
+
+    "link detect title" : "Go to website",
+    "link detect description" : "You can open webpages inside of the mini-program browser without leaving the app.",
+    "link detect button" : "Open website",
+
+    "translate query title" : "Translate this",
+    "translate query description" : "You can translate text inside of the search bar through DeepL.",
+    "translate query button" : "Open translate",
+
     "clear all notification-dialog": "Do you want to clear all the notification data?",
     "clear all bookmark-dialog": "Do you want to clear all the saved content?"
 

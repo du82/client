@@ -31,7 +31,7 @@ class Card5 extends StatelessWidget {
               Expanded(
                 child: Container(
                   //height: 120,
-                  padding: EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 10),
+                  padding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,11 +108,6 @@ class Card5 extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  /*Container(
-                      height: 100,
-                      width: 150,
-                      child: CustomCacheImage(imageUrl: article.image, radius: 8)
-                  ),*/
                   Container(
                     height: 60,
                     width: 100,
@@ -127,7 +122,7 @@ class Card5 extends StatelessWidget {
                     ),
                   ),
 
-                  VideoIcon(tags: article.tags, iconSize: 20,)
+                  VideoIcon(tags: article.tags, iconSize: 15,)
                 ],
               ),
               /*SizedBox(
@@ -135,7 +130,7 @@ class Card5 extends StatelessWidget {
               ),*/
             ],
           )),
-      onTap: () => navigateToDetailsScreenByReplace(context, article, null)
+      onTap: () => navigateToDetailsScreen(context, article, null)
     );
   }
 }

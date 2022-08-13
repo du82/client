@@ -20,8 +20,11 @@ import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/snacbar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:wordpress_app/widgets/buy_now.dart';
+import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
+import 'package:wordpress_app/widgets/search_hint_webpage.dart';
 
-import '../cards/alternative_search_card.dart';
+import '../widgets/search_hint_translate.dart';
 import 'category_based_articles.dart';
 
 class SearchPage extends StatefulWidget {
@@ -1035,10 +1038,36 @@ class _SearchPageState extends State<SearchPage> {
                     return EmptyPageWithIcon(
                         icon: Icons.error, title: 'Error!');
                   } else if (snapshot.data.isEmpty) {
-                    return _searchProviderUI();
+                    return Column(
+                      children: [
+                        if (searchFieldCtrl.text.contains('scan') || searchFieldCtrl.text.contains('qr') || searchFieldCtrl.text.contains('code'))
+                          SearchHintQRcode(),
+                        if (searchFieldCtrl.text.startsWith('translate') || searchFieldCtrl.text.startsWith('tr') || searchFieldCtrl.text.contains('code'))
+                          SearchHintTranslate(request: searchFieldCtrl.text,),
+                        if (searchFieldCtrl.text.contains('.com')
+                            || searchFieldCtrl.text.contains('.net')
+                            || searchFieldCtrl.text.contains('.org')
+                            || searchFieldCtrl.text.contains('.me')
+                            || searchFieldCtrl.text.contains('.co')
+                            || searchFieldCtrl.text.contains('.io')
+                            || searchFieldCtrl.text.contains('.cn'))
+                          SearchHintWebpage(url: searchFieldCtrl.text,),
+                        _searchProviderUI()
+                      ],
+                    );
                   }
                   return Column(
                     children: [
+                      if (searchFieldCtrl.text.contains('scan') || searchFieldCtrl.text.contains('qr') || searchFieldCtrl.text.contains('code'))
+                        SearchHintQRcode(),
+                      if (searchFieldCtrl.text.contains('.com')
+                          || searchFieldCtrl.text.contains('.net')
+                          || searchFieldCtrl.text.contains('.org')
+                          || searchFieldCtrl.text.contains('.me')
+                          || searchFieldCtrl.text.contains('.co')
+                          || searchFieldCtrl.text.contains('.io')
+                          || searchFieldCtrl.text.contains('.cn'))
+                        SearchHintWebpage(url: searchFieldCtrl.text,),
                       ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -1163,7 +1192,7 @@ class _SearchPageState extends State<SearchPage> {
     return recentSearchs.isEmpty
         ? _EmptySearchAnimation()
         : Container(
-      padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+      padding: EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 10),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(8),
@@ -1186,116 +1215,63 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Row(
             children: [
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 5, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'duck duck go',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                  )
-                ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://duckduckgo.com/?q=" + searchFieldCtrl.text));
-                },
-              ),
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 0, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'github',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 5, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'duck duck go',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
                     )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://duckduckgo.com/?q=" + searchFieldCtrl.text));
+                  },
                 ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://github.com/search?q=" + searchFieldCtrl.text));
-                },
               ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 5, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'wikipedia',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                    )
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 0, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'github',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://github.com/search?q=" + searchFieldCtrl.text));
+                  },
                 ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://wikipedia.org/wiki/" + searchFieldCtrl.text));
-                },
-              ),
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 0, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'reddit',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                    )
-                ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://www.reddit.com/search/?q=" + searchFieldCtrl.text));
-                },
               ),
             ],
           ),
@@ -1304,57 +1280,63 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Row(
             children: [
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 5, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'youtube',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                    )
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 5, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'wikipedia',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://wikipedia.org/wiki/" + searchFieldCtrl.text));
+                  },
                 ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://www.youtube.com/results?search_query=" + searchFieldCtrl.text));
-                },
               ),
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 0, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'odysee',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                    )
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 0, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'reddit',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.reddit.com/search/?q=" + searchFieldCtrl.text));
+                  },
                 ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://odysee.com/\$/search?q=" + searchFieldCtrl.text));
-                },
               ),
             ],
           ),
@@ -1363,57 +1345,128 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Row(
             children: [
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 5, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'wolfram alpha',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                    )
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 5, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'youtube',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.youtube.com/results?search_query=" + searchFieldCtrl.text));
+                  },
                 ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://www.wolframalpha.com/input?i=" + searchFieldCtrl.text));
-                },
               ),
-              InkWell(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 5, right: 0, top: 0, bottom: 0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ), child: Center(
-                      child: Text(
-                        'searx',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ).tr(),
-                    ),
-                    )
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 0, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'odysee',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://odysee.com/\$/search?q=" + searchFieldCtrl.text));
+                  },
                 ),
-                onTap: (){
-                  AppService().openLinkWithBrowserMiniProgram(
-                      context, ("https://s.zhaocloud.net/search?q=" + searchFieldCtrl.text));
-                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 5, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'wolfram alpha',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://www.wolframalpha.com/input?i=" + searchFieldCtrl.text));
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 5, right: 0, top: 0, bottom: 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Container(height: 35, decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ), child: Center(
+                        child: Text(
+                          'searx',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ).tr(),
+                      ),
+                      )
+                  ),
+                  onTap: (){
+                    AppService().openLinkWithBrowserMiniProgram(
+                        context, ("https://s.zhaocloud.net/search?q=" + searchFieldCtrl.text));
+                  },
+                ),
               ),
             ],
           ),
