@@ -42,8 +42,10 @@
 
     "baidu" : "Baidu",
     "duck duck go" : "DuckDuckGo",
+    "reddit" : "Reddit",
     "github" : "GitHub",
     "youtube" : "YouTube",
+    "searx" : "Searx",
     "toutiao" : "Toutiao",
     "odysee" : "Odysee",
     "wikipedia" : "Wikipedia",

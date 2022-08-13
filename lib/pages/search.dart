@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/src/provider.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
@@ -13,8 +11,6 @@ import 'package:wordpress_app/mini_program/devkit.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/category.dart';
 import 'package:wordpress_app/models/constants.dart';
-import 'package:wordpress_app/pages/home.dart';
-import 'package:wordpress_app/pages/welcome.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/services/wordpress_service.dart';
 import 'package:wordpress_app/utils/cached_image_with_dark.dart';
@@ -25,6 +21,7 @@ import 'package:wordpress_app/utils/snacbar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../cards/alternative_search_card.dart';
 import 'category_based_articles.dart';
 
 class SearchPage extends StatefulWidget {
@@ -51,6 +48,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         titleSpacing: 0,
         title: _searchBar(),
+        backgroundColor: Theme.of(context).colorScheme.onSecondary,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(45),
           child: Container(
@@ -62,10 +60,10 @@ class _SearchPageState extends State<SearchPage> {
                 InkWell(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
-                    margin: EdgeInsets.only(left: 15, top: 5, right: 5, bottom: 5),
+                    margin: EdgeInsets.only(left: 10, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -92,7 +90,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -119,7 +117,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -146,7 +144,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -173,7 +171,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -200,7 +198,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -227,7 +225,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -254,7 +252,7 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Center(
@@ -720,40 +718,46 @@ class _SearchPageState extends State<SearchPage> {
         leading: Container(),
       ),
       key: scaffoldKey,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 15),
-                  child: Column(
-                    children: [
-                      _searchStarted == false
-                          ? _suggestionUI()
-                          : _afterSearchUI(),
-                    ],
+      body: Container(
+        color: Theme.of(context).colorScheme.onSecondary,
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 15),
+                    child: Column(
+                      children: [
+                        _searchStarted == false
+                            ? _suggestionUI()
+                            : _afterSearchUI(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [
-            IconButton(
-              icon: Padding(
-                padding: const EdgeInsets.only(
-                  left: 5,
-                ),
-                child: Icon(
-                  Feather.chevron_left,
-                  size: 32,
-                ),
+            InkWell(
+              child: IconButton(
+                icon: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 0
+                  ),
+                  child: Icon(
+                    LucideIcons.chevronLeft,
+                    size: 32,
+                  ),
+                ), onPressed: () {Navigator.pop(context);},
               ),
-              onPressed: ()=> Navigator.pop(context),
+              onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
             ),
           ],
         ),
@@ -773,8 +777,12 @@ class _SearchPageState extends State<SearchPage> {
               padding: EdgeInsets.only(left: 10),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryVariant,
+                color: Theme.of(context).colorScheme.onPrimary,
                 borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 1.3
+                  )
               ),
             ),
             Container(
@@ -1035,33 +1043,34 @@ class _SearchPageState extends State<SearchPage> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: snapshot.data.length,
-                          separatorBuilder: (ctx, idx) => Divider(
-                            color: Theme.of(context).dividerColor,
-                            thickness: 1.5,
-                            height: 20,
-                          ),
+                          separatorBuilder: (ctx, idx) => Container(height: 10,),
                           itemBuilder: (BuildContext context, int index) {
                             Article article = snapshot.data[index];
-                            return Card5(
+                            return Container(
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 0, top: 0, bottom: 0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Card5(
                                 article: article,
                                 heroTag: 'search${article.id}',
-                                scaffoldKey: scaffoldKey);
+                                scaffoldKey: scaffoldKey));
                           }),
-                      Divider(
-                        color: Theme.of(context).dividerColor,
-                        thickness: 1.5,
-                        height: 20,
-                      ),
+                      Container(height: 10),
+                      _searchProviderUI(),
+                      Container(height: 10),
                       Container(
                         height: 50,
                         decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primaryVariant,
+                            color: Theme.of(context).colorScheme.onPrimary,
                             borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
                           child: (
                               Text(
-                                'Search results provided by baishi.io',
+                                '~~  Search results provided by baishi.io  ~~',
                                 maxLines: 1,
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
@@ -1091,7 +1100,7 @@ class _SearchPageState extends State<SearchPage> {
         : Container(
       padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSecondary,
+        color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -1117,7 +1126,7 @@ class _SearchPageState extends State<SearchPage> {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.onSecondary,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ListTile(
@@ -1156,511 +1165,257 @@ class _SearchPageState extends State<SearchPage> {
         : Container(
       padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSecondary,
+        color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'try alt search'.tr(),
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          Container(
+            padding: EdgeInsets.only(left: 5),
+            child: Text(
+              'try alt search',
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.w700),
+            ).tr(),
           ),
           SizedBox(
             height: 15,
           ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
+          Row(
+            children: [
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 5, top: 0, bottom: 0),
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://duckduckgo.com/favicon.ico")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  title: Text(
-                    'duck duck go',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!d',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'duck duck go',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
                     ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://duckduckgo.com/?q=" + searchFieldCtrl.text));
-                  },
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/odysee.png")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                    ),
-                  ),
-                  title: Text(
-                    'odysee',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!o',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
-                    ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://odysee.com/\$/search?q=" + searchFieldCtrl.text));
-                  },
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://github.com/favicon.ico")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                    ),
-                  ),
-                  title: Text(
-                    'github',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!gh',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
-                    ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://github.com/search?q=" + searchFieldCtrl.text));
-                  },
+                  )
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://duckduckgo.com/?q=" + searchFieldCtrl.text));
+                },
+              ),
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 0, top: 0, bottom: 0),
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://s.zhaocloud.net/favicon.ico")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  title: Text(
-                    'searxng',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!s',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'github',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
                     ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://s.zhaocloud.net/search?q=" + searchFieldCtrl.text));
-                  },
+                    )
                 ),
-              ],
-            ),
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://github.com/search?q=" + searchFieldCtrl.text));
+                },
+              ),
+            ],
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
+          Row(
+            children: [
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 5, top: 0, bottom: 0),
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://en.wikipedia.org/favicon.ico")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  title: Text(
-                    'wikipedia',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!w',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'wikipedia',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
                     ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://wikipedia.org/wiki/" + searchFieldCtrl.text));
-                  },
+                    )
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://wikipedia.org/wiki/" + searchFieldCtrl.text));
+                },
+              ),
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 0, top: 0, bottom: 0),
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider("https://www.wolframalpha.com/favicon.ico")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  title: Text(
-                    'wolfram alpha',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!wa',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'reddit',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
                     ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://www.wolframalpha.com/input?i=" + searchFieldCtrl.text));
-                  },
+                    )
                 ),
-              ],
-            ),
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.reddit.com/search/?q=" + searchFieldCtrl.text));
+                },
+              ),
+            ],
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
+          Row(
+            children: [
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 5, top: 0, bottom: 0),
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/baidu.png")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  title: Text(
-                    'baidu',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!bd',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'youtube',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
                     ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://www.baidu.com/s?wd=" + searchFieldCtrl.text));
-                  },
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 10, right: 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  leading: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/icons/youtube.png")),
-                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                    ),
-                  ),
-                  title: Text(
-                    'youtube',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,),
-                  ).tr(),
-                  trailing: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 25,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '!yt',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
-                    ),
-                  ),
-                  onTap: (){
-                    AppService().openLinkWithBrowserMiniProgram(
-                        context, ("https://www.youtube.com/results?search_query=" + searchFieldCtrl.text));
-                  },
+                    )
                 ),
-              ],
-            ),
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.youtube.com/results?search_query=" + searchFieldCtrl.text));
+                },
+              ),
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 0, top: 0, bottom: 0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'odysee',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
+                    ),
+                    )
+                ),
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://odysee.com/\$/search?q=" + searchFieldCtrl.text));
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 5, top: 0, bottom: 0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'wolfram alpha',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
+                    ),
+                    )
+                ),
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://www.wolframalpha.com/input?i=" + searchFieldCtrl.text));
+                },
+              ),
+              InkWell(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        left: 5, right: 0, top: 0, bottom: 0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Container(height: 35, width: 152.5, decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(8),
+                    ), child: Center(
+                      child: Text(
+                        'searx',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ).tr(),
+                    ),
+                    )
+                ),
+                onTap: (){
+                  AppService().openLinkWithBrowserMiniProgram(
+                      context, ("https://s.zhaocloud.net/search?q=" + searchFieldCtrl.text));
+                },
+              ),
+            ],
           ),
         ],
       ),

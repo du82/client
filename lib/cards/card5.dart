@@ -31,7 +31,7 @@ class Card5 extends StatelessWidget {
               Expanded(
                 child: Container(
                   //height: 120,
-                  padding: EdgeInsets.only(top: 0, bottom: 5),
+                  padding: EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,17 @@ class Card5 extends StatelessWidget {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 18, fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        AppService.getNormalText(article.content!),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w500),
                       ),
                       SizedBox(
                         height: 8,
@@ -104,8 +114,9 @@ class Card5 extends StatelessWidget {
                       child: CustomCacheImage(imageUrl: article.image, radius: 8)
                   ),*/
                   Container(
-                    height: 100,
-                    width: 150,
+                    height: 60,
+                    width: 100,
+                    margin: EdgeInsets.only(top: 10, right: 10),
                     child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                         child: Hero(
@@ -116,7 +127,7 @@ class Card5 extends StatelessWidget {
                     ),
                   ),
 
-                  VideoIcon(tags: article.tags, iconSize: 40,)
+                  VideoIcon(tags: article.tags, iconSize: 20,)
                 ],
               ),
               /*SizedBox(
