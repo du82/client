@@ -100,7 +100,11 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.background.withOpacity(1),
-                            borderRadius: BorderRadius.circular(10)
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Theme.of(context).colorScheme.primary.withOpacity(0),
+                                width: 1.3
+                            )
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,

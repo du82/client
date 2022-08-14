@@ -45,30 +45,6 @@ class _Tab0State extends State<Tab0> {
         child: Column(
           children: [
             //Featured(),
-            /*Container(
-                  //height: 35,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  decoration: BoxDecoration(
-                      color: Colors.red[400],
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)
-                      ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'The app is running in developer mode.',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Theme.of(context)
-                              .backgroundColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),*/
-            //Featured(),
 
             HeaderBanner(title: 'The app is running in developer mode.', enabled: false,),
 

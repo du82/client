@@ -11,6 +11,7 @@ import 'package:wordpress_app/pages/search.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
+import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
 
 import '../blocs/theme_bloc.dart';
 import '../services/barcode_scanner.dart';
@@ -150,12 +151,13 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
               ),
               onPressed: () {
                 showModalBottomSheet<void>(
+                  isScrollControlled: false,
                   backgroundColor: Theme.of(context).colorScheme.onSecondary,
                   context: context,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12)
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)
                     ),
                   ),
                   builder: (BuildContext context) {
@@ -167,9 +169,9 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                           children: <Widget>[
                             Container(
                               padding: EdgeInsets.only(
-                                  left: 15, right: 15, top: 10, bottom: 10),
+                                  left: 10, right: 10, top: 10, bottom: 10),
                               margin: EdgeInsets.only(
-                                  left: 15, right: 15, top:5),
+                                  left: 10, right: 10, top: 3),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.onPrimary,
                                 borderRadius: BorderRadius.circular(10),
@@ -264,206 +266,8 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(
-                                  left: 15, right: 15, top: 10, bottom: 10),
-                              margin: EdgeInsets.only(
-                                  left: 15, right: 15, top:15),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'all actions',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1),
-                                  ).tr(),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.flame,
-                                                size: 25,
-                                              ),
-                                              onPressed: () {
-                                                theWebViewController.clearCache();
-                                                Navigator.of(context).popUntil((route) => route.isFirst);
-                                              }
-                                          ),
-                                          Text('burn').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.copy,
-                                                size: 25,
-                                              ),
-                                              onPressed: () {Clipboard.setData(ClipboardData(text: widget.url!));
-                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('copied to clipboard'),));}
-                                          ),
-                                          Text('copy link').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.arrowRight,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> theWebViewController.goForward(),
-                                          ),
-                                          Text('forward').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.home,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> Navigator.of(context).popUntil((route) => route.isFirst),
-                                          ),
-                                          Text('home').tr(),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Container(height: 10,),
-                                  Row(
-                                    children: [
-
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.rotateCw,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> theWebViewController.reload(),
-                                          ),
-                                          Text('reload').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.scanLine,
-                                                size: 25,
-                                              ),
-                                              onPressed: () => Navigator.of(context).push(SwipeablePageRoute(
-                                                  canOnlySwipeFromEdge: true,
-                                                  builder: (BuildContext context) => BarcodeScannerWithController()),
-                                              )
-                                          ),
-                                          Text('scan').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.settings,
-                                                size: 25,
-                                              ),
-                                              onPressed: () {nextScreen(context, SettingPage());}
-                                          ),
-                                          Text('settings').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.share,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> _handleShare(),
-                                          ),
-                                          Text('share').tr(),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Container(height: 10,),
-                                  Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.search,
-                                                size: 25,
-                                              ),
-                                              onPressed: () {nextScreen(context, SearchPage());}
-                                          ),
-                                          Text('search').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.bug,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> theWebViewController.reload(),
-                                          ),
-                                          Text('Test Bugs').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.externalLink,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> AppService().openLinkWithCustomTab(
-                                                context, (widget.url!)),
-                                          ),
-                                          Text('outlink').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.play,
-                                                size: 25,
-                                              ),
-                                              onPressed: () {nextScreen(context, VideoTab());}
-                                          ),
-                                          Text('video').tr(),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-
+                                margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                                child: SearchHintQRcode()),
                           ],
                         ),
                       ),
