@@ -98,16 +98,19 @@ class _VideoDetailsState extends State<VideoDetails> {
                         size: 20,
                       ),
                       SizedBox(width: 10),
-                      Text(
-                        'write a comment',
-                        maxLines: 1,
-                        style: TextStyle(
-                            letterSpacing: -0.7,
-                            wordSpacing: 1,
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w500),
-                      ).tr(),
+                      Flexible(
+                        child: Text(
+                          'write a comment',
+                          maxLines: 1,
+                          style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: -0.7,
+                              wordSpacing: 1,
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.w500),
+                        ).tr(),
+                      ),
                     ],
                   ),
                 ),
