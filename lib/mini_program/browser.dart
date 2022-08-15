@@ -18,6 +18,7 @@ import '../services/barcode_scanner.dart';
 import '../tabs/profile_tab.dart';
 import '../tabs/video_tab.dart';
 import '../widgets/language.dart';
+import '../widgets/search_hint_wikipedia.dart';
 
 class BrowserMiniProgram extends StatefulWidget {
   final String? title;

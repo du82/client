@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/src/provider.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
+import 'package:wikidart/wikidart.dart';
 import 'package:wordpress_app/blocs/category_bloc.dart';
 import 'package:wordpress_app/cards/card5.dart';
 import 'package:wordpress_app/config/server_config.dart';
@@ -24,6 +25,8 @@ import 'package:wordpress_app/widgets/buy_now.dart';
 import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
 import 'package:wordpress_app/widgets/search_hint_webpage.dart';
 
+import '../widgets/search_hint_create.dart';
+import '../widgets/search_hint_wikipedia.dart';
 import '../widgets/search_hint_translate.dart';
 import 'category_based_articles.dart';
 
@@ -44,6 +47,19 @@ class _SearchPageState extends State<SearchPage> {
   get itemBuilder => null;
 
   get query => null;
+
+  Future<void> main() async {
+    var res = await Wikidart.searchQuery(searchFieldCtrl.text);
+    var pageid = res?.results?.first.pageId;
+
+    if (pageid != null) {
+      var google = await Wikidart.summary(pageid);
+
+      print(google?.title); // Returns "Google"
+      print(google?.description); // Returns "American technology company"
+      print(google?.extract); // Returns "Google LLC is an American multinational technology company that specializes in Internet-related..."
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -923,11 +939,12 @@ class _SearchPageState extends State<SearchPage> {
                               context, ("https://" + searchFieldCtrl.text));
                         }
                       }
+
                       setState(() => _searchStarted = true);
                       data = TenwanService().fetchPostsBySearch(searchFieldCtrl.text);},
                   ),
                 ),
-                // testing commits
+
                 textInputAction: TextInputAction.search,
                 onFieldSubmitted: (query) {
                   if (query == '' || query.isEmpty) {
@@ -1042,6 +1059,8 @@ class _SearchPageState extends State<SearchPage> {
                       children: [
                         if (searchFieldCtrl.text.contains('scan') || searchFieldCtrl.text.contains('qr') || searchFieldCtrl.text.contains('code'))
                           SearchHintQRcode(),
+                        if (searchFieldCtrl.text.startsWith('create') || searchFieldCtrl.text.startsWith('test'))
+                          SearchHintCreator(),
                         if (searchFieldCtrl.text.startsWith('translate') || searchFieldCtrl.text.startsWith('tr'))
                           SearchHintTranslate(request: searchFieldCtrl.text,),
                         if (searchFieldCtrl.text.contains('.com')
@@ -1050,7 +1069,8 @@ class _SearchPageState extends State<SearchPage> {
                             || searchFieldCtrl.text.contains('.me')
                             || searchFieldCtrl.text.contains('.co')
                             || searchFieldCtrl.text.contains('.io')
-                            || searchFieldCtrl.text.contains('.cn'))
+                            || searchFieldCtrl.text.contains('.cn')
+                            || searchFieldCtrl.text.contains('.dev'))
                           SearchHintWebpage(url: searchFieldCtrl.text,),
                         _searchProviderUI()
                       ],
@@ -1058,6 +1078,8 @@ class _SearchPageState extends State<SearchPage> {
                   }
                   return Column(
                     children: [
+                      if (searchFieldCtrl.text.startsWith('translate') || searchFieldCtrl.text.startsWith('tr'))
+                        SearchHintTranslate(request: searchFieldCtrl.text,),
                       if (searchFieldCtrl.text.contains('scan') || searchFieldCtrl.text.contains('qr') || searchFieldCtrl.text.contains('code'))
                         SearchHintQRcode(),
                       if (searchFieldCtrl.text.contains('.com')
@@ -1066,7 +1088,8 @@ class _SearchPageState extends State<SearchPage> {
                           || searchFieldCtrl.text.contains('.me')
                           || searchFieldCtrl.text.contains('.co')
                           || searchFieldCtrl.text.contains('.io')
-                          || searchFieldCtrl.text.contains('.cn'))
+                          || searchFieldCtrl.text.contains('.cn')
+                          || searchFieldCtrl.text.contains('.dev'))
                         SearchHintWebpage(url: searchFieldCtrl.text,),
                       ListView.separated(
                           shrinkWrap: true,

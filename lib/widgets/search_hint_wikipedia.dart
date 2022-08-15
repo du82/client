@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:wikidart/wikidart.dart';
 
 import '../services/app_service.dart';
 
-class SearchHintWebpage extends StatefulWidget {
-  const SearchHintWebpage({Key? key, required this.url}) : super(key: key);
-  final String url;
+class SearchHintWikipedia extends StatefulWidget {
+  const SearchHintWikipedia({Key? key, required this.request}) : super(key: key);
+  final String request;
+
+  Future<void> main() async {
+    var res = await Wikidart.searchQuery(request);
+    var pageid = res?.results?.first.pageId;
+
+    if (pageid != null) {
+      var google = await Wikidart.summary(pageid);
+
+      print(google?.title); // Returns "Google"
+      print(google?.description); // Returns "American technology company"
+      print(google?.extract); // Returns "Google LLC is an American multinational technology company that specializes in Internet-related..."
+    }
+  }
 
   @override
   _FeaturedState createState() => _FeaturedState();
 }
 
-  class _FeaturedState extends State<SearchHintWebpage> {
+class _FeaturedState extends State<SearchHintWikipedia> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +44,10 @@ class SearchHintWebpage extends StatefulWidget {
               contentPadding: EdgeInsets.all(0),
               isThreeLine: false,
               leading: CircleAvatar(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.blue[900],
                 radius: 20,
                 child: Icon(
-                  LucideIcons.globe,
+                  LucideIcons.languages,
                   size: 20,
                   color: Colors.white,
                 ),
@@ -41,7 +55,7 @@ class SearchHintWebpage extends StatefulWidget {
               title: Row(
                 children: [
                   Text(
-                    'link detect title',
+                    'translate query title',
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -78,13 +92,7 @@ class SearchHintWebpage extends StatefulWidget {
               ),
               subtitle: Container(
                 padding: EdgeInsets.only(top: 5),
-                child: Text(
-                  'link detect description',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context).colorScheme.secondary),
-                ).tr(),
+                child: Container(),
               ),
             ),
           ),
@@ -100,7 +108,7 @@ class SearchHintWebpage extends StatefulWidget {
                     borderRadius: BorderRadius.circular(8),
                   ), child: Center(
                     child: Text(
-                      'link detect button',
+                      'translate query button',
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600),
@@ -108,11 +116,11 @@ class SearchHintWebpage extends StatefulWidget {
                   ),
                   )
               ),
-            onTap: () {
-              AppService().openLinkWithBrowserMiniProgram(
-                  context, (widget.url));
-              HapticFeedback.heavyImpact();
-            }
+              onTap: () {
+                AppService().openLinkWithBrowserMiniProgram(
+                    context, ("https://www.deepl.com/translator#en/de/" + widget.request));
+                HapticFeedback.heavyImpact();
+              }
           ),
         ],
       ),

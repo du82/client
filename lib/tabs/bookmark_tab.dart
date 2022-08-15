@@ -115,7 +115,6 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
       appBar: AppBar(
         title: Text('bookmarks').tr(),
         automaticallyImplyLeading: false,
-        
         actions: [
           TextButton(
             onPressed: ()=> _openCLearAllDialog(),

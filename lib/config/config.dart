@@ -19,8 +19,7 @@ class Config {
 
 
   //app theme color
-  //final Color appThemeColor = Color(0xff2872fa);
-  final Color appThemeColor = Color(0xff2872fa);
+  final Color appThemeColor = Color(0xff0dc884);
   final Color appSecondaryColor = Color(0xff32373c);
   // Icons
   static const String appIcon = 'assets/images/icon.png';
