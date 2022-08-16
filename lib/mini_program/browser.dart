@@ -14,6 +14,7 @@ import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
 
 import '../blocs/theme_bloc.dart';
+import '../config/config.dart';
 import '../services/barcode_scanner.dart';
 import '../tabs/profile_tab.dart';
 import '../tabs/video_tab.dart';
@@ -49,237 +50,373 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0),
-        child: AppBar(
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).backgroundColor,
-        child: Row(
+      appBar: AppBar(
+        elevation: 0.2,
+        toolbarHeight: 40,
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            InkWell(
+            /*InkWell(
               child: IconButton(
                 icon: Padding(
                   padding: const EdgeInsets.only(
-                      left: 5,
+                      left: 15,
                       right: 0
                   ),
                   child: Icon(
-                    LucideIcons.chevronLeft,
-                    size: 32,
+                    LucideIcons.search,
+                    size: 20,
                   ),
                 ), onPressed: () {Navigator.pop(context);},
               ),
               onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
             ),
-            SizedBox(width: 8),
+            SizedBox(
+              width: 10,
+            ),*/
             InkWell(
               child: Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 10, right: 20),
-                    height: 35,
-                    width: MediaQuery.of(context).size.width - 175,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            if (widget.url!.startsWith("https://"))
-                              Icon(
-                                LucideIcons.lock,
-                                color: Colors.green,
-                                size: 18,
-                              )
-                            else
-                              Icon(
-                               LucideIcons.unlock,
-                                color: Colors.red,
-                                size: 18,
-                              ),
-                          ],
-                        ),
-                        SizedBox(width: 10),
-                        Flexible(
-                          child: Text(
-                            '${widget.url}',
-                            maxLines: 1,
-                            style: TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                letterSpacing: -0.7,
-                                wordSpacing: 1,
-                                fontSize: 16,
-                                color: Theme.of(context).colorScheme.secondary,
-                                fontWeight: FontWeight.w500),
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 175,
+                      decoration: BoxDecoration(
+                          //color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 8),
+                            child: Icon(
+                              LucideIcons.search,
+                              size: 20,
+                            ),
                           ),
-                        ),
-                      ],
+                          if (widget!.url!.startsWith('https://'))
+                            Flexible(
+                              child: Text(
+                                '${widget.url?.replaceRange(0, 8, "")}',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    letterSpacing: -0.7,
+                                    wordSpacing: 1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )
+                          else
+                            Flexible(
+                              child: Text(
+                                '${widget.url?.replaceRange(0, 8, "")}',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    letterSpacing: -0.7,
+                                    wordSpacing: 1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )
+                        ],
+                      ),
                     ),
-                  ),
-                ]
+                  ]
               ),
               onTap: () => nextScreen(context, SearchPage()),
             ),
-            SizedBox(width: 10),
-            IconButton(
-              icon: Padding(
-                padding: const EdgeInsets.only(
-                    left: 5,
-                    right: 8
-                ),
-                child: Icon(
-                  LucideIcons.rotateCw,
-                  size: 25,
-                ),
-              ),
-              onPressed: ()=> _handleShare(),
-            ),
-            IconButton(
-              icon: Padding(
-                padding: const EdgeInsets.only(
-                    left: 5,
-                    right: 5
-                ),
-                child: Icon(
-                  LucideIcons.alignRight,
-                  size: 30,
-                ),
-              ),
-              onPressed: () {
-                showModalBottomSheet<void>(
-                  isScrollControlled: false,
-                  backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10)
-                    ),
-                  ),
-                  builder: (BuildContext context) {
-                    return Container(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      margin: EdgeInsets.only(top: 12),
-                      child: Center(
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(
-                                  left: 10, right: 10, top: 10, bottom: 10),
-                              margin: EdgeInsets.only(
-                                  left: 10, right: 10, top: 3),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'suggested actions',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700,
-                                        letterSpacing: -0.7,
-                                        wordSpacing: 1),
-                                  ).tr(),
-                                  Container(height: 10,),
-                                  Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.arrowRight,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> theWebViewController.goForward(),
-                                          ),
-                                          Text('forward').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.share,
-                                                size: 25,
-                                              ),
-                                            onPressed: ()=> _handleShare(),
-                                          ),
-                                          Text('share').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                              icon: Icon(
-                                                LucideIcons.scanLine,
-                                                size: 25,
-                                              ),
-                                              onPressed: () => Navigator.of(context).push(SwipeablePageRoute(
-                                                  canOnlySwipeFromEdge: true,
-                                                  builder: (BuildContext context) => BarcodeScannerWithController()),
-                                              )
-                                          ),
-                                          Text('scan').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.flame,
-                                              size: 25,
-                                            ),
-                                            onPressed: () {
-                                              theWebViewController.clearCache();
-                                              Navigator.of(context).popUntil((route) => route.isFirst);
-                                            }
-                                          ),
-                                          Text('burn').tr(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              LucideIcons.rotateCw,
-                                              size: 25,
-                                            ),
-                                            onPressed: ()=> theWebViewController.reload(),
-                                          ),
-                                          Text('reload').tr(),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                                margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                                child: SearchHintQRcode()),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
           ],
         ),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                icon: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                  ),
+                  child: Icon(
+                    LucideIcons.moreVertical,
+                    size: 20,
+                  ),
+                ),
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                    isScrollControlled: false,
+                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                    context: context,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)
+                      ),
+                    ),
+                    builder: (BuildContext context) {
+                      return Container(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        margin: EdgeInsets.only(top: 12),
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 10),
+                                  child: SearchHintQRcode()),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              InkWell(
+                child: IconButton(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 0,
+                        right: 15
+                    ),
+                    child: Icon(
+                      LucideIcons.x,
+                      size: 24,
+                    ),
+                  ), onPressed: () {
+                    Navigator.pop(context);
+                    HapticFeedback.heavyImpact();
+                    },
+                ),
+                onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
+              ),
+            ],
+          )
+        ],
       ),
+      /*bottomNavigationBar: SizedBox(
+        height: 40,
+        child: BottomAppBar(
+          color: Theme.of(context).backgroundColor,
+          child: Row(
+            children: [
+              InkWell(
+                child: IconButton(
+                  icon: Icon(
+                    LucideIcons.chevronLeft,
+                    //size: 26,
+                  ), onPressed: () {Navigator.pop(context);},
+                ),
+                onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
+              ),
+              SizedBox(width: 8),
+              InkWell(
+                child: Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 10, right: 20),
+                      height: 30,
+                      width: MediaQuery.of(context).size.width - 175,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              if (widget.url!.startsWith("https://"))
+                                Icon(
+                                  LucideIcons.lock,
+                                  color: Colors.green,
+                                  size: 18,
+                                )
+                              else
+                                Icon(
+                                 LucideIcons.unlock,
+                                  color: Colors.red,
+                                  size: 18,
+                                ),
+                            ],
+                          ),
+                          SizedBox(width: 10),
+                          Flexible(
+                            child: Text(
+                              '${widget.url}',
+                              maxLines: 1,
+                              style: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  letterSpacing: -0.7,
+                                  wordSpacing: 1,
+                                  fontSize: 16,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]
+                ),
+                onTap: () => nextScreen(context, SearchPage()),
+              ),
+              SizedBox(width: 10),
+              IconButton(
+                icon: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 8
+                  ),
+                  child: Icon(
+                    LucideIcons.rotateCw,
+                    size: 25,
+                  ),
+                ),
+                onPressed: ()=> _handleShare(),
+              ),
+              IconButton(
+                icon: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 5
+                  ),
+                  child: Icon(
+                    LucideIcons.alignRight,
+                    size: 30,
+                  ),
+                ),
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                    isScrollControlled: false,
+                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                    context: context,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)
+                      ),
+                    ),
+                    builder: (BuildContext context) {
+                      return Container(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        margin: EdgeInsets.only(top: 12),
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, top: 10, bottom: 10),
+                                margin: EdgeInsets.only(
+                                    left: 10, right: 10, top: 3),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'suggested actions',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -0.7,
+                                          wordSpacing: 1),
+                                    ).tr(),
+                                    Container(height: 10,),
+                                    Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                LucideIcons.arrowRight,
+                                                size: 25,
+                                              ),
+                                              onPressed: ()=> theWebViewController.goForward(),
+                                            ),
+                                            Text('forward').tr(),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                                icon: Icon(
+                                                  LucideIcons.share,
+                                                  size: 25,
+                                                ),
+                                              onPressed: ()=> _handleShare(),
+                                            ),
+                                            Text('share').tr(),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                                icon: Icon(
+                                                  LucideIcons.scanLine,
+                                                  size: 25,
+                                                ),
+                                                onPressed: () => Navigator.of(context).push(SwipeablePageRoute(
+                                                    canOnlySwipeFromEdge: true,
+                                                    builder: (BuildContext context) => BarcodeScannerWithController()),
+                                                )
+                                            ),
+                                            Text('scan').tr(),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                LucideIcons.flame,
+                                                size: 25,
+                                              ),
+                                              onPressed: () {
+                                                theWebViewController.clearCache();
+                                                Navigator.of(context).popUntil((route) => route.isFirst);
+                                              }
+                                            ),
+                                            Text('burn').tr(),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                LucideIcons.rotateCw,
+                                                size: 25,
+                                              ),
+                                              onPressed: ()=> theWebViewController.reload(),
+                                            ),
+                                            Text('reload').tr(),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                                  child: SearchHintQRcode()),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),*/
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,

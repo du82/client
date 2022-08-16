@@ -6,6 +6,7 @@ class Article {
   final int? id;
   final String? title;
   final String? content;
+  final String? excerpt;
   final String? image;
   final String? video;
   final String? author;
@@ -14,6 +15,7 @@ class Article {
   final String? date;
   final String? timeAgo;
   final String? link;
+  final String? type;
   final int? catId;
   final List? tags;
 
@@ -21,6 +23,7 @@ class Article {
       {this.id,
       this.title,
       this.content,
+      this.excerpt,
       this.image,
       this.video,
       this.author,
@@ -29,6 +32,7 @@ class Article {
       this.date,
       this.timeAgo,
       this.link,
+      this.type,
       this.catId,
       this.tags});
 
@@ -38,6 +42,7 @@ class Article {
       id: json['id'] ?? 0,
       title: json['title']['rendered'] ?? '',
       content: json['content']['rendered'] ?? '',
+      excerpt: json['content']['rendered'] ?? '',
       image: json['custom']["featured_image"] != ""
         ? json['custom']["featured_image"]
         : WpConfig.randomPostFeatureImage,
@@ -47,15 +52,13 @@ class Article {
       date: DateFormat('dd MMMM, yyyy', 'en_US')
         .format(DateTime.parse(json["date"]))
         .toString(),
-      //timeAgo: Jiffy(json["date"]).fromNow(),
       timeAgo: Jiffy(json['date']).fromNow(),
       link: json['link'] ?? 'empty',
+      type: json['type'] ?? 'empty',
       category: json["custom"]["categories"][0]["name"] ?? '',
       catId: json["custom"]["categories"][0]["cat_ID"] ?? 0,
       tags: json['tags']
 
     );
   }
-
-
 }

@@ -70,8 +70,24 @@ class _ArticleDetailsState extends State<ArticleDetails> {
         appBar: AppBar(
           elevation: 0.2,
           toolbarHeight: 40,
+          centerTitle: false,
           automaticallyImplyLeading: false,
-          titleSpacing: 15,
+          titleSpacing: 20,
+          /*leading: InkWell(
+            child: IconButton(
+              icon: Padding(
+                padding: const EdgeInsets.only(
+                    left: 0,
+                    right: 0
+                ),
+                child: Icon(
+                  LucideIcons.chevronLeft,
+                  size: 25,
+                ),
+              ), onPressed: () {Navigator.pop(context);},
+            ),
+            onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
+          ),*/
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -153,25 +169,10 @@ class _ArticleDetailsState extends State<ArticleDetails> {
           actions: [
             Row(
               children: [
-                InkWell(
-                  child: IconButton(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15,
-                          right: 0
-                      ),
-                      child: Icon(
-                        LucideIcons.headphones,
-                        size: 20,
-                      ),
-                    ), onPressed: () {Navigator.pop(context);},
-                  ),
-                  onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
-                ),
                 IconButton(
                   icon: Padding(
                     padding: const EdgeInsets.only(
-                        right: 0,
+                      left: 15,
                     ),
                     child: Icon(
                       LucideIcons.moreVertical,
@@ -206,6 +207,21 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       },
                     );
                   },
+                ),
+                InkWell(
+                  child: IconButton(
+                    icon: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 0,
+                          right: 15
+                      ),
+                      child: Icon(
+                        LucideIcons.x,
+                        size: 24,
+                      ),
+                    ), onPressed: () {Navigator.pop(context);},
+                  ),
+                  onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
                 ),
               ],
             )
