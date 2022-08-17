@@ -2,7 +2,7 @@ class WpConfig {
 
 
   // YOUR WEBISTE URL
-  static const String websiteUrl = "https://baishi.io/app";
+  static const String apiUrl = "https://baishi.io/app";
 
   // CREDENTIALS
   static const String websiteAdminName = 'client';
@@ -22,7 +22,7 @@ class WpConfig {
   // -- 'Serial Number' : [Category Id, 'Category Name'] -- Length should be 4.
   static const Map selectedCategories = {
     '1': [2, "Entertainment"],
-    '2': [26, "Travel"],
+    '2': [26, "Politics"],
     '3': [25, "Technology"],
     '4': [5, "Science"],
   };

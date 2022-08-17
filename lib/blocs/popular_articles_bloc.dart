@@ -24,8 +24,8 @@ class PopularArticlesBloc extends ChangeNotifier {
     notifyListeners();
     
     var response = WpConfig.blockedCategoryIdsforPopularPosts.isEmpty
-      ? await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&" + "limit=$_contentAmount"))
-      : await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&" + "limit=$_contentAmount&cat=" + WpConfig.blockedCategoryIdsforPopularPosts));
+      ? await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&" + "limit=$_contentAmount"))
+      : await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&" + "limit=$_contentAmount&cat=" + WpConfig.blockedCategoryIdsforPopularPosts));
         
     List? decodedData = jsonDecode(response.body);
     if (response.statusCode == 200) {

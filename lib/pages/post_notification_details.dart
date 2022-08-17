@@ -22,7 +22,7 @@ class _PostNotificationDetailsState extends State<PostNotificationDetails> {
 
   Future<Article?> fetchPostsByCategoryId() async {
     Article? article;
-    var response = await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts/${widget.postID}"));
+    var response = await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts/${widget.postID}"));
     var decodedData = jsonDecode(response.body);
     if (response.statusCode == 200) {
       article = Article.fromJson(decodedData);

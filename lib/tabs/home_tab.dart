@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -129,11 +130,11 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                             //Container(width: MediaQuery.of(context).size.width - 305,),
                             Spacer(),
                             InkWell(
-                              child: Icon(
-                                LucideIcons.scanLine,
-                                color: Theme.of(context).colorScheme.secondary,
-                                size: 23,
-                              ),
+                              child: SvgPicture.asset(
+                                  'assets/icons/scan-code.svg',
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  width: 23,
+                                ),
                               onTap: () {
                                 Navigator.of(context).push(SwipeablePageRoute(canOnlySwipeFromEdge: true, builder: (BuildContext context) => BarcodeScannerWithController()));
                                 HapticFeedback.heavyImpact();
@@ -287,26 +288,33 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                 ),
                 forceElevated: innerBoxIsScrolled,
                 bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(49),
+                  preferredSize: Size.fromHeight(41),
                   child: ColoredBox(
                     color: Theme.of(context).backgroundColor,
                     child: Column(
                       children: [
-                        TabBar(
-                          controller: _tabController,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          labelColor: Theme.of(context).primaryColor,
-                          labelStyle: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-                          labelPadding: EdgeInsets.symmetric(horizontal: 10),
-                          unselectedLabelColor: Theme.of(context).colorScheme.secondary,
-                          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                          isScrollable: true,
-                          indicator: MD2Indicator(
-                            indicatorHeight: 3,
-                            indicatorColor: Theme.of(context).primaryColor,
-                            indicatorSize: MD2IndicatorSize.normal,
+                        SizedBox(
+                          height: 40,
+                          child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            child: TabBar(
+                              indicatorPadding: EdgeInsets.symmetric(horizontal: 8),
+                              controller: _tabController,
+                              indicatorSize: TabBarIndicatorSize.label,
+                              labelColor: Theme.of(context).primaryColor,
+                              labelStyle: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                              labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                              unselectedLabelColor: Theme.of(context).colorScheme.secondary,
+                              unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                              isScrollable: true,
+                              indicator: MD2Indicator(
+                                indicatorHeight: 3,
+                                indicatorColor: Theme.of(context).primaryColor,
+                                indicatorSize: MD2IndicatorSize.full,
+                              ),
+                              tabs: _tabs,
+                            ),
                           ),
-                          tabs: _tabs,
                         ),
                         Divider(
                           color: Theme.of(context).dividerColor,

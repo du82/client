@@ -20,7 +20,7 @@ class AuthService {
     };
 
     final response = await http.post(
-      Uri.parse(WpConfig.websiteUrl + '/wp-json/jwt-auth/v1/token'),
+      Uri.parse(WpConfig.apiUrl + '/wp-json/jwt-auth/v1/token'),
       body: body,
     );
 
@@ -51,7 +51,7 @@ class AuthService {
 
   Future<UserModel?> loginWithUsernamePassword(String userName, String password) async {
     UserModel? userModel;
-    final http.Response response = await http.post(Uri.parse('${WpConfig.websiteUrl}/wp-json/jwt-auth/v1/token?username=$userName&password=$password'));
+    final http.Response response = await http.post(Uri.parse('${WpConfig.apiUrl}/wp-json/jwt-auth/v1/token?username=$userName&password=$password'));
     if (response.statusCode == 200) {
       var decodedData = jsonDecode(response.body);
       String? _token = decodedData['token'];
@@ -72,7 +72,7 @@ class AuthService {
 
   Future<AuthStatus?> createUserWithUsernamePassword(String? _urlHeader, String userName, String email, String password) async {
     AuthStatus? status;
-    final StringBuffer url = new StringBuffer(WpConfig.websiteUrl + '/wp-json/wp/v2/users');
+    final StringBuffer url = new StringBuffer(WpConfig.apiUrl + '/wp-json/wp/v2/users');
     HttpClient httpClient = new HttpClient();
     HttpClientRequest request = await httpClient.postUrl(Uri.parse(url.toString()));
     request.headers.set(HttpHeaders.contentTypeHeader, "application/json; charset=UTF-8");
@@ -129,7 +129,7 @@ class AuthService {
 
   Future<int?> getUserId(String userName, String password) async {
     int? userId;
-    final http.Response response = await http.post(Uri.parse('${WpConfig.websiteUrl}/wp-json/jwt-auth/v1/token?username=$userName&password=$password'));
+    final http.Response response = await http.post(Uri.parse('${WpConfig.apiUrl}/wp-json/jwt-auth/v1/token?username=$userName&password=$password'));
     if (response.statusCode == 200) {
       var decodedData = await jsonDecode(response.body);
       String? _token = decodedData['token'];

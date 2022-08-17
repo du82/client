@@ -1,25 +1,14 @@
 import 'dart:async';
 
-import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:provider/provider.dart';
 import 'package:share/share.dart';
-import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:wordpress_app/pages/search.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
-
-import '../blocs/theme_bloc.dart';
-import '../config/config.dart';
-import '../services/barcode_scanner.dart';
-import '../tabs/profile_tab.dart';
-import '../tabs/video_tab.dart';
-import '../widgets/language.dart';
-import '../widgets/search_hint_wikipedia.dart';
 
 class BrowserMiniProgram extends StatefulWidget {
   final String? title;
@@ -58,24 +47,6 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            /*InkWell(
-              child: IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15,
-                      right: 0
-                  ),
-                  child: Icon(
-                    LucideIcons.search,
-                    size: 20,
-                  ),
-                ), onPressed: () {Navigator.pop(context);},
-              ),
-              onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
-            ),
-            SizedBox(
-              width: 10,
-            ),*/
             InkWell(
               child: Stack(
                   children: [
@@ -138,55 +109,49 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                   padding: const EdgeInsets.only(
                     left: 15,
                   ),
-                  child: Icon(
-                    LucideIcons.moreVertical,
-                    size: 20,
-                  ),
+                  child: SvgPicture.asset('assets/icons/refresh.svg'),
                 ),
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                    isScrollControlled: false,
-                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                    context: context,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10)
-                      ),
-                    ),
-                    builder: (BuildContext context) {
-                      return Container(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        margin: EdgeInsets.only(top: 12),
-                        child: Center(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 10),
-                                  child: SearchHintQRcode()),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
+                onPressed: () {Navigator.pop(context);},
               ),
               InkWell(
                 child: IconButton(
                   icon: Padding(
                     padding: const EdgeInsets.only(
-                        left: 0,
                         right: 15
                     ),
                     child: Icon(
-                      LucideIcons.x,
-                      size: 24,
+                      LucideIcons.moreVertical,
+                      size: 20,
                     ),
-                  ), onPressed: () {
-                    Navigator.pop(context);
-                    HapticFeedback.heavyImpact();
-                    },
+                  ),
+                  onPressed: () {
+                    showModalBottomSheet<void>(
+                      isScrollControlled: false,
+                      backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)
+                        ),
+                      ),
+                      builder: (BuildContext context) {
+                        return Container(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          margin: EdgeInsets.only(top: 12),
+                          child: Center(
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 10),
+                                    child: SearchHintQRcode()),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
                 onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
               ),
@@ -194,7 +159,7 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
           )
         ],
       ),
-      /*bottomNavigationBar: SizedBox(
+      bottomNavigationBar: SizedBox(
         height: 40,
         child: BottomAppBar(
           color: Theme.of(context).backgroundColor,
@@ -209,60 +174,9 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                 ),
                 onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
               ),
-              SizedBox(width: 8),
-              InkWell(
-                child: Stack(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 10, right: 20),
-                      height: 30,
-                      width: MediaQuery.of(context).size.width - 175,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              if (widget.url!.startsWith("https://"))
-                                Icon(
-                                  LucideIcons.lock,
-                                  color: Colors.green,
-                                  size: 18,
-                                )
-                              else
-                                Icon(
-                                 LucideIcons.unlock,
-                                  color: Colors.red,
-                                  size: 18,
-                                ),
-                            ],
-                          ),
-                          SizedBox(width: 10),
-                          Flexible(
-                            child: Text(
-                              '${widget.url}',
-                              maxLines: 1,
-                              style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  letterSpacing: -0.7,
-                                  wordSpacing: 1,
-                                  fontSize: 16,
-                                  color: Theme.of(context).colorScheme.secondary,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ]
-                ),
-                onTap: () => nextScreen(context, SearchPage()),
-              ),
-              SizedBox(width: 10),
-              IconButton(
+              //SizedBox(width: 8),
+              Spacer(),
+              /*IconButton(
                 icon: Padding(
                   padding: const EdgeInsets.only(
                       left: 5,
@@ -412,11 +326,11 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                     },
                   );
                 },
-              ),
+              ),*/
             ],
           ),
         ),
-      ),*/
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,

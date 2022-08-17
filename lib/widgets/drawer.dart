@@ -78,7 +78,7 @@ class CustomDrawer extends StatelessWidget {
                     ).tr(),
                     onTap: (){
                       Navigator.pop(context);
-                      AppService().openLinkWithCustomTab(context, WpConfig.websiteUrl);
+                      AppService().openLinkWithCustomTab(context, WpConfig.apiUrl);
                     },
                   ),
                   ListTile(

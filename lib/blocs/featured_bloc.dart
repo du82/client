@@ -24,8 +24,8 @@ class FeaturedBloc extends ChangeNotifier {
     notifyListeners();
     
     var response = WpConfig.blockedCategoryIds.isEmpty
-      ? await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts?tags=${WpConfig.featuredTagID}&per_page=$_contentAmount&_fields=id,date,title,content,custom,link,tags"))
-      : await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts?tags=${WpConfig.featuredTagID}&per_page=$_contentAmount&_fields=id,date,title,content,custom,link,tags&categories_exclude=" + WpConfig.blockedCategoryIds));
+      ? await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts?tags=${WpConfig.featuredTagID}&per_page=$_contentAmount&_fields=id,date,title,content,custom,link,tags"))
+      : await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts?tags=${WpConfig.featuredTagID}&per_page=$_contentAmount&_fields=id,date,title,content,custom,link,tags&categories_exclude=" + WpConfig.blockedCategoryIds));
         
     List? decodedData = jsonDecode(response.body);
     if (response.statusCode == 200) {

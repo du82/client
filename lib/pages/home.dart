@@ -129,13 +129,13 @@ class _HomePageState extends State<HomePage> {
       icons: iconList,
       gapLocation: GapLocation.none,
       activeIndex: selectedIndex,
-      iconSize: 25,
+      iconSize: 22,
       backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
       activeColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       inactiveColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       splashColor: Theme.of(context).primaryColor,
       onTap: (index) => onItemTapped(index),
-      height: 48,
+      height: 40,
     );
   }
 

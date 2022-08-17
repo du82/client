@@ -15,7 +15,7 @@ class CustomWordpress {
 
     _urlHeader['Authorization'] = 'Bearer $token';
 
-    final response = await http.post(Uri.parse(WpConfig.websiteUrl + '/wp-json/jwt-auth/v1/token/validate'), headers: _urlHeader);
+    final response = await http.post(Uri.parse(WpConfig.apiUrl + '/wp-json/jwt-auth/v1/token/validate'), headers: _urlHeader);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return fetchMeUser(_urlHeader);
@@ -27,7 +27,7 @@ class CustomWordpress {
 
 
   Future<WpUser> fetchMeUser(urlHeader) async {
-    final response = await http.get(Uri.parse(WpConfig.websiteUrl + '/wp-json/wp/v2/users/me'), headers: urlHeader);
+    final response = await http.get(Uri.parse(WpConfig.apiUrl + '/wp-json/wp/v2/users/me'), headers: urlHeader);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final jsonStr = json.decode(response.body);

@@ -201,7 +201,7 @@ class GuestUserUI extends StatelessWidget {
               height: 45,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/assets/noAccountImage.png")),
+                    fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.apiUrl + "/app-content/assets/noAccountImage.png")),
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
             ),

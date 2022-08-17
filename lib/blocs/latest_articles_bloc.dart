@@ -22,8 +22,8 @@ class LatestArticlesBloc extends ChangeNotifier {
   Future fetchData() async {
 
     var response = WpConfig.blockedCategoryIds.isEmpty
-      ? await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts/?page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags"))
-      : await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts/?page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags&categories_exclude=" + WpConfig.blockedCategoryIds));
+      ? await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts/?page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags"))
+      : await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts/?page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags&categories_exclude=" + WpConfig.blockedCategoryIds));
     if (response.statusCode == 200) {
       List decodedData = jsonDecode(response.body);
       _articles.addAll(decodedData.map((m) => Article.fromJson(m)).toList());

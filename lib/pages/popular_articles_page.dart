@@ -34,8 +34,8 @@ class _PopularArticlesPageState extends State<PopularArticlesPage> {
 
   Future _fetchArticles() async {
     var response = WpConfig.blockedCategoryIdsforPopularPosts.isEmpty
-      ? await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&limit=$_postLimit"))
-      : await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&limit=$_postLimit&cat=" + WpConfig.blockedCategoryIdsforPopularPosts));
+      ? await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&limit=$_postLimit"))
+      : await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wordpress-popular-posts/v1/popular-posts?range=$_timeRange&limit=$_postLimit&cat=" + WpConfig.blockedCategoryIdsforPopularPosts));
     if (this.mounted) {
       if (response.statusCode == 200) {
         List? decodedData = jsonDecode(response.body);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,8 +74,8 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
                           child: InkWell(
                             child: Container(
                               padding: EdgeInsets.only(left: 5, right: 5),
-                              margin: EdgeInsets.all(5),
-                              height: 33,
+                              margin: EdgeInsets.all(10),
+                              height: 25,
                               width: 75,
                               alignment: Alignment.centerRight,
                               decoration: BoxDecoration(
@@ -196,10 +197,7 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
                                     child: IconButton(
                                       padding: EdgeInsets.only(right: 0, left: 0),
                                       constraints: BoxConstraints(),
-                                      icon: Icon(
-                                        Feather.x,
-                                        //size: 25,
-                                      ),
+                                      icon: SvgPicture.asset('assets/icons/applet-closed.svg'),
                                       onPressed: () => Navigator.of(context).pop(null),
                                     ),
                                   ),

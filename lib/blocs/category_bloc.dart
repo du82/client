@@ -16,8 +16,8 @@ class CategoryBloc extends ChangeNotifier {
     _categoryData.clear();
     notifyListeners();
     var response = WpConfig.blockedCategoryIds.isEmpty
-      ? await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/categories?per_page=100&order=desc&orderby=count"))
-      : await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/categories?per_page=100&order=desc&orderby=count&exclude=" + WpConfig.blockedCategoryIds));
+      ? await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/categories?per_page=100&order=desc&orderby=count"))
+      : await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/categories?per_page=100&order=desc&orderby=count&exclude=" + WpConfig.blockedCategoryIds));
     List? decodedData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {

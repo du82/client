@@ -27,8 +27,8 @@ class CategoryTab2Bloc extends ChangeNotifier {
 
   Future fetchData(int categoryId, mounted) async {
     var response = WpConfig.blockedCategoryIds.isEmpty
-      ? await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts?categories[]=" + categoryId.toString() + "&page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags"))
-      : await http.get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts?categories[]=" + categoryId.toString() + "&page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags&categories_exclude=" + WpConfig.blockedCategoryIds));
+      ? await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts?categories[]=" + categoryId.toString() + "&page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags"))
+      : await http.get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts?categories[]=" + categoryId.toString() + "&page=$_page&per_page=$_postAmountPerLoad&_fields=id,date,title,content,custom,link,tags&categories_exclude=" + WpConfig.blockedCategoryIds));
 
     if (mounted) {
       if (response.statusCode == 200) {

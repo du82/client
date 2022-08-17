@@ -47,7 +47,7 @@ class _VideoTabState extends State<VideoTab> with AutomaticKeepAliveClientMixin 
   Future _fetchArticles(int page) async {
     try {
       var response = await http
-          .get(Uri.parse("${WpConfig.websiteUrl}/wp-json/wp/v2/posts?"
+          .get(Uri.parse("${WpConfig.apiUrl}/wp-json/wp/v2/posts?"
           'page=$_page' +
           '&tags=${WpConfig.videoTagId}' +
           '&per_page=$_postAmount' +

@@ -139,7 +139,6 @@ class _VideoDetailsState extends State<VideoDetails> {
                   iconSize: 25,
                   scaffoldKey: scaffoldKey,
                   iconColor: Theme.of(context).primaryColor,
-                  normalIconColor: Colors.black,
                 ),
               ),
               IconButton(

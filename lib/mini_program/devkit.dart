@@ -379,7 +379,7 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                 left: 10, right: 10, top: 10),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/assets/noAccountImage.png")),
+                  fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.apiUrl + "/app-content/assets/noAccountImage.png")),
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
           ),
@@ -391,7 +391,7 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                 left: 10, right: 10, top: 10),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/assets/noAccountImage.png")),
+                  fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.apiUrl + "/app-content/assets/noAccountImage.png")),
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
           ),
@@ -403,7 +403,7 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                 left: 10, right: 10, top: 10),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.websiteUrl + "/app-content/assets/noAccountImage.png")),
+                  fit: BoxFit.cover, image: CachedNetworkImageProvider(WpConfig.apiUrl + "/app-content/assets/noAccountImage.png")),
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
           ),

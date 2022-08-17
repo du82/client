@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
@@ -175,173 +176,168 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       left: 15,
                     ),
                     child: Icon(
-                      LucideIcons.moreVertical,
+                      LucideIcons.headphones,
                       size: 20,
                     ),
                   ),
-                  onPressed: () {
-                    showModalBottomSheet<void>(
-                      isScrollControlled: false,
-                      backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                      context: context,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)
-                        ),
-                      ),
-                      builder: (BuildContext context) {
-                        return Container(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          margin: EdgeInsets.only(top: 12),
-                          child: Center(
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                    margin: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 10),
-                                    child: SearchHintQRcode()),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
+                  onPressed: () {Navigator.pop(context);},
                 ),
                 InkWell(
                   child: IconButton(
                     icon: Padding(
                       padding: const EdgeInsets.only(
-                          left: 0,
                           right: 15
                       ),
                       child: Icon(
-                        LucideIcons.x,
-                        size: 24,
+                        LucideIcons.moreVertical,
+                        size: 20,
                       ),
-                    ), onPressed: () {Navigator.pop(context);},
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        isScrollControlled: false,
+                        backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10)
+                          ),
+                        ),
+                        builder: (BuildContext context) {
+                          return Container(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            margin: EdgeInsets.only(top: 12),
+                            child: Center(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                      margin: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 10),
+                                      child: SearchHintQRcode()),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                   onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
                 ),
               ],
             )
-
           ],
         ),
-        bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).backgroundColor,
-          child: Row(
-            children: [
-              InkWell(
-                child: IconButton(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0,
-                        right: 0
-                    ),
-                    child: Icon(
-                      LucideIcons.chevronLeft,
-                      size: 32,
-                    ),
-                  ), onPressed: () {Navigator.pop(context);},
-                ),
-                onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
-              ),
-              //SizedBox(width: 8),
-              InkWell(
-                child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 20),
-                  height: 35,
-                  width: MediaQuery.of(context).size.width - 190,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        LucideIcons.edit3,
-                        color: Theme.of(context).colorScheme.secondary,
-                        size: 20,
-                      ),
-                      SizedBox(width: 10),
-                      Flexible(
-                        child: Text(
-                          'write a comment',
-                          maxLines: 1,
-                          style: TextStyle(
-                              overflow: TextOverflow.clip,
-                              letterSpacing: -0.7,
-                              wordSpacing: 1,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w500),
-                        ).tr(),
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  showModalBottomSheet<void>(
-                    backgroundColor: Colors.white,
-                    context: context,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          topRight: Radius.circular(18)
-                      ),
-                    ),
-                    builder: (BuildContext context) {
-                      return CommentsPage(postId: article!.id, categoryId: article.catId!,);
-                    },
-                  );
-                },
-              ),
-              SizedBox(width: 10),
-              Row(
-                children: [
-                  Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 5),
-                    child: BookmarkIcon(
-                      bookmarkedList: bookmarkedList,
-                      article: article,
-                      iconSize: 24,
-                      scaffoldKey: scaffoldKey,
-                      iconColor: Theme.of(context).primaryColor,
-                      normalIconColor: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  IconButton(
+        bottomNavigationBar: SizedBox(
+          height: 40,
+          child: BottomAppBar(
+            color: Theme.of(context).backgroundColor,
+            child: Row(
+              children: [
+                InkWell(
+                  child: IconButton(
                     icon: Padding(
                       padding: const EdgeInsets.only(
-                          left: 5,
+                          left: 0,
                           right: 0
                       ),
-                      child: Icon(
-                        LucideIcons.search,
-                        size: 25,
+                      child: SvgPicture.asset('assets/icons/left.svg'),
+                    ), onPressed: () {Navigator.pop(context);},
+                  ),
+                  onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                ),
+                //SizedBox(width: 8),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10, right: 20),
+                    height: 30,
+                    width: MediaQuery.of(context).size.width - 190,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                            'assets/icons/comment.svg',
+                            color: Theme.of(context).colorScheme.secondary,
+                            width: 16,
+                        ),
+                        SizedBox(width: 10),
+                        Flexible(
+                          child: Text(
+                            'write a comment',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.clip,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1,
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w500),
+                          ).tr(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    showModalBottomSheet<void>(
+                      backgroundColor: Colors.white,
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            topRight: Radius.circular(18)
+                        ),
+                      ),
+                      builder: (BuildContext context) {
+                        return CommentsPage(postId: article!.id, categoryId: article.catId!,);
+                      },
+                    );
+                  },
+                ),
+                SizedBox(width: 15),
+                Row(
+                  children: [
+                    Container(
+                      margin: new EdgeInsets.symmetric(horizontal: 5),
+                      child: BookmarkIcon(
+                        bookmarkedList: bookmarkedList,
+                        article: article,
+                        iconSize: 20,
+                        scaffoldKey: scaffoldKey,
+                        normalIconColor: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    onPressed: () => nextScreen(context, SearchPage()),
-                  ),
-                  IconButton(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 5,
-                          right: 8
+                    IconButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 5,
+                            right: 0
+                        ),
+                        child: Icon(
+                          LucideIcons.search,
+                          size: 20,
+                        ),
                       ),
-                      child: Icon(
-                        LucideIcons.cornerUpRight,
-                        size: 25,
-                      ),
+                      onPressed: () => nextScreen(context, SearchPage()),
                     ),
-                    onPressed: ()=> _handleShare(),
-                  ),
-                ],
-              ),
+                    IconButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 5,
+                            right: 8
+                        ),
+                        child: SvgPicture.asset('assets/icons/share.svg'),
+                      ),
+                      onPressed: ()=> _handleShare(),
+                    ),
+                  ],
+                ),
 
-            ],
+              ],
+            ),
           ),
         ),
         body: SafeArea(
