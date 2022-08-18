@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/blocs/settings_bloc.dart';
@@ -149,6 +150,52 @@ class _SettingPageState extends State<SettingPage>
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,),
+                              ).tr(),
+                              trailing: Icon(Feather.chevron_right),
+                              onTap: () => Navigator.of(context).push(SwipeablePageRoute(
+                                  canOnlySwipeFromEdge: true,
+                                  builder: (BuildContext context) => LanguagePopup()),
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 00),
+                      margin: EdgeInsets.only(
+                          left: 10, right: 10, top: 10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'general settings',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.7,
+                                wordSpacing: 1),
+                          ).tr(),
+                          ListTile(
+                              contentPadding: EdgeInsets.all(0),
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.blueAccent,
+                                radius: 18,
+                                child: Icon(
+                                  LucideIcons.regex,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              title: Text(
+                                'Regulatory \& Legal',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,),
                               ).tr(),
                               trailing: Icon(Feather.chevron_right),
                               onTap: () => Navigator.of(context).push(SwipeablePageRoute(

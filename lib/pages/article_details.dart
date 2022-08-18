@@ -229,7 +229,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
           ],
         ),
         bottomNavigationBar: SizedBox(
-          height: 40,
+          height: 45,
           child: BottomAppBar(
             color: Theme.of(context).backgroundColor,
             child: Row(
@@ -241,61 +241,63 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                           left: 0,
                           right: 0
                       ),
-                      child: SvgPicture.asset('assets/icons/left.svg'),
+                      child: SvgPicture.asset('assets/icons/left.svg', width: 25,),
                     ), onPressed: () {Navigator.pop(context);},
                   ),
                   onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
                 ),
                 //SizedBox(width: 8),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 10, right: 20),
-                    height: 30,
-                    width: MediaQuery.of(context).size.width - 190,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                            'assets/icons/comment.svg',
-                            color: Theme.of(context).colorScheme.secondary,
-                            width: 16,
-                        ),
-                        SizedBox(width: 10),
-                        Flexible(
-                          child: Text(
-                            'write a comment',
-                            maxLines: 1,
-                            style: TextStyle(
-                                overflow: TextOverflow.clip,
-                                letterSpacing: -0.7,
-                                wordSpacing: 1,
-                                fontSize: 16,
-                                color: Theme.of(context).colorScheme.secondary,
-                                fontWeight: FontWeight.w500),
-                          ).tr(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    showModalBottomSheet<void>(
-                      backgroundColor: Colors.white,
-                      context: context,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(18),
-                            topRight: Radius.circular(18)
-                        ),
+                Flexible(
+                  child: InkWell(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10, right: 20),
+                      height: 30,
+                      width: MediaQuery.of(context).size.width - 200,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(10)
                       ),
-                      builder: (BuildContext context) {
-                        return CommentsPage(postId: article!.id, categoryId: article.catId!,);
-                      },
-                    );
-                  },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SvgPicture.asset(
+                              'assets/icons/comment.svg',
+                              color: Theme.of(context).colorScheme.secondary,
+                              width: 16,
+                          ),
+                          SizedBox(width: 10),
+                          Flexible(
+                            child: Text(
+                              'comment',
+                              maxLines: 1,
+                              style: TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  letterSpacing: -0.7,
+                                  wordSpacing: 1,
+                                  fontSize: 16,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.w500),
+                            ).tr(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        backgroundColor: Colors.white,
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(18),
+                              topRight: Radius.circular(18)
+                          ),
+                        ),
+                        builder: (BuildContext context) {
+                          return CommentsPage(postId: article!.id, categoryId: article.catId!,);
+                        },
+                      );
+                    },
+                  ),
                 ),
                 SizedBox(width: 15),
                 Row(
@@ -327,12 +329,25 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       icon: Padding(
                         padding: const EdgeInsets.only(
                             left: 5,
-                            right: 8
+                            right: 5
                         ),
-                        child: SvgPicture.asset('assets/icons/share.svg'),
+                        child: SvgPicture.asset(
+                          'assets/icons/share.svg',
+                          width: 20,),
                       ),
                       onPressed: ()=> _handleShare(),
                     ),
+                    /*IconButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 8
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/icons/red-envelopes.svg',
+                          width: 20,),
+                      ),
+                      onPressed: ()=> _handleShare(),
+                    ),*/
                   ],
                 ),
 

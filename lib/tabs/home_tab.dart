@@ -288,13 +288,13 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                 ),
                 forceElevated: innerBoxIsScrolled,
                 bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(41),
+                  preferredSize: Size.fromHeight(36),
                   child: ColoredBox(
                     color: Theme.of(context).backgroundColor,
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 40,
+                          height: 35,
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 5),
                             child: TabBar(
@@ -302,10 +302,10 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                               controller: _tabController,
                               indicatorSize: TabBarIndicatorSize.label,
                               labelColor: Theme.of(context).primaryColor,
-                              labelStyle: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                              labelStyle: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                               labelPadding: EdgeInsets.symmetric(horizontal: 10),
                               unselectedLabelColor: Theme.of(context).colorScheme.secondary,
-                              unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                              unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                               isScrollable: true,
                               indicator: MD2Indicator(
                                 indicatorHeight: 3,
@@ -318,7 +318,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                         ),
                         Divider(
                           color: Theme.of(context).dividerColor,
-                          thickness: 1.3,
+                          thickness: 1,
                           height: 1,
                         ),
                       ],

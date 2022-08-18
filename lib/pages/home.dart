@@ -105,7 +105,6 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: ()async => await _onWillPop(),
           child: Scaffold(
-
               key: scaffoldKey,
               bottomNavigationBar: _bottonNavigationBar(context),
               body: PageView(
@@ -135,7 +134,7 @@ class _HomePageState extends State<HomePage> {
       inactiveColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       splashColor: Theme.of(context).primaryColor,
       onTap: (index) => onItemTapped(index),
-      height: 40,
+      height: 45,
     );
   }
 
