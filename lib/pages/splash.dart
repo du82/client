@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/blocs/user_bloc.dart';
 import 'package:wordpress_app/pages/home.dart';
-import 'package:wordpress_app/pages/welcome.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import '../config/config.dart';
-import '../experimental/two_level_test.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key? key}) : super(key: key);

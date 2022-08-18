@@ -10,6 +10,7 @@ import 'package:wordpress_app/experimental/two_level_test.dart';
 import 'package:wordpress_app/mini_program/promotion_render.dart';
 import 'package:wordpress_app/mini_program/render.dart';
 import 'package:wordpress_app/mini_program/test_browser.dart';
+import 'package:wordpress_app/pages/splash.dart';
 import 'package:wordpress_app/pages/welcome.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/vertical_line.dart';
@@ -340,13 +341,13 @@ class _DevKitMiniProgramState extends State<DevKitMiniProgram> {
                     ),
                   ),
                   title: Text(
-                    'Welcome Screen',
+                    'Splash Page',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,),
                   ).tr(),
                   trailing: Icon(Feather.chevron_right),
-                  onTap: () => nextScreen(context, WelcomePage()),
+                  onTap: () => nextScreen(context, SplashPage()),
                 ),
                 SizedBox(height: 15),
                 ListTile(
