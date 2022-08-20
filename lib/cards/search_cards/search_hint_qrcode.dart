@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 
-import '../services/barcode_scanner.dart';
+import '../../services/barcode_scanner.dart';
 
 class SearchHintQRcode extends StatelessWidget {
   const SearchHintQRcode({

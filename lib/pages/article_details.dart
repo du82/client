@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,7 +23,7 @@ import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../utils/cached_image.dart';
-import '../widgets/search_hint_qrcode.dart';
+import '../cards/search_cards/search_hint_qrcode.dart';
 
 class ArticleDetails extends StatefulWidget {
   final String? tag;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wordpress_app/models/article.dart';
@@ -34,11 +35,11 @@ class BookmarkIcon extends StatelessWidget {
           constraints: BoxConstraints(),
           alignment: Alignment.centerRight,
             icon: bookmarkedList.keys.contains(article!.id)
-                //? Icon(LucideIcons.bookmarkPlus, color: iconColor == null? Theme.of(context).primaryColor : iconColor)
-                ? SvgPicture.asset('assets/icons/good.svg', color: iconColor == null? Theme.of(context).primaryColor : iconColor)
+                ? SvgPicture.asset('assets/icons/good-filled.svg', color: iconColor == null? Theme.of(context).primaryColor : iconColor)
                 : SvgPicture.asset('assets/icons/good.svg'),
             onPressed: () {
               BookmarkService().handleBookmarkIconPressed(article!, scaffoldKey);
+              HapticFeedback.heavyImpact();
             });
       },
     );

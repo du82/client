@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wikidart/wikidart.dart';
 
-import '../services/app_service.dart';
+import '../../services/app_service.dart';
 
 class SearchHintWikipedia extends StatefulWidget {
   const SearchHintWikipedia({Key? key, required this.request}) : super(key: key);

@@ -8,7 +8,7 @@ import 'package:wordpress_app/pages/search.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
-import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
+import 'package:wordpress_app/cards/search_cards/search_hint_qrcode.dart';
 
 class BrowserMiniProgram extends StatefulWidget {
   final String? title;

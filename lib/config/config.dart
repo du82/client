@@ -31,7 +31,6 @@ class Config {
   static const List<String> languages = [
     'English • 英语',
     'Chinese • 简体中文',
-    /*'Spanish'*/
   ];
 
   static const List<String> servers = [

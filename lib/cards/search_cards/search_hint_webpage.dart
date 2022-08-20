@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-import '../services/app_service.dart';
+import '../../services/app_service.dart';
 
 class SearchHintWebpage extends StatefulWidget {
   const SearchHintWebpage({Key? key, required this.url}) : super(key: key);

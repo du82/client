@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -21,13 +20,11 @@ import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/snacbar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:wordpress_app/widgets/buy_now.dart';
-import 'package:wordpress_app/widgets/search_hint_qrcode.dart';
-import 'package:wordpress_app/widgets/search_hint_webpage.dart';
+import 'package:wordpress_app/cards/search_cards/search_hint_qrcode.dart';
+import 'package:wordpress_app/cards/search_cards/search_hint_webpage.dart';
 
-import '../widgets/search_hint_create.dart';
-import '../widgets/search_hint_wikipedia.dart';
-import '../widgets/search_hint_translate.dart';
+import '../cards/search_cards/search_hint_create.dart';
+import '../cards/search_cards/search_hint_translate.dart';
 import 'category_based_articles.dart';
 
 class SearchPage extends StatefulWidget {
