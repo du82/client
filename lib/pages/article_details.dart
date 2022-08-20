@@ -112,7 +112,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          '${article!.author}',
+                          '${article.author}',
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w900),
@@ -123,7 +123,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          article!.timeAgo!,
+                          article.timeAgo!,
                           style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context)
@@ -292,7 +292,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                           ),
                         ),
                         builder: (BuildContext context) {
-                          return CommentsPage(postId: article!.id, categoryId: article.catId!,);
+                          return CommentsPage(postId: article.id, categoryId: article.catId!,);
                         },
                       );
                     },
@@ -382,7 +382,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                 ),
                                 SizedBox(height: 10),*/
                                 Text(
-                                  AppService.getNormalText(article!.title!),
+                                  AppService.getNormalText(article.title!),
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,

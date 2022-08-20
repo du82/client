@@ -85,12 +85,18 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                 snap: true,
                 floating: true,
                 pinned: true,
-                backgroundColor: Theme.of(context).primaryColor,
-                systemOverlayStyle: SystemUiOverlayStyle.light,
-                flexibleSpace: Image(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                //systemOverlayStyle: SystemUiOverlayStyle.light,
+                /*flexibleSpace: Image(
                   //image: CachedNetworkImageProvider('${WpConfig.websiteUrl}/app-content/backgrounds/main.jpg'),
                   image: CachedNetworkImageProvider('https://source.unsplash.com/random/?nature'),
                   fit: BoxFit.fitWidth,
+                ),*/
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Image(
+                    image: CachedNetworkImageProvider('https://source.unsplash.com/random/?nature'),
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
                 title: Container(
                   padding: EdgeInsets.only(left: 15, right: 15),
