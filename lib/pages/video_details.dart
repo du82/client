@@ -7,15 +7,12 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:hive/hive.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
-import 'package:wordpress_app/blocs/ads_bloc.dart';
-import 'package:wordpress_app/config/ad_config.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/constants.dart';
 import 'package:wordpress_app/pages/search.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
-import 'package:wordpress_app/widgets/banner_ad.dart';
 import 'package:wordpress_app/widgets/bookmark_icon.dart';
 import 'package:wordpress_app/widgets/local_video_player.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +40,6 @@ class _VideoDetailsState extends State<VideoDetails> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((value) => context.read<AdsBloc>().showLoadedAds());
     Future.delayed(Duration(milliseconds: 100)).then((value) {
       setState(() {
         _rightPaddingValue = 10;
@@ -336,10 +332,6 @@ class _VideoDetailsState extends State<VideoDetails> {
                               ),
                             ],
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 15, right: 15),
-                          child: AdConfig.isAdsEnabled == true ? BannerAdWidget() : Container(),
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 15, right: 15),

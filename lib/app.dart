@@ -1,11 +1,9 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/blocs/category_tab1_bloc.dart';
 import 'package:wordpress_app/blocs/comment_bloc.dart';
 import 'package:wordpress_app/blocs/tab_index_bloc.dart';
 import 'package:wordpress_app/pages/splash.dart';
-import 'blocs/ads_bloc.dart';
 import 'blocs/category_bloc.dart';
 import 'blocs/category_tab2_bloc.dart';
 import 'blocs/category_tab3_bloc.dart';
@@ -18,10 +16,6 @@ import 'blocs/theme_bloc.dart';
 import 'blocs/user_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'models/theme.dart';
-
-
-final FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
-final FirebaseAnalyticsObserver firebaseObserver =  FirebaseAnalyticsObserver(analytics: firebaseAnalytics);
 
 class MyApp extends StatelessWidget {
   @override
@@ -38,7 +32,6 @@ class MyApp extends StatelessWidget {
                 ChangeNotifierProvider<LatestArticlesBloc>(create: (context) => LatestArticlesBloc()),
                 ChangeNotifierProvider<UserBloc>(create: (context) => UserBloc()),
                 ChangeNotifierProvider<PopularArticlesBloc>(create: (context) => PopularArticlesBloc()),
-                ChangeNotifierProvider<AdsBloc>(create: (context) => AdsBloc()),
                 ChangeNotifierProvider<TabIndexBloc>(create: (context) => TabIndexBloc()),
                 ChangeNotifierProvider<CategoryTab1Bloc>(create: (context) => CategoryTab1Bloc()),
                 ChangeNotifierProvider<CategoryTab2Bloc>(create: (context) => CategoryTab2Bloc()),
@@ -51,7 +44,6 @@ class MyApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   supportedLocales: context.supportedLocales,
                   localizationsDelegates: context.localizationDelegates,
-                  navigatorObservers: [firebaseObserver],
                   locale: context.locale,
                   theme: ThemeModel().lightTheme,
                   darkTheme: ThemeModel().darkTheme,

@@ -39,11 +39,9 @@ dependencies:
   flutter_web_browser: ^0.16.0
   flare_flutter: ^3.0.2
   fluttertoast: ^8.0.8
-  google_mobile_ads: ^1.0.1
   loading_indicator: ^3.0.1
   flutter_html: ^2.1.2
   better_player: ^0.0.79
-  firebase_analytics: ^9.0.4
   flutter_math_fork: ^0.5.0
   md2_tab_indicator:
     git:
