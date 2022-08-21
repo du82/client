@@ -5,6 +5,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/blocs/comment_bloc.dart';
@@ -240,10 +241,10 @@ class _CommentsPageState extends State<CommentsPage> {
                       }
                     }),
               ),
-              Material(
+              /*Material(
                 elevation: 5,
                 child: _bottomWidget(context),
-              )
+              )*/
             ],
           ),
           !_isSomethingChanging

@@ -119,6 +119,6 @@ class ThemeModel {
         surface: Color(0xff303030), //shadow color - 1
         onBackground: Colors.grey[900]!  //loading card color
 
-    ).copyWith(primary: Colors.green, secondary: Color(0xFF32373c)),
+    ).copyWith(primary: Colors.grey[700], secondary: Color(0xFF32373c)),
   );
 }

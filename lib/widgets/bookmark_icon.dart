@@ -36,7 +36,7 @@ class BookmarkIcon extends StatelessWidget {
           alignment: Alignment.centerRight,
             icon: bookmarkedList.keys.contains(article!.id)
                 ? SvgPicture.asset('assets/icons/good-filled.svg', color: iconColor == null? Theme.of(context).primaryColor : iconColor)
-                : SvgPicture.asset('assets/icons/good.svg'),
+                : SvgPicture.asset('assets/icons/star.svg'),
             onPressed: () {
               BookmarkService().handleBookmarkIconPressed(article!, scaffoldKey);
               HapticFeedback.heavyImpact();

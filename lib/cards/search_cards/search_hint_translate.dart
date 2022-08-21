@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../services/app_service.dart';
@@ -62,15 +63,25 @@ class SearchHintTranslate extends StatefulWidget {
                     child: Row(
                       children: [
                         Text(
-                          'MP',
+                          'scan code title',
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                          ),
+                              fontSize: 18, fontWeight: FontWeight.w700),
                         ).tr(),
+                        Spacer(),
+                        SvgPicture.asset(
+                          'assets/icons/protect.svg',
+                          width: 20,
+                          color: Colors.blue.withOpacity(0.6),
+                        ),
+
+                        Container(width: 3,),
+                        SvgPicture.asset(
+                          'assets/icons/applet.svg',
+                          width: 20,
+                          color: Colors.green.withOpacity(0.6),
+                        ),
                       ],
                     ),
                   ),

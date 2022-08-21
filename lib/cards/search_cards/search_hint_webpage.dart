@@ -42,7 +42,7 @@ class SearchHintWebpage extends StatefulWidget {
               title: Row(
                 children: [
                   Text(
-                    'link detect title',
+                    'scan code title',
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -51,14 +51,14 @@ class SearchHintWebpage extends StatefulWidget {
                   Spacer(),
                   SvgPicture.asset(
                     'assets/icons/protect.svg',
-                    width: 15,
+                    width: 20,
                     color: Colors.blue.withOpacity(0.6),
                   ),
 
                   Container(width: 3,),
                   SvgPicture.asset(
                     'assets/icons/applet.svg',
-                    width: 16,
+                    width: 20,
                     color: Colors.green.withOpacity(0.6),
                   ),
                 ],

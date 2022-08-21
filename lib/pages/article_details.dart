@@ -39,6 +39,7 @@ class ArticleDetails extends StatefulWidget {
 class _ArticleDetailsState extends State<ArticleDetails> {
   double _rightPaddingValue = 140;
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  ScrollController _scrollController = new ScrollController();
 
   get heroTag => null;
 
@@ -169,7 +170,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
           actions: [
             Row(
               children: [
-                IconButton(
+                /*IconButton(
                   icon: Padding(
                     padding: const EdgeInsets.only(
                       left: 15,
@@ -180,7 +181,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                     ),
                   ),
                   onPressed: () {Navigator.pop(context);},
-                ),
+                ),*/
                 InkWell(
                   child: IconButton(
                     icon: Padding(
@@ -240,7 +241,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                           left: 0,
                           right: 0
                       ),
-                      child: SvgPicture.asset('assets/icons/left.svg', width: 25,),
+                      child: SvgPicture.asset('assets/icons/left.svg', width: 30,),
                     ), onPressed: () {Navigator.pop(context);},
                   ),
                   onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
@@ -260,9 +261,9 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SvgPicture.asset(
-                              'assets/icons/comment.svg',
+                              'assets/icons/write.svg',
                               color: Theme.of(context).colorScheme.secondary,
-                              width: 16,
+                              width: 20,
                           ),
                           SizedBox(width: 10),
                           Flexible(
@@ -287,26 +288,44 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                         context: context,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(18),
-                              topRight: Radius.circular(18)
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15)
                           ),
                         ),
                         builder: (BuildContext context) {
-                          return CommentsPage(postId: article.id, categoryId: article.catId!,);
+                          return Container(
+                              child: CommentsPage(postId: article.id, categoryId: article.catId!,),
+                            margin: EdgeInsets.only(top: 18),
+                          );
                         },
                       );
                     },
                   ),
                 ),
-                SizedBox(width: 15),
+                SizedBox(width: 10),
                 Row(
                   children: [
+                    IconButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0,
+                            right: 0
+                        ),
+                        child: SvgPicture.asset(
+                            'assets/icons/chat.svg'),
+                      ),
+                      onPressed: () => _scrollController.animateTo(
+                        5000,
+                        curve: Curves.easeOut,
+                        duration: const Duration(seconds: 2),
+                      )
+                    ),
                     Container(
                       margin: new EdgeInsets.symmetric(horizontal: 5),
                       child: BookmarkIcon(
                         bookmarkedList: bookmarkedList,
                         article: article,
-                        iconSize: 20,
+                        iconSize: 30,
                         scaffoldKey: scaffoldKey,
                         normalIconColor: Theme.of(context).colorScheme.primary,
                       ),
@@ -314,42 +333,15 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                     IconButton(
                       icon: Padding(
                         padding: const EdgeInsets.only(
-                            left: 5,
-                            right: 0
-                        ),
-                        child: Icon(
-                          LucideIcons.search,
-                          size: 20,
-                        ),
-                      ),
-                      onPressed: () => nextScreen(context, SearchPage()),
-                    ),
-                    IconButton(
-                      icon: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 5,
-                            right: 5
+                            left: 5
                         ),
                         child: SvgPicture.asset(
-                          'assets/icons/share.svg',
-                          width: 20,),
+                          'assets/icons/share.svg'),
                       ),
                       onPressed: ()=> _handleShare(),
                     ),
-                    /*IconButton(
-                      icon: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 8
-                        ),
-                        child: SvgPicture.asset(
-                          'assets/icons/red-envelopes.svg',
-                          width: 20,),
-                      ),
-                      onPressed: ()=> _handleShare(),
-                    ),*/
                   ],
                 ),
-
               ],
             ),
           ),
@@ -362,6 +354,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
             children: [
               Expanded(
                 child: CustomScrollView(
+                  controller: _scrollController,
                   slivers: <Widget>[
                     SliverToBoxAdapter(
                       child: Column(
@@ -464,6 +457,57 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                             postId: article.id,
                             catId: article.catId,
                             scaffoldKey: scaffoldKey,
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'comments',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 23, fontWeight: FontWeight.w700),
+                                ).tr(),
+                                Spacer(),
+                                InkWell(
+                                  child: Container(
+                                    height: 25,
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    margin: EdgeInsets.only(left: 5, top: 5, right: 5),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: Theme.of(context).primaryColor.withOpacity(0.2),
+                                        borderRadius: BorderRadius.circular(15)
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'scroll to top',
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            letterSpacing: -0.7,
+                                            wordSpacing: 1,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ).tr(),
+                                    ),
+                                  ),
+                                  onTap: () => _scrollController.animateTo(
+                                    0,
+                                    curve: Curves.easeOut,
+                                    duration: const Duration(milliseconds: 1000),
+                                  )
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 10,
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height - 170,
+                            child: CommentsPage(postId: article.id, categoryId: article.catId!,),
                           ),
                         ],
                       ),

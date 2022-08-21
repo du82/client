@@ -139,14 +139,14 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                               child: SvgPicture.asset(
                                   'assets/icons/scan-code.svg',
                                   color: Theme.of(context).colorScheme.secondary,
-                                  width: 23,
+                                  width: 25,
                                 ),
                               onTap: () {
                                 Navigator.of(context).push(SwipeablePageRoute(canOnlySwipeFromEdge: true, builder: (BuildContext context) => BarcodeScannerWithController()));
                                 HapticFeedback.heavyImpact();
                               }
                             ),
-                            Container(width: 15,),
+                            Container(width: 10,),
                             /*InkWell(
                               child: Icon(
                                 LucideIcons.plusCircle,
@@ -192,10 +192,10 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                                 enableFeedback: true,
                                 elevation: 0,
                                 color: Colors.grey[800],
-                                child: Icon(
-                                  LucideIcons.plusCircle,
+                                child: SvgPicture.asset(
+                                  'assets/icons/plus-circle.svg',
                                   color: Theme.of(context).colorScheme.secondary,
-                                  size: 23,
+                                  width: 25,
                                 ),
                                 itemBuilder: (BuildContext context) {
                                   return <PopupMenuItem>[
