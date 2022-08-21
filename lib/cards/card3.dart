@@ -3,8 +3,8 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/models/article.dart';
@@ -121,7 +121,7 @@ class Card3 extends StatelessWidget {
                                 right: 5
                             ),
                             child: Icon(
-                              Feather.message_square,
+                              LucideIcons.messageSquare,
                               size: 24,
                             ),
                           ),
@@ -135,7 +135,7 @@ class Card3 extends StatelessWidget {
                                 right: 5
                             ),
                             child: Icon(
-                              Feather.corner_up_right,
+                              LucideIcons.cornerUpRight,
                               size: 24,
                             ),
                           ),
@@ -167,7 +167,7 @@ class Card3 extends StatelessWidget {
                                   ).tr(),
                                   SizedBox(width: 10),
                                   Icon(
-                                    Feather.arrow_right_circle,
+                                    LucideIcons.arrowUpRight,
                                     color: Config().appThemeColor,
                                     size: 20,
                                   ),

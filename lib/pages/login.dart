@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:wordpress_app/blocs/user_bloc.dart';
 import 'package:wordpress_app/config/config.dart';
@@ -103,18 +104,17 @@ class _LoginPageState extends State<LoginPage> {
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [
-            IconButton(
-              icon: Padding(
-                padding: const EdgeInsets.only(
-                    left: 5,
-                    right: 5
-                ),
-                child: Icon(
-                  Feather.chevron_left,
-                  size: 30,
-                ),
+            InkWell(
+              child: IconButton(
+                icon: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 0,
+                      right: 0
+                  ),
+                  child: SvgPicture.asset('assets/icons/left.svg', width: 30,),
+                ), onPressed: () {Navigator.pop(context);},
               ),
-              onPressed: ()=> Navigator.pop(context),
+              onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
             ),
           ],
         ),
@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 15),
                         border: InputBorder.none,
                         prefixIcon: Icon(
-                          Feather.at_sign,
+                          LucideIcons.atSign,
                           size: 20,
                         )),
                     controller: userNameCtrl,
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                             icon: lockIcon,
                             onPressed: () => _onlockPressed()),
                         prefixIcon: Icon(
-                          Feather.lock,
+                          LucideIcons.lock,
                           size: 20,
                         )),
                     controller: passwordCtrl,

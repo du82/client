@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/blocs/category_bloc.dart';
 import 'package:wordpress_app/config/server_config.dart';
@@ -72,7 +72,7 @@ class _SearchTabState extends State<SearchTab> with AutomaticKeepAliveClientMixi
                           child: Row(
                             children: [
                               Icon(
-                                AntDesign.search1,
+                                LucideIcons.search,
                                 color: Colors.grey[600],
                               ),
                               SizedBox(

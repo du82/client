@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/services/bookmark_service.dart';
@@ -79,7 +79,7 @@ class BookmarkCard extends StatelessWidget {
                               Spacer(),
                               IconButton(
                                   alignment: Alignment.centerRight,
-                                  icon: Icon(Feather.x, size: 16),
+                                  icon: Icon(LucideIcons.x, size: 16),
                                   onPressed: () => BookmarkService()
                                       .removeFromBookmarkList(article))
                             ]),

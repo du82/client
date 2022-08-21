@@ -1,7 +1,7 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wordpress_app/config/config.dart';
 
 class LocalVideoPlayer extends StatefulWidget {
@@ -32,12 +32,12 @@ class _LocalVideoPlayerState extends State<LocalVideoPlayer> {
             enableMute: true,
             enableFullscreen: true,
             enablePlayPause: false,
-            playIcon: Feather.play,
-            pauseIcon: Feather.pause,
-            fullscreenEnableIcon: Feather.maximize,
-            fullscreenDisableIcon: Feather.minimize,
-            muteIcon: Feather.volume_2,
-            unMuteIcon: Feather.volume_x,
+            playIcon: LucideIcons.play,
+            pauseIcon: LucideIcons.pause,
+            fullscreenEnableIcon: LucideIcons.maximize,
+            fullscreenDisableIcon: LucideIcons.minimize,
+            muteIcon: LucideIcons.volume2,
+            unMuteIcon: LucideIcons.volumeX,
             progressBarPlayedColor: Config().appThemeColor,
           )
       ),

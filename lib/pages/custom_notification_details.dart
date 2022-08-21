@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wordpress_app/models/notification_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:wordpress_app/services/app_service.dart';
@@ -28,7 +28,7 @@ class CustomNotificationDeatils extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  AntDesign.clockcircleo,
+                  LucideIcons.clock,
                   size: 16,
                   color: Colors.grey[600],
                 ),

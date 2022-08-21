@@ -7,7 +7,6 @@ import 'package:wikidart/wikidart.dart';
 import 'package:wordpress_app/blocs/category_bloc.dart';
 import 'package:wordpress_app/cards/card5.dart';
 import 'package:wordpress_app/config/server_config.dart';
-import 'package:wordpress_app/mini_program/devkit.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/category.dart';
 import 'package:wordpress_app/models/constants.dart';
@@ -868,10 +867,6 @@ class _SearchPageState extends State<SearchPage> {
                       } else if (searchFieldCtrl.text.contains("http://")) {
                         AppService().openLinkWithBrowserMiniProgram(
                             context, searchFieldCtrl.text);
-                      } else if (searchFieldCtrl.text.contains("//devkit")) {
-                        Navigator.of(context).push(SwipeablePageRoute(
-                            builder: (BuildContext context) => DevKitMiniProgram()),
-                        );
                         // B - Baidu
                       } else if (searchFieldCtrl.text.startsWith("!bd ")) {
                         AppService().openLinkWithBrowserMiniProgram(
@@ -957,10 +952,6 @@ class _SearchPageState extends State<SearchPage> {
                   } else if (query.contains("http://")) {
                     AppService().openLinkWithBrowserMiniProgram(
                         context, query);
-                  } else if (query.contains("//devkit")) {
-                    Navigator.of(context).push(SwipeablePageRoute(
-                        builder: (BuildContext context) => DevKitMiniProgram()),
-                    );
                     // B - Baidu
                   } else if (query.startsWith("!bd ")) {
                     AppService().openLinkWithBrowserMiniProgram(

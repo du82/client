@@ -1,7 +1,5 @@
-import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:wordpress_app/config/config.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wordpress_app/config/server_config.dart';
 
 class VideoIcon extends StatelessWidget {
@@ -34,7 +32,7 @@ class VideoIcon extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Icon(
-            Feather.play,
+            LucideIcons.play,
             color: Theme.of(context).colorScheme.background,
             size: 40,
           ),

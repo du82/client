@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:wordpress_app/blocs/ads_bloc.dart';
 import 'package:wordpress_app/config/ad_config.dart';
 import 'package:wordpress_app/config/config.dart';
@@ -18,10 +19,12 @@ import 'package:wordpress_app/widgets/bookmark_icon.dart';
 import 'package:wordpress_app/widgets/full_image.dart';
 import 'package:wordpress_app/widgets/local_video_player.dart';
 import 'package:wordpress_app/widgets/related_articles.dart';
+import '../blocs/comment_bloc.dart';
 import '../models/article.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../services/wordpress_service.dart';
 import '../utils/cached_image.dart';
 import '../cards/search_cards/search_hint_qrcode.dart';
 
@@ -40,6 +43,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
   double _rightPaddingValue = 140;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   ScrollController _scrollController = new ScrollController();
+  Future? _fetchComments;
 
   get heroTag => null;
 
@@ -57,6 +61,10 @@ class _ArticleDetailsState extends State<ArticleDetails> {
         _rightPaddingValue = 10;
       });
     });
+    Future.microtask(() => context.read<CommentsBloc>().getFlagList());
+    final Article? article = widget.articleData;
+    _fetchComments = TenwanService().fetchCommentsById(article?.id);
+    super.initState();
   }
 
   @override
@@ -305,20 +313,77 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 SizedBox(width: 10),
                 Row(
                   children: [
-                    IconButton(
-                      icon: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 0,
-                            right: 0
+                    Stack(
+                      children: [
+                        IconButton(
+                            icon: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 0,
+                                  right: 0
+                              ),
+                              child: SvgPicture.asset(
+                                  'assets/icons/chat.svg'),
+                            ),
+                            onPressed: () => _scrollController.animateTo(
+                              5000,
+                              curve: Curves.easeOut,
+                              duration: const Duration(seconds: 2),
+                            )
                         ),
-                        child: SvgPicture.asset(
-                            'assets/icons/chat.svg'),
-                      ),
-                      onPressed: () => _scrollController.animateTo(
-                        5000,
-                        curve: Curves.easeOut,
-                        duration: const Duration(seconds: 2),
-                      )
+                        FutureBuilder(
+                            future: _fetchComments,
+                            initialData: [],
+                            builder: (BuildContext context, AsyncSnapshot snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none:
+                                case ConnectionState.active:
+                                case ConnectionState.waiting:
+                                  return Container();
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasError || snapshot.data == null) {
+                                    return Container();
+                                  } else if (snapshot.data.isEmpty) {
+                                    return Container();
+                                  }
+                              }
+                              return InkWell(
+                                  child: Container(
+                                    height: 12,
+                                    margin: EdgeInsets.only(left: 25, top: 8),
+                                    padding: EdgeInsets.only(left: 3, right: 3),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Colors.redAccent[400],
+                                      borderRadius: BorderRadius.circular(15),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.redAccent.withOpacity(0.8),
+                                          offset: Offset(0.0, 1), //(x,y)
+                                          blurRadius: 0.5,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '1+',
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () => _scrollController.animateTo(
+                                    0,
+                                    curve: Curves.easeOut,
+                                    duration: const Duration(milliseconds: 1000),
+                                  )
+                              );
+                            }),
+                      ],
                     ),
                     Container(
                       margin: new EdgeInsets.symmetric(horizontal: 5),
@@ -521,4 +586,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
           ),
         ));
   }
+}
+
+class _fetchComments {
 }

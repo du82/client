@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:wordpress_app/cards/bookmark_card.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/models/article.dart';
@@ -57,7 +57,7 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
                         backgroundColor: Colors.blueAccent,
                         radius: 18,
                         child: Icon(
-                          Feather.globe,
+                          LucideIcons.globe,
                           size: 18,
                           color: Colors.white,
                         ),
@@ -68,7 +68,7 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
                           fontSize: 16,
                           fontWeight: FontWeight.w500,),
                       ).tr(),
-                      trailing: Icon(Feather.chevron_right),
+                      trailing: Icon(LucideIcons.chevronRight),
                       onTap: (){
                         BookmarkService().clearBookmarkList();
                         Navigator.pop(context);
@@ -81,7 +81,7 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
                       backgroundColor: Colors.blueAccent,
                       radius: 18,
                       child: Icon(
-                        Feather.globe,
+                        LucideIcons.globe,
                         size: 18,
                         color: Colors.white,
                       ),
@@ -92,7 +92,7 @@ class _BookmarkTabState extends State<BookmarkTab> with AutomaticKeepAliveClient
                         fontSize: 16,
                         fontWeight: FontWeight.w500,),
                     ).tr(),
-                    trailing: Icon(Feather.chevron_right),
+                    trailing: Icon(LucideIcons.chevronRight),
                     onTap: (){
                       Navigator.pop(context);
                     },

@@ -1,18 +1,10 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:wordpress_app/blocs/ads_bloc.dart';
 import 'package:wordpress_app/blocs/category_bloc.dart';
-import 'package:wordpress_app/blocs/notification_bloc.dart';
-import 'package:wordpress_app/blocs/settings_bloc.dart';
-import 'package:wordpress_app/blocs/user_bloc.dart';
-import 'package:wordpress_app/config/ad_config.dart';
 import 'package:wordpress_app/services/app_service.dart';
-import 'package:wordpress_app/services/notification_service.dart';
 import 'package:wordpress_app/tabs/profile_tab.dart';
-import 'package:wordpress_app/tabs/search_tab.dart';
 import 'package:wordpress_app/tabs/video_tab.dart';
 import 'package:wordpress_app/utils/snacbar.dart';
 import '../tabs/bookmark_tab.dart';
@@ -52,24 +44,6 @@ class _HomePageState extends State<HomePage> {
         openSnacbar(scaffoldKey, 'no internet'.tr());
       }
     });
-
-    Future.delayed(Duration(milliseconds: 0)).then((_){
-      NotificationService().initFirebasePushNotification(context)
-      .then((_) => context.read<NotificationBloc>().checkSubscription())
-      .then((_){
-        context.read<SettingsBloc>().getPackageInfo();
-        if (!context.read<UserBloc>().guestUser) {
-          context.read<UserBloc>().getUserData();
-        }
-      });
-    }).then((_){
-
-      if(AdConfig.isAdsEnabled){
-        AdConfig().initAdmob().then((value) => context.read<AdsBloc>().initiateAds());
-      }
-      
-    });
-    
   }
 
   

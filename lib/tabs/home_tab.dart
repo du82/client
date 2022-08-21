@@ -116,10 +116,10 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(
-                              LucideIcons.search,
+                            SvgPicture.asset(
+                              'assets/icons/search.svg',
                               color: Theme.of(context).colorScheme.secondary,
-                              size: 23,
+                              width: 28,
                             ),
                             SizedBox(width: 10),
                             Text(
@@ -147,44 +147,6 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin, T
                               }
                             ),
                             Container(width: 10,),
-                            /*InkWell(
-                              child: Icon(
-                                LucideIcons.plusCircle,
-                                color: Theme.of(context).colorScheme.secondary,
-                                size: 23,
-                              ),
-                              onTap: () {
-                                showModalBottomSheet<void>(
-                                  backgroundColor: Colors.white,
-                                  context: context,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(18),
-                                        topRight: Radius.circular(18)
-                                    ),
-                                  ),
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                      height: MediaQuery.of(context).size.height - 70,
-                                      //color: Colors.amber,
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            const Text('Modal BottomSheet'),
-                                            ElevatedButton(
-                                              child: const Text('Close BottomSheet'),
-                                              onPressed: () => Navigator.pop(context),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),*/
                             PopupMenuButton(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10))

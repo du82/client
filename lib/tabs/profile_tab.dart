@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:provider/provider.dart';
@@ -96,7 +95,7 @@ class _SettingPageState extends State<SettingPage>
                               backgroundColor: Colors.orangeAccent,
                               radius: 18,
                               child: Icon(
-                                Feather.bell,
+                                LucideIcons.bell,
                                 size: 18,
                                 color: Colors.white,
                               ),
@@ -115,7 +114,7 @@ class _SettingPageState extends State<SettingPage>
                               backgroundColor: Colors.blueGrey,
                               radius: 18,
                               child: Icon(
-                                Feather.sun,
+                                LucideIcons.sun,
                                 size: 18,
                                 color: Colors.white,
                               ),
@@ -140,7 +139,7 @@ class _SettingPageState extends State<SettingPage>
                                 backgroundColor: Colors.blueAccent,
                                 radius: 18,
                                 child: Icon(
-                                  Feather.globe,
+                                  LucideIcons.globe,
                                   size: 18,
                                   color: Colors.white,
                                 ),
@@ -151,7 +150,7 @@ class _SettingPageState extends State<SettingPage>
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,),
                               ).tr(),
-                              trailing: Icon(Feather.chevron_right),
+                              trailing: Icon(LucideIcons.chevronRight),
                               onTap: () => Navigator.of(context).push(SwipeablePageRoute(
                                   canOnlySwipeFromEdge: true,
                                   builder: (BuildContext context) => LanguagePopup()),
@@ -197,7 +196,7 @@ class _SettingPageState extends State<SettingPage>
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,),
                               ).tr(),
-                              trailing: Icon(Feather.chevron_right),
+                              trailing: Icon(LucideIcons.chevronRight),
                               onTap: () => Navigator.of(context).push(SwipeablePageRoute(
                                   canOnlySwipeFromEdge: true,
                                   builder: (BuildContext context) => LanguagePopup()),
@@ -259,7 +258,7 @@ class GuestUserUI extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.primary),
             ).tr(),
-            trailing: Icon(Feather.chevron_right),
+            trailing: Icon(LucideIcons.chevronRight),
             onTap: () => Navigator.of(context).push(SwipeablePageRoute(
                 canOnlySwipeFromEdge: true,
                 builder: (BuildContext context) => LoginPage()),
@@ -282,7 +281,7 @@ class UserUI extends StatelessWidget {
             backgroundColor: Colors.blueAccent,
             radius: 18,
             child: Icon(
-              Feather.user_check,
+              LucideIcons.userCheck,
               size: 18,
               color: Colors.white,
             ),
@@ -302,7 +301,7 @@ class UserUI extends StatelessWidget {
             backgroundColor: Colors.indigoAccent[100],
             radius: 18,
             child: Icon(
-              Feather.mail,
+              LucideIcons.mail,
               size: 18,
               color: Colors.white,
             ),
@@ -322,7 +321,7 @@ class UserUI extends StatelessWidget {
             backgroundColor: Colors.redAccent[100],
             radius: 18,
             child: Icon(
-              Feather.log_out,
+              LucideIcons.logOut,
               size: 18,
               color: Colors.white,
             ),
@@ -334,7 +333,7 @@ class UserUI extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: Theme.of(context).colorScheme.primary),
           ).tr(),
-          trailing: Icon(Feather.chevron_right),
+          trailing: Icon(LucideIcons.chevronRight),
           onTap: () => openLogoutDialog(context),
         ),
       ],

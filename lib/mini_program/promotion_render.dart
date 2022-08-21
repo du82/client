@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wordpress_app/config/config.dart';
-import 'package:wordpress_app/services/app_service.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/vertical_line.dart';
 
@@ -93,7 +90,7 @@ class _RenderMiniProgramState extends State<PromotionMiniProgram> with Automatic
                                       padding: EdgeInsets.only(right: 0, left: 0),
                                       constraints: BoxConstraints(),
                                       icon: Icon(
-                                        Feather.more_horizontal,
+                                        LucideIcons.moreHorizontal,
                                         //size: 25,
                                       ),
                                       onPressed: () {
@@ -111,78 +108,7 @@ class _RenderMiniProgramState extends State<PromotionMiniProgram> with Automatic
                                               height: 200,
                                               color: Theme.of(context).colorScheme.onSecondary,
                                               child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 10, right: 10, top: 10, bottom: 00),
-                                                      margin: EdgeInsets.only(
-                                                          left: 10, right: 10, top: 10),
-                                                      decoration: BoxDecoration(
-                                                        color: Theme.of(context).colorScheme.onPrimary,
-                                                        borderRadius: BorderRadius.circular(8),
-                                                      ),
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            'mini programs',
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight: FontWeight.w700,
-                                                                letterSpacing: -0.7,
-                                                                wordSpacing: 1),
-                                                          ),
-                                                          SizedBox(height: 15),
-                                                          ListTile(
-                                                            contentPadding: EdgeInsets.all(0),
-                                                            leading: CircleAvatar(
-                                                              backgroundColor: Colors.black,
-                                                              radius: 18,
-                                                              child: Icon(
-                                                                Feather.terminal,
-                                                                size: 18,
-                                                                color: Colors.greenAccent,
-                                                              ),
-                                                            ),
-                                                            title: Text(
-                                                              'Terminal',
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Theme.of(context).colorScheme.primary),
-                                                            ),
-                                                            trailing: Icon(Feather.chevron_right),
-                                                          ),
-                                                          SizedBox(height: 15),
-                                                          ListTile(
-                                                            contentPadding: EdgeInsets.all(0),
-                                                            leading: CircleAvatar(
-                                                              backgroundColor: Colors.black,
-                                                              radius: 18,
-                                                              child: Icon(
-                                                                Feather.terminal,
-                                                                size: 18,
-                                                                color: Colors.greenAccent,
-                                                              ),
-                                                            ),
-                                                            title: Text(
-                                                              'RenderMiniProgram',
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Theme.of(context).colorScheme.primary),
-                                                            ),
-                                                            trailing: Icon(Feather.chevron_right),
-                                                            onTap: () => nextScreen(context, PromotionMiniProgram(url: 'baishi.io', title: "Render")),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+
                                               ),
                                             );
                                           },
@@ -198,7 +124,7 @@ class _RenderMiniProgramState extends State<PromotionMiniProgram> with Automatic
                                       padding: EdgeInsets.only(right: 0, left: 0),
                                       constraints: BoxConstraints(),
                                       icon: Icon(
-                                        Feather.x,
+                                        LucideIcons.x,
                                         //size: 25,
                                       ),
                                       onPressed: () => Navigator.of(context).pop(null),
@@ -232,7 +158,7 @@ class _RenderMiniProgramState extends State<PromotionMiniProgram> with Automatic
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
-                                    Feather.download,
+                                    LucideIcons.download,
                                     color: Theme.of(context).colorScheme.background,
                                     size: 20,
                                   ),

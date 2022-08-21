@@ -2,11 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/html_parser.dart';
-import 'package:flutter_html/style.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:wordpress_app/blocs/comment_bloc.dart';
 import 'package:wordpress_app/blocs/user_bloc.dart';
@@ -267,19 +264,6 @@ class _CommentsPageState extends State<CommentsPage> {
           color: Theme.of(context).colorScheme.onPrimary,
           child: Row(
             children: [
-              IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8,
-                      right: 5
-                  ),
-                  child: Icon(
-                    Feather.chevron_left,
-                    size: 32,
-                  ),
-                ),
-                onPressed: ()=> Navigator.pop(context),
-              ),
               SizedBox(width: 8),
               Expanded(
                 child: InkWell(
@@ -295,7 +279,7 @@ class _CommentsPageState extends State<CommentsPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
-                          Feather.log_in,
+                          LucideIcons.logIn,
                           color: Theme.of(context).colorScheme.secondary,
                           size: 20,
                         ),
@@ -334,19 +318,6 @@ class _CommentsPageState extends State<CommentsPage> {
           color: Theme.of(context).backgroundColor,
           child: Row(
             children: [
-              IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 5,
-                      right: 5
-                  ),
-                  child: Icon(
-                    Feather.chevron_left,
-                    size: 32,
-                  ),
-                ),
-                onPressed: ()=> Navigator.pop(context),
-              ),
               Expanded(
                 child: Container(
                   height: 45,
@@ -375,7 +346,7 @@ class _CommentsPageState extends State<CommentsPage> {
               IconButton(
                 padding: EdgeInsets.only(right: 10),
                 icon: Icon(
-                  Feather.arrow_up_circle,
+                  LucideIcons.arrowUpCircle,
                   size: 25,
                   color: Config().appThemeColor,
                 ),

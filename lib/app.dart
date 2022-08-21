@@ -12,7 +12,6 @@ import 'blocs/category_tab3_bloc.dart';
 import 'blocs/category_tab4_bloc.dart';
 import 'blocs/featured_bloc.dart';
 import 'blocs/latest_articles_bloc.dart';
-import 'blocs/notification_bloc.dart';
 import 'blocs/popular_articles_bloc.dart';
 import 'blocs/settings_bloc.dart';
 import 'blocs/theme_bloc.dart';
@@ -38,7 +37,6 @@ class MyApp extends StatelessWidget {
                 ChangeNotifierProvider<FeaturedBloc>(create: (context) => FeaturedBloc()),
                 ChangeNotifierProvider<LatestArticlesBloc>(create: (context) => LatestArticlesBloc()),
                 ChangeNotifierProvider<UserBloc>(create: (context) => UserBloc()),
-                ChangeNotifierProvider<NotificationBloc>(create: (context) => NotificationBloc()),
                 ChangeNotifierProvider<PopularArticlesBloc>(create: (context) => PopularArticlesBloc()),
                 ChangeNotifierProvider<AdsBloc>(create: (context) => AdsBloc()),
                 ChangeNotifierProvider<TabIndexBloc>(create: (context) => TabIndexBloc()),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 import '../config/config.dart';
 
@@ -25,17 +26,17 @@ class _LanguagePopupState extends State<LanguagePopup> {
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [
-            IconButton(
-              icon: Padding(
-                padding: const EdgeInsets.only(
-                  left: 5,
-                ),
-                child: Icon(
-                  Feather.chevron_left,
-                  size: 32,
-                ),
+            InkWell(
+              child: IconButton(
+                icon: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 0,
+                      right: 0
+                  ),
+                  child: SvgPicture.asset('assets/icons/left.svg', width: 30,),
+                ), onPressed: () {Navigator.pop(context);},
               ),
-              onPressed: ()=> Navigator.pop(context),
+              onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
             ),
           ],
         ),
@@ -63,7 +64,7 @@ class _LanguagePopupState extends State<LanguagePopup> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: ListTile(
-            leading: Icon(Feather.globe, size: 22,),
+            leading: Icon(LucideIcons.globe, size: 22,),
             horizontalTitleGap: 10,
             title: Text(d, style: TextStyle(
                 fontWeight: FontWeight.w500

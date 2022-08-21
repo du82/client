@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FullScreenImage extends StatelessWidget {
   final String imageUrl;
@@ -24,19 +24,17 @@ class FullScreenImage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 5),
             child: Align(
               alignment: Alignment.bottomLeft,
-              child: IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 5,
-                      right: 5
-                  ),
-                  child: Icon(
-                    Feather.chevron_left,
-                    size: 30,
-                    color: Colors.white,
-                  ),
+              child: InkWell(
+                child: IconButton(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 0,
+                        right: 0
+                    ),
+                    child: SvgPicture.asset('assets/icons/left.svg', width: 30,),
+                  ), onPressed: () {Navigator.pop(context);},
                 ),
-                onPressed: ()=> Navigator.pop(context),
+                onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
               ),
             ),
           ),
