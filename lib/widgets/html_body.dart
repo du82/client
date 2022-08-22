@@ -42,7 +42,7 @@ class HtmlBody extends StatelessWidget {
       customRender: {
         "video": (RenderContext context1, Widget child) {
           if(isVideoEnabled == false) return Container();
-          return LocalVideoPlayer(videoUrl: context1.tree.element!.attributes['src'].toString());
+          //return LocalVideoPlayer(videoUrl: context1.tree.element!.attributes['src'].toString());
         },
 
         "img": (RenderContext context1, Widget child){

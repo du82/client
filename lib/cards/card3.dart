@@ -1,22 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:hive/hive.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:share/share.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/models/article.dart';
 import 'package:wordpress_app/models/constants.dart';
 import 'package:wordpress_app/pages/comments_page.dart';
 import 'package:wordpress_app/pages/search.dart';
 import 'package:wordpress_app/services/app_service.dart';
-import 'package:wordpress_app/utils/cached_image.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/bookmark_icon.dart';
 import 'package:wordpress_app/widgets/local_video_player.dart';
-import 'package:wordpress_app/widgets/video_icon.dart';
 
 
 //Big card with title & description
