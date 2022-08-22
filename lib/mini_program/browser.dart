@@ -1,14 +1,18 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share/share.dart';
+import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:wordpress_app/pages/search.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/cards/search_cards/search_hint_qrcode.dart';
+
+import '../services/barcode_scanner.dart';
 
 class BrowserMiniProgram extends StatefulWidget {
   final String? title;
@@ -176,7 +180,7 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
               ),
               //SizedBox(width: 8),
               Spacer(),
-              /*IconButton(
+              IconButton(
                 icon: Padding(
                   padding: const EdgeInsets.only(
                       left: 5,
@@ -326,7 +330,7 @@ class _BrowserMiniProgramState extends State<BrowserMiniProgram> with AutomaticK
                     },
                   );
                 },
-              ),*/
+              ),
             ],
           ),
         ),

@@ -1,11 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:wordpress_app/services/app_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/utils/vertical_line.dart';
+
+import '../utils/snacbar.dart';
 
 class RenderMiniProgram extends StatefulWidget {
   final String? title;
@@ -20,6 +22,7 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
   late WebViewController theWebViewController;
   TextEditingController theController = new TextEditingController();
   bool showLoading = false;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   void updateLoading(bool ls) {
     this.setState(() {
@@ -73,16 +76,17 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
                           alignment: Alignment.topRight,
                           child: InkWell(
                             child: Container(
-                              padding: EdgeInsets.only(left: 5, right: 5),
-                              margin: EdgeInsets.all(10),
-                              height: 25,
+                              padding: EdgeInsets.only(left: 0, right: 5),
+                              margin: EdgeInsets.all(5),
+                              height: 30,
                               width: 75,
                               alignment: Alignment.centerRight,
                               decoration: BoxDecoration(
                                   color: Theme.of(context).colorScheme.background.withOpacity(1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(100),
                                   border: Border.all(
                                     color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                    width: 0.5
                                   )
                               ),
                               child: Row(
@@ -90,11 +94,11 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
                                 children: [
                                   Container(
                                     child: IconButton(
-                                      padding: EdgeInsets.only(right: 0, left: 0),
+                                      padding: EdgeInsets.only(right: 0, left: 3),
                                       constraints: BoxConstraints(),
-                                      icon: Icon(
-                                        LucideIcons.moreHorizontal,
-                                        //size: 25,
+                                      icon: SvgPicture.asset(
+                                        'assets/icons/dots.svg',
+                                        width: 30,
                                       ),
                                       onPressed: () {
                                         showModalBottomSheet<void>(
@@ -108,7 +112,7 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
                                           ),
                                           builder: (BuildContext context) {
                                             return Container(
-                                              height: 200,
+                                              height: 150,
                                               color: Theme.of(context).colorScheme.onSecondary,
                                               child: Center(
 
@@ -119,15 +123,43 @@ class _RenderMiniProgramState extends State<RenderMiniProgram> with AutomaticKee
                                       },
                                     ),
                                   ),
-                                  SizedBox(width: 7),
+                                  SizedBox(width: 5),
                                   verticalLine(context, 50.0),
-                                  SizedBox(width: 6.5),
-                                  Container(
+                                  SizedBox(width: 5),
+                                  /*Container(
                                     child: IconButton(
-                                      padding: EdgeInsets.only(right: 0, left: 0),
+                                      padding: EdgeInsets.only(right: 3, left: 0),
                                       constraints: BoxConstraints(),
-                                      icon: SvgPicture.asset('assets/icons/applet-closed.svg'),
+                                      icon: SvgPicture.asset(
+                                        'assets/icons/x-circle.svg',
+                                        width: 20,
+                                      ),
                                       onPressed: () => Navigator.of(context).pop(null),
+                                    ),
+                                  ),*/
+                                  Container(
+                                    padding: EdgeInsets.only(right: 5, left: 5),
+                                    child: InkWell(
+                                        child: SvgPicture.asset(
+                                          'assets/icons/x-circle.svg',
+                                          width: 20,
+                                        ),
+                                        onLongPress: () {
+                                          Navigator.of(context).pop(null);
+                                          HapticFeedback.heavyImpact();
+                                        },
+                                        onTap: () {
+                                          final snackBar = SnackBar(
+                                            content: const Text('long press mini program').tr(),
+                                            action: SnackBarAction(
+                                              label: 'got it'.tr(),
+                                              onPressed: () {
+                                                // Some code to undo the change.
+                                              },
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                        },
                                     ),
                                   ),
                                 ],

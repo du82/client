@@ -370,9 +370,9 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                     ),
                                   ),
                                   onTap: () => _scrollController.animateTo(
-                                    0,
+                                    5000,
                                     curve: Curves.easeOut,
-                                    duration: const Duration(milliseconds: 1000),
+                                    duration: const Duration(seconds: 2),
                                   )
                               );
                             }),

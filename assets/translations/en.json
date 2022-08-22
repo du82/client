@@ -20,6 +20,7 @@
     "view all" : "view all",
     "post" : "Post",
     "follow" : "Follow",
+    "got it" : "Got it",
 
     "browser" : "Browser",
     "suggested actions" : "Suggested actions",
@@ -36,6 +37,7 @@
     "outlink" : "Outlink",
 
     "clear cache" : "Clear cache",
+    "long press mini program" : "Long-press to close mini-programs",
 
     "not what you were looking for" : "Not what you were looking for?",
     "try alt search" : "Try another search engine",
