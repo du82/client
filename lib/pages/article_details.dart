@@ -14,6 +14,7 @@ import 'package:wordpress_app/widgets/bookmark_icon.dart';
 import 'package:wordpress_app/widgets/full_image.dart';
 import 'package:wordpress_app/widgets/local_video_player.dart';
 import 'package:wordpress_app/widgets/related_articles.dart';
+import 'package:wordpress_app/lib/mini_program/render_raw.dart';
 import '../blocs/comment_bloc.dart';
 import '../models/article.dart';
 import 'package:provider/provider.dart';
@@ -119,6 +120,13 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                               fontSize: 15,
                               fontWeight: FontWeight.w900),
                         ),
+                        article.author?.endsWith("Bai AI") == true
+                            ? SvgPicture.asset(
+                          'assets/icons/ai.svg',
+                          width: 16,
+                          color: Colors.purple.withOpacity(0.6),
+                        )
+                            : Container(),
                       ],
                     ),
                     Row(
