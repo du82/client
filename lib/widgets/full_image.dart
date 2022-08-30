@@ -31,7 +31,7 @@ class FullScreenImage extends StatelessWidget {
                         left: 0,
                         right: 0
                     ),
-                    child: SvgPicture.asset('assets/icons/left.svg', width: 30,),
+                    child: SvgPicture.asset('assets/icons/left.svg', width: 30, color: Colors.white,),
                   ), onPressed: () {Navigator.pop(context);},
                 ),
                 onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),

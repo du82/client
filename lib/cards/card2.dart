@@ -60,14 +60,15 @@ class Card2 extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      height: 180,
-                      width: double.infinity,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          child: Hero(
-                              tag: heroTag,
-                              child: CustomCacheImage(
-                                  imageUrl: article.image, radius: 0))),
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: Hero(
+                                tag: heroTag,
+                                child: CustomCacheImage(
+                                    imageUrl: article.image, radius: 0))),
+                      ),
                     ),
                     VideoIcon(tags: article.tags, iconSize: 60,)
                   ],

@@ -8,6 +8,7 @@ import 'package:share/share.dart';
 import 'package:wordpress_app/config/config.dart';
 import 'package:wordpress_app/models/constants.dart';
 import 'package:wordpress_app/pages/comments_page.dart';
+import 'package:wordpress_app/pages/create_account.dart';
 import 'package:wordpress_app/services/app_service.dart';
 import 'package:wordpress_app/utils/next_screen.dart';
 import 'package:wordpress_app/widgets/bookmark_icon.dart';
@@ -16,6 +17,7 @@ import 'package:wordpress_app/widgets/local_video_player.dart';
 import 'package:wordpress_app/widgets/related_articles.dart';
 import 'package:wordpress_app/lib/mini_program/render_raw.dart';
 import '../blocs/comment_bloc.dart';
+import '../blocs/user_bloc.dart';
 import '../models/article.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -179,18 +181,6 @@ class _ArticleDetailsState extends State<ArticleDetails> {
           actions: [
             Row(
               children: [
-                /*IconButton(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15,
-                    ),
-                    child: Icon(
-                      LucideIcons.headphones,
-                      size: 20,
-                    ),
-                  ),
-                  onPressed: () {Navigator.pop(context);},
-                ),*/
                 InkWell(
                   child: IconButton(
                     icon: Padding(
@@ -256,61 +246,103 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                   onLongPress: () => Navigator.of(context).popUntil((route) => route.isFirst),
                 ),
                 //SizedBox(width: 8),
-                Flexible(
-                  child: InkWell(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10, right: 20),
-                      height: 30,
-                      width: MediaQuery.of(context).size.width - 200,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(10)
+                if (context.watch<UserBloc>().isSignedIn == false)
+                  Flexible(
+                    child: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10, right: 20),
+                        height: 30,
+                        width: MediaQuery.of(context).size.width - 200,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                                'assets/icons/door-open.svg',
+                                color: Theme.of(context).colorScheme.secondary,
+                                width: 20,
+                            ),
+                            SizedBox(width: 10),
+                            Flexible(
+                              child: Text(
+                                'login to write comments',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    overflow: TextOverflow.clip,
+                                    letterSpacing: -0.7,
+                                    wordSpacing: 1,
+                                    fontSize: 16,
+                                    color: Theme.of(context).colorScheme.secondary,
+                                    fontWeight: FontWeight.w500),
+                              ).tr(),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SvgPicture.asset(
+                      onTap: () {
+                        nextScreen(context, CreateAccountPage());
+                      },
+                    ),
+                  )
+                else
+                  Flexible(
+                    child: InkWell(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10, right: 20),
+                        height: 30,
+                        width: MediaQuery.of(context).size.width - 200,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
                               'assets/icons/write.svg',
                               color: Theme.of(context).colorScheme.secondary,
                               width: 20,
-                          ),
-                          SizedBox(width: 10),
-                          Flexible(
-                            child: Text(
-                              'comment',
-                              maxLines: 1,
-                              style: TextStyle(
-                                  overflow: TextOverflow.clip,
-                                  letterSpacing: -0.7,
-                                  wordSpacing: 1,
-                                  fontSize: 16,
-                                  color: Theme.of(context).colorScheme.secondary,
-                                  fontWeight: FontWeight.w500),
-                            ).tr(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showModalBottomSheet<void>(
-                        backgroundColor: Colors.white,
-                        context: context,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15)
-                          ),
+                            ),
+                            SizedBox(width: 10),
+                            Flexible(
+                              child: Text(
+                                'comment',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    overflow: TextOverflow.clip,
+                                    letterSpacing: -0.7,
+                                    wordSpacing: 1,
+                                    fontSize: 16,
+                                    color: Theme.of(context).colorScheme.secondary,
+                                    fontWeight: FontWeight.w500),
+                              ).tr(),
+                            ),
+                          ],
                         ),
-                        builder: (BuildContext context) {
-                          return Container(
+                      ),
+                      onTap: () {
+                        showModalBottomSheet<void>(
+                          backgroundColor: Colors.white,
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15)
+                            ),
+                          ),
+                          builder: (BuildContext context) {
+                            return Container(
                               child: CommentsPage(postId: article.id, categoryId: article.catId!,),
-                            margin: EdgeInsets.only(top: 18),
-                          );
-                        },
-                      );
-                    },
+                              margin: EdgeInsets.only(top: 18),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
                 SizedBox(width: 10),
                 Row(
                   children: [
@@ -489,6 +521,14 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                 fontWeight: FontWeight.w400,
                                 color: Theme.of(context).colorScheme.primary,
                                 fontFamily: ''),
+                                    "figcaption": Style(
+                                        margin: EdgeInsets.zero,
+                                        padding: EdgeInsets.zero,
+                                        fontSize: FontSize(17.0),
+                                        lineHeight: LineHeight(1.3),
+                                        whiteSpace: WhiteSpace.NORMAL,
+                                        fontWeight: FontWeight.w400,
+                                        color: Theme.of(context).primaryColor,),
                                     "figure": Style(
                                       margin: EdgeInsets.zero,
                                       padding: EdgeInsets.zero,
@@ -498,9 +538,18 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                     "video":
                                         (RenderContext context1, Widget child) {
                                       return LocalVideoPlayer(
-                                          videoUrl: context1
-                                              .tree.element!.attributes['src']
-                                              .toString());
+                                          videoUrl: context1.tree.element!.attributes['src'].toString());
+                                    },
+                                    "img":
+                                        (RenderContext context1, Widget child) {
+                                      return InkWell(
+                                        child: AspectRatio(
+                                          aspectRatio: 16 / 9,
+                                          child: CustomCacheImage(
+                                              imageUrl: context1.tree.element!.attributes['src'].toString(), radius: 10),
+                                        ),
+                                        onTap: () => nextScreen(context, FullScreenImage(imageUrl: context1.tree.element!.attributes['src'].toString()))
+                                      );
                                     },
                                   },
                                 ),
